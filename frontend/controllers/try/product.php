@@ -32,7 +32,7 @@ class Product extends CI_Controller {
        
        public function index(){
            $this->load->driver('cache');
-           $this->cache->memcached->save('test','合肥金相投资咨询');
+           $this->cache->memcached->save('test','合肥金相投资咨询有限公司');
        }
 	
 }
