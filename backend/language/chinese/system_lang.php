@@ -17,7 +17,7 @@ $lang['site_management']='站点管理';
 
 
 $lang['no_language'] = '缺少语言包';
-$lang['website_manage'] = 'phpcms V9 - 后台管理中心';
+
 $lang['lockscreen'] = '锁屏';
 $lang['submit'] = '提 交';
 $lang['yes'] = '是';
@@ -79,7 +79,7 @@ $lang['icon_unlock'] = '<font color="red">√</font>';
 $lang['icon_locked'] = '<font color="blue">×</font>';
 $lang['type'] = '类型';
 $lang['search'] = '搜索';
-$lang['username'] = '用户名';
+
 $lang['user_already_exist'] = '用户已存在。';
 $lang['poster']	= '广告';
 $lang['announce'] = '公告';

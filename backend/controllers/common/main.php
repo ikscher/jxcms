@@ -26,10 +26,8 @@ class Main extends CI_Controller {
         $result_array=array();
         $result_serial='';
         if ( !$role = $this->cache->get('role')){
-            $tbl_pre=$this->db->dbprefix;
-            $sql="select rolename,description,listorder,disabled from {$tbl_pre}admin_role";
-            $query=$this->db->query($sql);
-            $result_array=$query->result_array();
+            $this->load->model('common/model_main');
+            $result_array=$this->model_main->getRoles();
             $result_serial=  serialize($result_array);
             
             $this->cache->save('role',$result_serial);
@@ -95,10 +93,9 @@ class Main extends CI_Controller {
 		$maxloginfailedtimes = $this->config->item('maxloginfailedtimes');
 	
         $where=array($username,1);
-        $tbl_pre=$this->db->dbprefix;
-		$query= $this->db->query("select times,logintime from {$tbl_pre}times where username=? and isadmin=?",$where);
-        $rtime=$query->row_array();
-
+        $this->load->model('common/model_main');
+        $rtime=$this->model_main->getLoginTimes($where);
+        
         $rtime['times']=isset($rtime['times'])?$rtime['times']:0;
         
         if( $rtime['times'] > $maxloginfailedtimes-1) {
@@ -108,8 +105,7 @@ class Main extends CI_Controller {
         //查询帐号
         $where_=array($this->session->userdata('userid'));
       
-        $query_ = $this->db->query("select password,encrypt from {$tbl_pre}admin where userid=?",$where_);
-        $r=$query_->row_array();
+        $r=$this->model_main->getAdminInfo($where_);
    
         $r['encrypt']=isset($r['encrypt'])?$r['encrypt']:'';
         
@@ -119,20 +115,25 @@ class Main extends CI_Controller {
         
         if( $r['password']!= $password) {
             $ip = getIp();
-            if($rtime['times']<$maxloginfailedtimes && $query->num_rows()>0) {
+           
+            if($rtime['times']<$maxloginfailedtimes && $rtime['times']>0) {
                 $times = $maxloginfailedtimes - intval($rtime['times']);
-                $sql="update {$tbl_pre}times set `ip`='{$ip}',`isadmin`=1,`times`=`times`+1 where `username`='{$username}'";
-                $this->db->query($sql);
+                $this->load->model('common/model_main');
+                $this->model_main->updateLoginTimes($ip,$username);
+               
             } else {
-    
-                $sql="insert into {$tbl_pre}times(username,`ip`,`isadmin`,`logintime`,`times`) values('{$username}','{$ip}',1,".SYS_TIME.",1)";
-                $this->db->query($sql);
+                $this->load->model('common/model_main');
+                $this->model_main->insertLoginTime($username,$ip);
                 $times = $maxloginfailedtimes;
             }
             exit('2|'.$times);//密码错误
         }
         
-        if($query->num_rows()>0) $this->db->query("delete from {$tbl_pre}times where `username`='{$username}'");
+        if(count($rtime)>0) {
+            $this->load->model('common/model_main');
+            $this->model_main->deleteLoginInfo($username);
+        }
+        
 		$this->session->set_userdata('lock_screen', 0);
 		exit('1');
 	}
@@ -167,7 +168,7 @@ class Main extends CI_Controller {
 	}
     
     /*
-     * 功能：默认加载初始公共页
+     * 功能：默认加载初始内容公共页
      */
     public function public_main() {
         
@@ -183,12 +184,11 @@ class Main extends CI_Controller {
 		$userid = $this->session->userdata('userid');
 		$rolename = $this->session->userdata('rolename');
         
-        $tbl_pre=$this->db->dbprefix;
-        $sql="select * from {$tbl_pre}admin where `userid`='{$userid}'";
-    
-		$q = $this->db->query($sql);
-        $r=$q->row_array();
-      
+        
+        $where=array($userid);
+        $this->load->model('common/model_main');
+        $r=$this->model_main->getAdminInfo($where);
+       
 		$this->data['logintime'] = $r['lastlogintime'];
 		$this->data['loginip'] = $r['lastloginip'];
         

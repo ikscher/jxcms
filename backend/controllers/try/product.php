@@ -18,8 +18,8 @@ class Product extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
        public function show(){
-           $this->load->model('try/mproduct');
-            $data=$this->mproduct->getData();
+           $this->load->model('try/model_product');
+            $data=$this->model_product->getData();
             var_dump($data);
            //echo 'this is product';
        }
