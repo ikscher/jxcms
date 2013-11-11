@@ -165,13 +165,7 @@ if (defined('ENVIRONMENT'))
     define('COOKIE_SECURE',FALSE);
     define('COOKIE_AUTHKEY','YT%3434_M');
   
-/*
- * -------------------------------------------------------------------
- *  the following cookie is the same as config.php
- * -------------------------------------------------------------------
- */
-    define('DB_PREFIX', "");
- 
+
     
 /*
  * -------------------------------------------------------------------
@@ -218,6 +212,7 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */

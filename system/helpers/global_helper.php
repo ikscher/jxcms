@@ -57,7 +57,7 @@ if ( ! function_exists('getIp'))
 * @param	string		$modules 多个模块之间用半角逗号隔开，如：member,guestbook
 * @return	string		语言字符
 */
-
+/*
 function L($language = 'no_language',$pars = array(), $modules = '',$lang="chinese") {
 	static $LANG = array();
 	static $LANG_MODULES = array();
@@ -85,7 +85,25 @@ function L($language = 'no_language',$pars = array(), $modules = '',$lang="chine
 		return $language;
 	}
 }
-
+*/
+    /**
+	 * 获取系统信息
+	 */
+if ( ! function_exists('get_sysinfo'))
+{
+	function get_sysinfo() {
+		$sys_info['os']             = PHP_OS;
+		$sys_info['zlib']           = function_exists('gzclose');//zlib
+		$sys_info['safe_mode']      = (boolean) ini_get('safe_mode');//safe_mode = Off
+		$sys_info['safe_mode_gid']  = (boolean) ini_get('safe_mode_gid');//safe_mode_gid = Off
+		$sys_info['timezone']       = function_exists("date_default_timezone_get") ? date_default_timezone_get() : L('no_setting');
+		$sys_info['socket']         = function_exists('fsockopen') ;
+		$sys_info['web_server']     = $_SERVER['SERVER_SOFTWARE'];
+		$sys_info['phpv']           = phpversion();	
+		$sys_info['fileupload']     = @ini_get('file_uploads') ? ini_get('upload_max_filesize') :'unknown';
+		return $sys_info;
+	}
+}
 // ------------------------------------------------------------------------
 /* End of file language_helper.php */
 /* Location: ./system/helpers/language_helper.php */

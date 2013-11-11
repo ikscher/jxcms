@@ -52,7 +52,8 @@
 
 
             <div class="col-auto">
-                <div class="log white cut_line">您好！admin  [超级管理员]<span>|</span><a href="javascript:void(0);" class="logout" >[退出]</a><span>|</span>
+                <div class="log white cut_line">
+                    <?php echo $this->lang->line('main_hello'); ?><?php echo $adminusername; ?> [<?php echo $rolename; ?>]<span>|</span><a href="javascript:void(0);" class="logout" >[退出]</a><span>|</span>
                     <a href="http://test.jx.com/jxcms/index.php" target="_blank" id="site_homepage">站点首页</a><span>|</span>
                     <a href="?m=member" target="_blank">会员中心</a><span>|</span>
                     <a href="?m=search" target="_blank" id="site_search">搜索</a>
@@ -80,11 +81,11 @@
                 <div id="Scroll"><div id="leftMain"></div></div>
                 <a href="javascript:;" id="openClose"  class="open" title="<?php echo $this->lang->line('spread_or_closed') ?>"><span class="hidden"><?php echo $this->lang->line('expand') ?></span></a>
             </div>
-            <div class="col-1 lf cat-menu" id="display_center_id" style="display:none" height="100%">
+           <!-- <div class="col-1 lf cat-menu" id="display_center_id" style="display:none" height="100%">
                 <div class="content">
-                    <iframe name="center_frame" id="center_frame" src="" frameborder="false" scrolling="auto" style="border:none" width="100%" height="auto" allowtransparency="true"></iframe>
+                    <iframe name="center_frame" id="center_frame" src="index.php?d=common&c=main&m=public_main" frameborder="false" scrolling="auto" style="border:none" width="100%" height="auto" allowtransparency="true"></iframe>
                 </div>
-            </div>
+            </div>-->
             <div class="col-auto mr8">
                 <div class="crumbs">
                     <div class="shortcut cu-span">
@@ -95,7 +96,7 @@
                     <?php echo $this->lang->line('current_position'); ?><span id="current_pos"></span></div>
                 <div class="col-1">
                     <div class="content" style="position:relative; overflow:hidden">
-                        <iframe name="right" id="rightMain" src="?m=admin&c=index&a=public_main" frameborder="false" scrolling="auto" style="border:none; margin-bottom:30px" width="100%" height="auto" allowtransparency="true"></iframe>
+                        <iframe name="right" id="rightMain" src="index.php?d=common&c=main&m=public_main" frameborder="false" scrolling="auto"  width="100%"  ></iframe>
 
                     </div>
                 </div>

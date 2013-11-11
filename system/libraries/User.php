@@ -31,29 +31,21 @@ class CI_User {
         
         $this->userid = $this->cookie->AuthCode(isset($adminuserid)? $this->input->cookie('adminuserid') : '', 'DECODE');
 
-        if (!empty($this->userid)) {
-            $sql="SELECT * FROM " . $this->tbl_prefix . "admin WHERE userid = '" . $this->userid . "' AND status = '1' limit 1";
-            $user_query = $this->db->query($sql);
+        if (empty($this->userid)) {
+            //$sql="SELECT * FROM " . $this->tbl_prefix . "admin WHERE userid = '" . $this->userid . "' AND status = '1' limit 1";
+            //$user_query = $this->db->query($sql);
          
-            if ($user_query->num_rows()>0) {
-                $row=$user_query->row();
-                $this->userid = $row->userid;
-                $this->username = $row->username;
+            //if ($user_query->num_rows()>0) {
+                //$row=$user_query->row();
+                //$this->userid = $row->userid;
+                //$this->username = $row->username;
 
-                $this->db->query("UPDATE " . $this->tbl_prefix . "admin SET lastloginip = " . $this->db->escape($this->input->server('REMOTE_ADDR')) . " WHERE userid = '" . (int) $this->userid . "'");
+                //$this->db->query("UPDATE " . $this->tbl_prefix . "admin SET `lastloginip` = " . $this->db->escape($this->input->server('REMOTE_ADDR')) . " `lastlogintime`=".SYS_TIME." WHERE userid = '" . (int) $this->userid . "'");
 
-//                $user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int) $user_query->row['user_group_id'] . "'");
-//
-//                $permissions = unserialize($user_group_query->row['permission']);
-//
-//                if (is_array($permissions)) {
-//                    foreach ($permissions as $key => $value) {
-//                        $this->permission[$key] = $value;
-//                    }
-//                }
-            } else {
+
+            //} else {
                 $this->logout();
-            }
+            //}
         }
     }
 
@@ -70,7 +62,7 @@ class CI_User {
         
         $password = $this->db->escape(md5(md5($password).$this->encrypt));
      
-        $sql = "SELECT userid,username,roleid FROM " . $this->tbl_prefix . "admin WHERE username ={$username}  AND  password = {$password} AND status = '1' limit 1";
+        $sql = "SELECT a.userid,a.username,a.roleid,ar.rolename FROM " . $this->tbl_prefix . "admin  a left join ".$this->tbl_prefix."admin_role ar on a.roleid=ar.roleid  WHERE a.username ={$username}  AND  a.password = {$password} AND a.status = '1' limit 1";
        
         $user_query = $this->db->query($sql);
 //        var_dump($user_query->result());
@@ -79,14 +71,18 @@ class CI_User {
             $row = $user_query->row();
             $this->session->set_userdata('userid', $row->userid);
             $this->session->set_userdata('roleid', $row->roleid);
+            $this->session->set_userdata('rolename',$row->rolename);
         
             $this->cookie->SetCookie("adminuserid", $this->cookie->AuthCode($row->userid, 'ENCODE'), 24 * 3600);
             $this->cookie->SetCookie("adminusername", $this->cookie->AuthCode($row->username, 'ENCODE'), 24 * 3600);
 
             $this->userid = $row->userid;
             $this->username = $row->username;
+            
+            $sql="UPDATE " . $this->tbl_prefix . "admin SET `lastloginip` = " . $this->db->escape($this->input->server('REMOTE_ADDR')) . ", `lastlogintime`=".SYS_TIME." WHERE userid = '" . (int) $this->userid . "'";
+            $this->db->query($sql);
 
-
+            
             return true;
         } else {
             return false;

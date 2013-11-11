@@ -16,6 +16,25 @@ class Main extends CI_Controller {
     public function index() {
         $this->load->helper('url');
         $this->lang->load('system'); 
+        
+        $this->data['adminusername'] = $this->cookie->AuthCode($this->input->cookie('adminusername'),'DECODE');
+		$this->data['rolename'] = $this->session->userdata('rolename');
+        
+        //载入全部角色
+        $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+        
+        $result_array=array();
+        $result_serial='';
+        if ( !$role = $this->cache->get('role')){
+            $tbl_pre=$this->db->dbprefix;
+            $sql="select rolename,description,listorder,disabled from {$tbl_pre}admin_role";
+            $query=$this->db->query($sql);
+            $result_array=$query->result_array();
+            $result_serial=  serialize($result_array);
+            
+            $this->cache->save('role',$result_serial);
+        }
+
 
         if (!$this->input->cookie('adminuserid') || !$this->session->userdata('userid')) {
             redirect('d=common&c=login&m=index&token=' . $this->session->userdata('token'));
@@ -29,7 +48,7 @@ class Main extends CI_Controller {
         $this->data['lockscreen_status']         = $this->lang->line('lockscreen_status');
         $this->data['password_can_not_be_empty'] = $this->lang->line('password_can_not_be_empty');
         $this->data['wait_1_hour_lock']          = $this->lang->line('wait_1_hour_lock');
-        $this->data['wait_1_hour']          = $this->lang->line('wait_1_hour');
+        $this->data['wait_1_hour']               = $this->lang->line('wait_1_hour');
         $this->data['password_error_lock']       = $this->lang->line('password_error_lock');
         $this->data['password_error_lock2']      = $this->lang->line('password_error_lock2');
 
@@ -145,6 +164,42 @@ class Main extends CI_Controller {
 		$curpos=$this->admin->current_pos($menuid);
 		
         $this->output->set_output($curpos);
+	}
+    
+    /*
+     * 功能：默认加载初始公共页
+     */
+    public function public_main() {
+        
+	    $this->load->helper('url');
+        $this->load->helper('global');
+        
+	    $this->lang->load('main');
+	
+		$username = $this->cookie->AuthCode($this->input->cookie('adminusername'),'DECODE');
+        //$this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+        //$role_serial=$this->cache->get('role');
+        
+		$userid = $this->session->userdata('userid');
+		$rolename = $this->session->userdata('rolename');
+        
+        $tbl_pre=$this->db->dbprefix;
+        $sql="select * from {$tbl_pre}admin where `userid`='{$userid}'";
+    
+		$q = $this->db->query($sql);
+        $r=$q->row_array();
+      
+		$this->data['logintime'] = $r['lastlogintime'];
+		$this->data['loginip'] = $r['lastloginip'];
+        
+        $this->data['adminusername']=$username;
+        $this->data['rolename']=$rolename;
+		$sysinfo = get_sysinfo();
+		$sysinfo['mysqlv'] = mysql_get_server_info();
+        $this->data['sysinfo'] = $sysinfo;
+		
+		$this->load->view('common/public_main',$this->data);
+		
 	}
 
 

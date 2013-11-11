@@ -85,7 +85,7 @@ function wSize(){
     var str=getWindowSize();
     var strs= new Array(); //定义一数组
     strs=str.toString().split(","); //字符分割
-    var heights = strs[0]-110,Body = $('body');
+    var heights = strs[0]-125,Body = $('body');
     $('#rightMain').height(heights);   
     if(strs[1]<980){
         $('.header').css('width',980+'px');

@@ -135,7 +135,7 @@ $lang['level_menu'] = '上级菜单';
 $lang['file'] = '文件';
 $lang['time'] = '时间';
 $lang['ie8_tip'] = '使用IE8浏览器可获得最佳视觉效果';
-$lang['personal_information'] = '我的个人信息';
+
 $lang['ajax_tip'] = '通过AJAX 传递的方法，请使用 ajax_开头，方法为修改或删除操作时，请对应写成，ajax_edit_myaction/ajax_delete_myaction';
 $lang['for_chinese_lan'] = '对应的中文语言名称';
 $lang['manage'] = '管理';

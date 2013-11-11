@@ -42,7 +42,7 @@
  *
  */
 	define('CI_CORE', FALSE);
-
+    date_default_timezone_set("Asia/shanghai");
 /*
  * ------------------------------------------------------
  *  Load the global functions
