@@ -3,6 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;  charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php echo $heading_title; ?></title>
         <link rel="shortcut icon" href="http://codeigniter.org.cn/images/design/favicon.ico" type="image/x-icon">
 
@@ -90,7 +91,7 @@
                 <div class="crumbs">
                     <div class="shortcut cu-span">
                         <a href="?m=content&c=create_html&a=public_index&pc_hash=" target="right"><span><?php echo $this->lang->line('create_index'); ?></span></a>
-                        <a href="?m=admin&c=cache_all&a=init&pc_hash=" target="right"><span><?php echo $this->lang->line('update_backup') ?></span></a>
+                        <a href="index.php?d=common&c=main&m=cleanCache" target="right"><span><?php echo $this->lang->line('update_backup') ?></span></a>
                         <a href="javascript:art.dialog({id:'map',iframe:'?m=admin&c=index&a=public_map', title:'<?php echo $this->lang->line('background_map') ?>', width:'700', height:'500', lock:true});void(0);"><span><?php echo $this->lang->line('background_map') ?></span></a>
                     </div>
                     <?php echo $this->lang->line('current_position'); ?><span id="current_pos"></span></div>

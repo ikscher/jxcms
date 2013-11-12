@@ -21,7 +21,7 @@ class Model_main extends CI_Model {
 
     public function getRoles() {
         $result_array = array();
-        $sql = "select rolename,description,listorder,disabled from {$this->tbl_prefix}admin_role";
+        $sql = "select roleid,rolename,description,listorder,disabled from {$this->tbl_prefix}admin_role";
         $query = $this->db->query($sql);
         $result_array = $query->result_array();
 

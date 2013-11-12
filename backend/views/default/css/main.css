@@ -67,8 +67,12 @@ ul, ol, li {list-style: none;}
 	#Skin .s3 {background-position:0 -33px}
 	#Skin .s4 {}
     
-.pad-6{padding:6px; overflow:hidden}.pad-10{padding:10px; overflow:hidden}.pad_10,.pad-lr-10{padding:0 10px}.pad-lr-6{padding:0 6px}
-.hr{background: url(../images/uline.gif) repeat-x center center;}
+.pad-6{padding:6px; overflow:hidden}
+.pad_10{padding:10px; overflow:hidden}
+/*.pad_10,.pad-lr-10{padding:0 10px}*/
+.pad-lr-6{padding:0 6px}
+
+.hr{background: url(../image/uline.gif) repeat-x center center;}
 .hr hr{display:none}
 .border-none,.border-none-td td,{border:none}
 .ib, .ib-li li, .ib-a a, .ib-span span,.common-form ul li span.text,.fixed-bottom .fixed-but .button,.arrowhead,.arrowhead-b,#Skin li,.shortcut a,.shortcut a span,.picBut a,.tab-use,.scroll a{display:inline-block;zoom:1;*display:inline;}
@@ -152,7 +156,7 @@ body fieldset.blue legend{padding:3px 8px;font-weight:700;color:#347add; backgro
 .col-tab .content-r{border-top:1px solid #dce3ed}
 .col-tab .contentList{border:1px solid #dce3ed;_zoom:1;}
 
-.col-1{ border:1px solid #f4f6f5;zoom:1; background:#fff}
+.col-1{ border:1px solid #f4f6f5;zoom:1; background:#fff;}
 .col-1 div.content{border:1px solid #c2d1d8;zoom:1;}
 
 .col-2{ border:1px solid #c7d8ea;zoom:1;}
