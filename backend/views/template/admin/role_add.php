@@ -4,22 +4,17 @@
     .col-xs-3,.col-xs-2{padding-left:0px;}
 </style>
 <div class="pad_10">
-    <nav class="navbar navbar-default" role="navigation">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">   
+    <div class="nav_">
+       
+            <ul>   
                 <li>                       
                     <button  type="button" name="return" class="btn btn-default navbar-btn"><?php echo $this->lang->line('return'); ?></button>
                     <button  type="button" name="refresh" class="btn btn-default navbar-btn"><?php echo $this->lang->line('refresh'); ?></button>
                 </li>
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a class="roleAdd" href="?d=admin&c=role&m=add"></a></li>
-
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
+        
+    </div>
     
     
         <table  class="table">

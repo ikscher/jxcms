@@ -26,9 +26,14 @@ class Main extends CI_Controller {
         $result_array = array();
         $result_serial = '';
         if (!$role = $this->cache->get('role')) {
-            $this->load->model('common/model_main');
-            $result_array = $this->model_main->getRoles();
-            $result_serial = serialize($result_array);
+            $this->load->model('admin/model_role');
+            $result_array = $this->model_role->getAllRoles();
+     
+            $roles=array();
+            foreach($result_array as $v){
+                $roles[$v['roleid']]=$v;
+            }
+            $result_serial = serialize($roles);
 
             $this->cache->save('role', $result_serial);
         }

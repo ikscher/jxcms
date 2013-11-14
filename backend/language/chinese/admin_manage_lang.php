@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 $lang['cofirmpwd'] = '确认密码';
+$lang['userid'] = 'ID';
 $lang['username'] = '用户名';
 $lang['password'] = '密码';
 $lang['email'] = 'E-mail';

@@ -1,35 +1,34 @@
 <?php $this->load->view('common/header'); ?>
 <link href="<?php echo base_url('views/default/css/table_form.css'); ?>" rel="stylesheet" type="text/css" />
+
 <div class="pad_10">
 
-    <div class="navbar navbar-default" role="navigation">
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
-            <form name="myform" action="?d=admin&c=role&m=index" method="post" class="navbar-form navbar-left" role="search">
-                <ul class="nav navbar-nav">
-                    <li><?php echo $this->lang->line('role_name'); ?></li><li><input name="rolename" type="text" class="form-control input-sm" placeholder="" value="<?php echo $rolename; ?>" /></li>
-                    <li><?php echo $this->lang->line('role_desc'); ?></li><li><input name="roledesc" type="text" class="form-control input-sm" placeholder="" value="<?php echo $roledesc; ?>" /></li>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="nav_">
+        <form name="myform" action="?d=admin&c=role&m=index" method="post">
+            <ul >
+                <li><?php echo $this->lang->line('role_name'); ?></li><li><input name="rolename" type="text" class="form-control input-sm" placeholder="" value="<?php echo $rolename; ?>" /></li>
+                <li><?php echo $this->lang->line('role_desc'); ?></li><li><input name="roledesc" type="text" class="form-control input-sm" placeholder="" value="<?php echo $roledesc; ?>" /></li>
 
-                    <li><select name="status" class="form-control input-sm">
-                            <option value='0' <?php if ($status == 0) { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('unlocked'); ?></option>
-                            <option value='1' <?php if ($status == 1) { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('locked'); ?></option>
-                        </select></li>
+                <li><select name="status" class="form-control input-sm">
+                        <option value='0' <?php if ($status == 0) { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('unlocked'); ?></option>
+                        <option value='1' <?php if ($status == 1) { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('locked'); ?></option>
+                    </select></li>
 
-                    <li>
-                        <button type="submit" class="btn btn-default"><?php echo $this->lang->line('query'); ?></button>
-                        <button  name="refresh" class="btn btn-default"><?php echo $this->lang->line('refresh'); ?></button>
-                    </li>
-                </ul>
-            </form>
-
-
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a class="roleAdd" href="?d=admin&c=role&m=add"><?php echo $this->lang->line('role_add');?></a></li>
-
+                <li>
+                    <button type="submit" class="btn btn-default"><?php echo $this->lang->line('query'); ?></button>
+                    <button  name="refresh" class="btn btn-default"><?php echo $this->lang->line('refresh'); ?></button>
+                </li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div>
+        </form>
+
+
+        <ul>
+            <li><a class="roleAdd" href="?d=admin&c=role&m=add"><?php echo $this->lang->line('role_add'); ?></a></li>
+
+        </ul>
+    </div><!-- /.navbar-collapse -->
+
 
     <table class="table table-striped table-bordered table-hover table-condensed center">
         <thead>
@@ -57,9 +56,9 @@
                             <?php } else { ?>
                                 <font color="#cccccc"><?php echo $this->lang->line('role_setting'); ?></font> | <font color="#cccccc"><?php echo $this->lang->line('usersandmenus') ?></font> |
                             <?php } ?>
-                            <a href="?m=admin&c=role&a=member_manage&roleid=<?php echo $info['roleid'] ?>&menuid="><?php echo $this->lang->line('role_member_manage'); ?></a> | 
-                            <?php if ($info['roleid'] > 1) { ?><a href="?m=admin&c=role&a=edit&roleid=<?php echo $info['roleid'] ?>&menuid="><?php echo $this->lang->line('edit') ?></a> | 
-                                <a href="javascript:confirmurl('?m=admin&c=role&a=delete&roleid=<?php echo $info['roleid'] ?>', '<?php echo $this->lang->line('posid_del_cofirm') ?>')"><?php echo $this->lang->line('delete') ?></a>
+                            <a  data-roleid="<?php echo $info['roleid'] ?>" class="getRoleMembers" href="javascript:void(0);" ><?php echo $this->lang->line('role_member_manage'); ?></a> | 
+                            <?php if ($info['roleid'] > 1) { ?><a class='editRole' data-roleid="<?php echo $info['roleid'] ?>" href="javascript:void(0);"><?php echo $this->lang->line('edit') ?></a> | 
+                                <a  data-roleid="<?php echo $info['roleid'] ?>" class="deleteRole" href="javascript:void(0);"><?php echo $this->lang->line('delete') ?></a>
                             <?php } else { ?>
                                 <font color="#cccccc"><?php echo $this->lang->line('edit') ?></font> | <font color="#cccccc"><?php echo $this->lang->line('delete') ?></font>
                             <?php } ?>
@@ -68,14 +67,42 @@
                 <?php endforeach; ?>
 
             <?php } ?>
+
         </tbody>
     </table>
+    <ul class="pagination"><?php echo $pagination; ?></ul>
 </div>
 </body>
 <script type="text/javascript">
     $("button[name=refresh]").click(function(){
         location.href="?d=admin&c=role&m=index";return false;
     });
-  
+    
+    $('.deleteRole').click(function(){
+        if(confirm("<?php echo $this->lang->line('role_del_cofirm'); ?>")){
+            var roleid=$(this).attr('data-roleid');
+            $.get('?d=admin&c=role&m=delete',{roleid:roleid},function(str){
+                if(str=='yes'){
+                    location.href=location.href;
+                }else{
+                    $('.modal-title').text("提示");
+                    $('.modal-body').html("删除角色失败！");
+                    $('#myModal').modal()
+                }
+            });
+        }
+    });
+    
+    $('.editRole').click(function(){
+        var roleid=$(this).attr('data-roleid');
+        if(!roleid) return false;
+        location.href='?d=admin&c=role&m=edit&roleid='+roleid;
+    })
+    
+    $('.getRoleMembers').click(function(){
+        var roleid=$(this).attr('data-roleid');
+        if(!roleid) return false;
+        location.href='?d=admin&c=role&m=member_manage&roleid='+roleid;
+    })
 </script>
 <?php $this->load->view('common/footer'); ?>

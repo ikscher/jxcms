@@ -33,4 +33,7 @@ $lang['ban'] = '禁止';
 $lang['return']='返回';
 $lang['edit'] ='编辑';
 $lang['delete']='删除';
+$lang['userinrole'] = '所属角色';
+$lang['admin_del_cofirm'] = '是否删除该管理员?';
+$lang['operations_manage'] = '管理操作';
 ?>

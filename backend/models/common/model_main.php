@@ -15,18 +15,7 @@ class Model_main extends CI_Model {
         $this->tbl_prefix = $this->db->dbprefix;
     }
 
-    /*
-     * 返回全部角色
-     */
-
-    public function getRoles() {
-        $result_array = array();
-        $sql = "select roleid,rolename,description,listorder,disabled from {$this->tbl_prefix}admin_role";
-        $query = $this->db->query($sql);
-        $result_array = $query->result_array();
-
-        return $result_array;
-    }
+   
 
     /*
      * 返回用户登录次数相关信息

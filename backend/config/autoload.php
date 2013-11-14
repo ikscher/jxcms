@@ -81,7 +81,7 @@ $autoload['helper'] = array();
 |
 */
 
-$autoload['config'] = array('config');
+$autoload['config'] = array('config','pagination');
 
 
 /*
