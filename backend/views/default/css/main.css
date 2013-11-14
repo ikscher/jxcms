@@ -7,7 +7,7 @@ body {_margin: 0;_height: 100%;}
 .objbody {overflow: hidden;}
 html.off, html.off body {background: #e2e9ea url(../image/left_bg.png) repeat-y -40px top;}
 
-
+label{font-weight:normal;}
 html.on,html.on body{background: #e2e9ea; background-image:none;}
 html.addbg,html.addbg body{background:#e2e9ea}
 

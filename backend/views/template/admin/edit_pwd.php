@@ -119,6 +119,7 @@
         
     $("#dosubmit").click(function(){
         if($(".onError").length>0) return false;
+        if(!$('#old_password').val()) return false;
         $.ajax({
             type:'post',
             url:'?d=admin&c=manage&m=edit_pwd',

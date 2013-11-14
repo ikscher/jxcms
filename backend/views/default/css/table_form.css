@@ -2,16 +2,16 @@ body fieldset{border:1px solid #D8D8D8; padding:10px;}
 body fieldset legend{padding:3px 8px;font-weight:700;border:1px solid #D8D8D8;background-color: #F9F9F9;}
 body fieldset.blue{border:1px solid #dce3ed}
 body fieldset.blue legend{padding:3px 8px;font-weight:700;color:#347add; background:none; border:none}
+.text-c {text-align: center;}
 .picBut {background:url("../image/picBnt.png") no-repeat 0 -28px;color:#FFF;float:left; text-align:center;font-weight:700;height:28px;line-height:26px;*line-height:30px;margin-right:10px;width:75px}
 .picBut a{color:#fff;text-decoration: none; width:75px; height:28px;display:inline-block;zoom:1;*display:inline;}
-
-.table-list td,.table-list th{padding-left:12px}
-.table-list thead th{ height:30px; background:#eef3f7; border-bottom:1px solid #d5dfe8; font-weight:normal}
-.table-list tbody td,.table-list .btn{border-bottom: #eee 1px solid; padding-top:5px; padding-bottom:5px}
+.table td,.table-list th{padding-left:12px}
+.table thead th{ height:30px; background:#F4F4F4; border-bottom:1px solid #d5dfe8; font-weight:bold;text-align: center;}
+.table tbody td,.table-list .btn{border-bottom: #eee 1px solid; padding-top:5px; padding-bottom:5px}
 div.btn{background:#f6f6f6; padding:6px 12px 0 12px; height:30px;line-height:30px}
-.table-list tr:hover,.table-list table tbody tr:hover{ background:#fbffe4}
+.table tr:hover,.table-list table tbody tr:hover{ background:#fbffe4}
 .nHover tr:hover,.nHover tr:hover td{ background:none}
-.table-list .input-text-c{ padding:0; height:18px}
+.table .input-text-c{ padding:0; height:18px}
 .input-text-c{border:1px solid #A7A6AA;height:18px;padding:2px 0 0; text-align:center}
 .td-line{border:1px solid #eee}
 .td-line td,.td-line th{border:1px solid #eee}
@@ -19,6 +19,7 @@ div.btn{background:#f6f6f6; padding:6px 12px 0 12px; height:30px;line-height:30p
 .table-list tr.on,.table-list tr.on td,.table-list tr.on th,.table-list td.on,.table-list th.on{background:#fdf9e5;}
 a.close-own{background: url(../image/cross.png) no-repeat left 3px; display:block; width:16px; height:16px;position: absolute;outline:none;right:7px; top:8px; text-indent:200px; overflow: hidden}
 a.close-own:hover{background-position: left -46px}
+ul li{padding:0 10px 0 0;}
 /*通用表单*/
 .common-form{}
 .common-form div.contentWrap{padding-right:20px}
