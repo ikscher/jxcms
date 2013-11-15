@@ -102,7 +102,7 @@
     $('.getRoleMembers').click(function(){
         var roleid=$(this).attr('data-roleid');
         if(!roleid) return false;
-        location.href='?d=admin&c=role&m=member_manage&roleid='+roleid;
+        location.href='?d=admin&c=role&m=manage_member&roleid='+roleid;
     })
 </script>
 <?php $this->load->view('common/footer'); ?>

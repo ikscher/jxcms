@@ -98,14 +98,28 @@ class Model_role extends CI_Model {
     }
     
     /*
-     * 返回角色下的所有成员
+     * 返回指定角色下的所有成员
      */
-    public function getRoleMembers($roleid=array()){
+    public function getRoleMembers($con=array()){
         $result=array();
-        $sql="select userid,username,password,roleid,encrypt,lastloginip,lastlogintime,email,realname from {$this->tbl_prefix}admin where roleid=?";
-        $query = $this->db->query($sql,$roleid);
+
+        $sql="select userid,username,password,roleid,encrypt,lastloginip,lastlogintime,email,realname from {$this->tbl_prefix}admin where roleid=? order by userid asc limit ?,?";
+
+        $query = $this->db->query($sql,$con);
         $result= $query->result_array();
         return $result;
+    }
+    
+    /*
+     * 返回指定角色下的成员总数
+     */
+    public function getRoleMembersTotal($roleid){
+        $result=array();
+        
+        $sql="select userid,username,password,roleid,encrypt,lastloginip,lastlogintime,email,realname from {$this->tbl_prefix}admin where roleid='{$roleid}' ";
+        $query = $this->db->query($sql);
+        
+        return  $query->num_rows()?$query->num_rows():0;
     }
     
     /*

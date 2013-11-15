@@ -20,4 +20,8 @@ $lang['new_password'] = '新密码';
 $lang['new_pwdconfirm'] = '重复新密码';
 $lang['old_password_wrong'] = '旧密码输入错误';
 $lang['old_password_right'] = '旧密码输入正确';
+$lang['manage_member']="成员管理";
+$lang['edit_member']="编辑成员（管理员）";
+$lang['refresh']='刷新';
+$lang['return']='返回';
 ?>

@@ -9,12 +9,16 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Manage extends CI_Controller {
+    function __construct() {
+        parent::__construct();
+        $this->load->helper('url');
+    }
     /*
      * 编辑用户信息
      */
 
     public function edit_info() {
-        $this->load->helper('url');
+        
         $this->lang->load('admin_manage');
         $userid = $this->session->userdata('userid');
         if ($this->input->post('dosubmit')) {
@@ -55,7 +59,6 @@ class Manage extends CI_Controller {
      * 管理员自助修改密码
      */
     public function edit_pwd() {
-        $this->load->helper('url');
         $this->lang->load('admin_manage');
         $userid = $this->session->userdata('userid');
         if ($this->input->post('dosubmit')) {
@@ -106,37 +109,80 @@ class Manage extends CI_Controller {
      */
     public function edit() {
         $this->lang->load('admin_manage');
-        $this->load->helper('url');
-        $this->data['roleid'] = $this->session->userdata('roleid');
-//        if(isset($_POST['dosubmit'])) {
-//			$memberinfo = $info = array();			
-//			$info = checkuserinfo($_POST['info']);
-//			if(isset($info['password']) && !empty($info['password']))
-//			{
-//				$this->op->edit_password($info['userid'], $info['password']);
-//			}
-//			$userid = $info['userid'];
-//			$admin_fields = array('username', 'email', 'roleid','realname');
-//			foreach ($info as $k=>$value) {
-//				if (!in_array($k, $admin_fields)){
-//					unset($info[$k]);
-//				}
-//			}
-//			$this->db->update($info,array('userid'=>$userid));
-//			showmessage(L('operation_success'),'','','edit');
-//		} else {					
-//			$info = $this->db->get_one(array('userid'=>$_GET['userid']));
-//			extract($info);	
-//			$roles = $this->role_db->select(array('disabled'=>'0'));	
-//			$show_header = true;
+        $this->load->model('admin/model_manage');
+         
+        $admin_roleid = $this->session->userdata('roleid');
+        $roleid = $this->input->get('roleid');
+        $userid = $this->input->get('userid');//这是a链接过来的，直接显示的
+        $sbt = $this->input->post('dosubmit');
+      
+        if(!empty($sbt)) {
+			
+			$info = $this->input->post('info');
+            
+            $userid=$info['userid']; //这是ajax post提交的，上面的$userid是不能在这使用的
+
+            if(empty($userid)) exit("no");
+            
+            $admin_fields=array('password','realname','email','encrypt','roleid');
+			
+            $comma='';
+            $str='';
+			foreach ($info as $k=>$v) {
+				if (!in_array($k, $admin_fields) || empty($v)){
+					unset($info[$k]);
+				} 
+			}
+            
+            if(isset($info['password'])){
+                $info['password']=md5(md5($info['password']).$info['encrypt']);
+            }
+
+            
+            foreach($info as $k=>$v){
+                $str .= $comma;
+
+                $str .= "`{$k}`='{$v}'";
+                $comma=',';
+            }
+            
+
+            
+			$bl=$this->model_manage->editAdminInfo($str,$userid);
+            
+            if($bl)
+                exit('yes');
+            else
+                exit('no');
+	
+		} 
+        
+       
+        if (empty($userid)) return ;
+        
+        $info = $this->model_manage->getAdminInfo(array($userid));
 
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
 
         $roles = array();
         $roles = unserialize($this->cache->get('role'));
+        
         $this->data['roles'] = $roles;
-        $this->load->view('admin/edit', $this->data);
-        //}
+        $this->data['info']  = $info;
+        $this->data['roleid'] = $roleid;
+        $this->data['admin_roleid'] = $admin_roleid;
+        
+        $this->load->view('admin/admin_edit', $this->data);
+   
+    }
+    
+    public function delete(){
+        $this->load->model('admin/model_manage');
+        
+        $userid = $this->input->post('userid');
+        
+        if(empty($userid)) return;
+        $this->model_manage->deleteAdmin(array($userid));
     }
 
 }

@@ -19,10 +19,9 @@ class Model_manage extends CI_Model {
      * 返回管理员的信息
      */
 
-    public function getAdminInfo($where) {
-
-        $sql = "select username,password,encrypt,lastloginip,lastlogintime,email,realname from {$this->tbl_prefix}admin where `userid`=?";
-        $query = $this->db->query($sql, $where);
+    public function getAdminInfo($userid=array()) {
+        $sql = "select userid,username,password,encrypt,lastloginip,lastlogintime,email,realname from {$this->tbl_prefix}admin where `userid`=?";
+        $query = $this->db->query($sql, $userid);
         return $query->row_array();
     }
 
@@ -36,7 +35,14 @@ class Model_manage extends CI_Model {
         return $this->db->query($sql);
 
     }
-
+    
+    /*
+     * 删除管理员
+     */
+    public function deleteAdmin($userid){
+        $sql="delete from {$this->tbl_prefix}admin where `userid`=?";
+        return $this->db->query($sql,$userid);
+    }
    
 
 }

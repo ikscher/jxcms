@@ -175,20 +175,41 @@ class Role extends CI_Controller {
     /**
 	 * 成员管理
 	 */
-	public function member_manage() {
+	public function manage_member() {
         $this->lang->load('admin_role');
         $this->lang->load('admin_manage');
 		$this->load->model('admin/model_role');
 		$roleid = $this->input->get('roleid');
+       
         
-		$infos = $this->model_role->getRoleMembers(array($roleid));
-        
+        //加载角色
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
         $role_serial=$this->cache->get('role');
         $roles=  unserialize($role_serial);
-        //var_dump($roles);exit;
+        
+        //分页显示
+        $perpage = $this->config->item('per_page');
+        $page = $this->input->get('per_page');
+        $page = isset($page) && $page > 0 ? $page : 1;
+        $limit = ($page - 1) * $perpage;
+
+        $con=array($roleid,$limit,$perpage);
+         
+		$infos = $this->model_role->getRoleMembers($con);
+ 
+      
+        $this->load->library('pagination');
+        $config['base_url'] = '?d=admin&c=role&m=manage_member&roleid='.$roleid;
+        $config['total_rows'] = $this->model_role->getRoleMembersTotal($roleid);
+        $this->pagination->initialize($config);
+
+        $pagination = $this->pagination->create_links();
+        
+        //输出变量
         $this->data['infos'] = $infos;
         $this->data['roles'] = $roles;
+        $this->data['pagination'] = $pagination;
+        $this->data['roleid'] = $roleid;
         
 		
         $this->load->view('admin/admin_list',$this->data);

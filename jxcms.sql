@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2013-11-14 17:53:11
+Date: 2013-11-15 17:24:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,13 +40,13 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384421950', 'ikscher@163.com', '中国龙', '', '', '1', null);
+INSERT INTO `admin` VALUES ('1', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384505453', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('2', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('3', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
-INSERT INTO `admin` VALUES ('5', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
+INSERT INTO `admin` VALUES ('5', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '3', 'xhAxTE', '127.0.0.1', '1384505443', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('6', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('7', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
-INSERT INTO `admin` VALUES ('8', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
+INSERT INTO `admin` VALUES ('8', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384502905', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('9', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('10', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
 INSERT INTO `admin` VALUES ('11', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
@@ -68,21 +68,15 @@ INSERT INTO `admin` VALUES ('26', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '
 INSERT INTO `admin` VALUES ('27', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('28', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
 INSERT INTO `admin` VALUES ('29', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
-INSERT INTO `admin` VALUES ('30', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('31', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
-INSERT INTO `admin` VALUES ('32', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('33', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('34', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
-INSERT INTO `admin` VALUES ('35', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('36', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('37', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
-INSERT INTO `admin` VALUES ('38', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('39', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('40', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
-INSERT INTO `admin` VALUES ('41', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('42', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('43', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
-INSERT INTO `admin` VALUES ('44', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('45', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('46', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
 INSERT INTO `admin` VALUES ('47', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
@@ -190,7 +184,6 @@ INSERT INTO `admin` VALUES ('148', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '
 INSERT INTO `admin` VALUES ('149', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('150', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('151', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
-INSERT INTO `admin` VALUES ('152', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
 INSERT INTO `admin` VALUES ('153', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1382774697', 'phpcms@163.com', 'php', '', '', '1', null);
 INSERT INTO `admin` VALUES ('154', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'java', '', '', '1', null);
 INSERT INTO `admin` VALUES ('155', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1384408654', 'ikscher@163.com', '中国龙', '', '', '1', null);
@@ -5548,7 +5541,7 @@ INSERT INTO `menu` VALUES ('50', 'role_manage', '49', 'admin', 'role', 'index', 
 INSERT INTO `menu` VALUES ('51', 'role_add', '50', 'admin', 'role', 'add', '', '0', '1', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('52', 'category_cache', '43', 'admin', 'category', 'public_cache', 'module=admin', '4', '1', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('55', 'manage_member', '5', 'member', 'member', 'manage', '', '0', '1', '1', '1', '1', '1', '1');
-INSERT INTO `menu` VALUES ('58', 'admin_add', '54', 'admin', 'admin_manage', 'add', '', '0', '1', '1', '1', '1', '1', '1');
+INSERT INTO `menu` VALUES ('58', 'admin_add', '54', 'admin', 'manage', 'add', '', '0', '1', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('59', 'model_manage', '975', 'content', 'sitemodel', 'index', '', '5', '1', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('64', 'site_management', '30', 'admin', 'site', 'index', '', '2', '1', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('81', 'member_add', '72', 'member', 'member', 'add', '', '2', '0', '1', '1', '1', '1', '1');
@@ -5723,9 +5716,9 @@ INSERT INTO `menu` VALUES ('1034', 'operation_pass', '74', 'member', 'member_ver
 INSERT INTO `menu` VALUES ('1035', 'operation_delete', '74', 'member', 'member_verify', 'delete', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1039', 'operation_ignore', '74', 'member', 'member_verify', 'ignore', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1038', 'settingsave', '30', 'admin', 'setting', 'save', '', '0', '0', '1', '1', '1', '1', '1');
-INSERT INTO `menu` VALUES ('1040', 'admin_edit', '54', 'admin', 'admin_manage', 'edit', '', '0', '0', '1', '1', '1', '1', '1');
+INSERT INTO `menu` VALUES ('1040', 'admin_edit', '54', 'admin', 'manage', 'edit', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1041', 'operation_reject', '74', 'member', 'member_verify', 'reject', '', '0', '0', '1', '1', '1', '1', '1');
-INSERT INTO `menu` VALUES ('1042', 'admin_delete', '54', 'admin', 'admin_manage', 'delete', '', '0', '0', '1', '1', '1', '1', '1');
+INSERT INTO `menu` VALUES ('1042', 'admin_delete', '54', 'admin', 'manage', 'delete', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1043', 'card', '54', 'admin', 'admin_manage', 'card', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1044', 'creat_card', '54', 'admin', 'admin_manage', 'creat_card', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1045', 'remove_card', '54', 'admin', 'admin_manage', 'remove_card', '', '0', '0', '1', '1', '1', '1', '1');
@@ -5733,7 +5726,7 @@ INSERT INTO `menu` VALUES ('1049', 'member_group_edit', '812', 'member', 'member
 INSERT INTO `menu` VALUES ('1048', 'member_edit', '72', 'member', 'member', 'edit', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1050', 'role_edit', '50', 'admin', 'role', 'edit', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1051', 'member_group_delete', '812', 'member', 'member_group', 'delete', '', '0', '0', '1', '1', '1', '1', '1');
-INSERT INTO `menu` VALUES ('1052', 'member_manage', '50', 'admin', 'role', 'member_manage', '', '0', '0', '1', '1', '1', '1', '1');
+INSERT INTO `menu` VALUES ('1052', 'member_manage', '50', 'admin', 'role', 'manage_member', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1053', 'role_delete', '50', 'admin', 'role', 'delete', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1054', 'member_model_export', '77', 'member', 'member_model', 'export', '', '0', '0', '1', '1', '1', '1', '1');
 INSERT INTO `menu` VALUES ('1055', 'member_model_sort', '77', 'member', 'member_model', 'sort', '', '0', '0', '1', '1', '1', '1', '1');

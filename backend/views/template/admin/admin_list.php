@@ -1,7 +1,21 @@
 <?php $this->load->view('common/header'); ?>
 <link href="<?php echo base_url('views/default/css/table_form.css'); ?>" rel="stylesheet" type="text/css" />
 <div class="pad_10">
+    <!--导航-->
+    <div class="nav_">
+        <span><?php echo $this->lang->line('manage_member');?></span>
+        <ul>   
 
+            <li>                       
+                <button  type="button" name="return" class="btn btn-default navbar-btn"><?php echo $this->lang->line('return'); ?></button>
+                <button  type="button" name="refresh" class="btn btn-default navbar-btn"><?php echo $this->lang->line('refresh'); ?></button>
+            </li>
+        </ul>
+
+
+    </div>
+    <!--导航-->
+    
     <table class="table table-striped table-bordered table-hover table-condensed center">
         <thead>
             <tr>
@@ -17,7 +31,7 @@
         </thead>
         <tbody>
             <?php $admin_founders = 1; ?>
-            <?php if (is_array($infos)) { ?>
+            <?php if (is_array($infos) && count($infos)>0) { ?>
                 <?php foreach ($infos as $info): ?>
 
                     <tr>
@@ -29,9 +43,9 @@
                         <td width="15%"><?php echo $info['email'] ?></td>
                         <td width="10%"  align="center"><?php echo $info['realname'] ?></td>
                         <td width="15%"  align="center">
-                            <a href=""><?php echo $this->lang->line('edit') ?></a> | 
+                            <a  class="editMember" data-userid="<?php  echo $info['userid']?>" href="javascript:void(0);"><?php echo $this->lang->line('edit') ?></a> | 
                             <?php if (!in_array($info['userid'], array($admin_founders))) { ?>
-                                <a href="javascript:confirmurl('?m=admin&c=admin_manage&a=delete&userid=<?php echo $info['userid'] ?>', '<?php echo $this->lang->line('admin_del_cofirm') ?>')"><?php echo $this->lang->line('delete') ?></a>
+                                <a class="deleteMember" data-userid="<?php  echo $info['userid']?>"  href="javascript:void(0);"><?php echo $this->lang->line('delete') ?></a>
                             <?php } else { ?>
                                 <font color="#cccccc"><?php echo $this->lang->line('delete') ?></font>
                             <?php } ?> 
@@ -39,11 +53,38 @@
                     </tr>
                 <?php endforeach; ?>
 
-            <?php } ?>
+            <?php }else{ ?>
+                  <tr><td colspan="8" align="center"><?php echo $this->lang->line('noresult');?></td></tr>
+            <?php }?>       
         </tbody>
     </table>
-    <div id="pages"> </div>
+    <ul class="pagination"><?php echo $pagination; ?></ul>
 
 
 </div>
+<script type="text/javascript">
+    $('button[name=return]').click(function(){
+        location.href='index.php?d=admin&c=role&m=index';
+    });
+    
+    $('button[name=refresh]').click(function(){
+        location.href=location.href;
+    });
+    
+    $('.editMember').click(function(){
+        var userid=$(this).attr('data-userid');
+        var roleid = "<?php echo $roleid;?>";
+        location.href='index.php?d=admin&c=manage&m=edit&userid='+userid+'&roleid='+roleid;
+    });
+    
+    $('.deleteMember').click(function(){
+        var userid=$(this).attr('data-userid');
+        if(confirm("<?php echo $this->lang->line('admin_del_cofirm');?>")){
+            $.post("?d=admin&c=manage&m=delete",{userid:userid},function(){
+                
+            })
+            location.href=location.href;
+        }
+    })
+</script>
 <?php $this->load->view('common/footer'); ?>

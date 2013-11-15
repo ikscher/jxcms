@@ -6,8 +6,9 @@
 <div class="pad_10">
     <!--导航-->
     <div class="nav_">
-
+        <span><?php echo $this->lang->line('role_edit');?></span>
         <ul>   
+
             <li>                       
                 <button  type="button" name="return" class="btn btn-default navbar-btn"><?php echo $this->lang->line('return'); ?></button>
                 <button  type="button" name="refresh" class="btn btn-default navbar-btn"><?php echo $this->lang->line('refresh'); ?></button>
@@ -65,12 +66,11 @@
             dataType:'text',
             data:$('input[name^="info"]:checked,input[name^="_info"],input[type="submit"],textarea[name^="info"],input[type="hidden"]'),
             success:function(str){
-                console.log(str);
-                
                 if(str=='yes'){
                     $('.modal-title').text("提示");
                     $('.modal-body').html("修改角色成功！");
-                    $('#myModal').modal()
+                    $('#myModal').modal();
+                    
                 }else{
                     $('.modal-title').text("提示");
                     $('.modal-body').html("修改角色失败！");
@@ -80,7 +80,7 @@
         });
     });
     
-  
+ 
     
     $('#rolename').blur(function(){
         var rolename=$.trim($(this).val());

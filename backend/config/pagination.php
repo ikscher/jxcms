@@ -15,7 +15,7 @@ $config['cur_tag_close'] = '</a></li>';
 $config['last_link'] = '最后一页';
 $config['last_tag_open'] = '<li>';
 $config['last_tag_close'] = '</li>';
-$config['num_links'] = 5;
+//$config['num_links'] = 5;
 $config['num_tag_open'] = '<li>';
 $config['num_tag_close'] = '</li>';
 
