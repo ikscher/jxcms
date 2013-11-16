@@ -214,6 +214,61 @@ class Role extends CI_Controller {
 		
         $this->load->view('admin/admin_list',$this->data);
 	}
+    
+    /*
+     * 权限设置
+     */
+    public function setPriv(){
+        $this->lang->load('admin_role');
+        $this->lang->load('admin_manage');
+        $roleid = $this->input->get('roleid');
+        
+        $sbt = $this->input->post('dosubmit');
+        if(isset($sbt)){
+			if (is_array($_POST['menuid']) && count($_POST['menuid']) > 0) {
+			
+				$this->priv_db->delete(array('roleid'=>$_POST['roleid'],'siteid'=>$_POST['siteid']));
+				$menuinfo = $this->menu_db->select('','`id`,`m`,`c`,`a`,`data`');
+				foreach ($menuinfo as $_v) $menu_info[$_v[id]] = $_v;
+				foreach($_POST['menuid'] as $menuid){
+					$info = array();
+					$info = $this->op->get_menuinfo(intval($menuid),$menu_info);
+					$info['roleid'] = $_POST['roleid'];
+					$info['siteid'] = $_POST['siteid'];
+					$this->priv_db->insert($info);
+				}
+			} else {
+				$this->priv_db->delete(array('roleid'=>$_POST['roleid'],'siteid'=>$_POST['siteid']));
+			}
+			$this->_cache();	
+			showmessage(L('operation_success'), HTTP_REFERER);
+
+		} else {
+	
+            $menu = pc_base::load_sys_class('tree');
+            $menu->icon = array('│ ','├─ ','└─ ');
+            $menu->nbsp = '&nbsp;&nbsp;&nbsp;';
+            $result = $this->menu_db->select();
+            $priv_data = $this->priv_db->select(); //获取权限表数据
+            $modules = 'admin,announce,vote,system';
+            foreach ($result as $n=>$t) {
+                $result[$n]['cname'] = L($t['name'],'',$modules);
+                $result[$n]['checked'] = ($this->op->is_checked($t,$_GET['roleid'],$siteid, $priv_data))? ' checked' : '';
+                $result[$n]['level'] = $this->op->get_level($t['id'],$result);
+                $result[$n]['parentid_node'] = ($t['parentid'])? ' class="child-of-node-'.$t['parentid'].'"' : '';
+            }
+            $str  = "<tr id='node-\$id' \$parentid_node>
+                        <td style='padding-left:30px;'>\$spacer<input type='checkbox' name='menuid[]' value='\$id' level='\$level' \$checked onclick='javascript:checknode(this);'> \$cname</td>
+                    </tr>";
+
+            $menu->init($result);
+            $categorys = $menu->get_tree(0, $str);
+			
+			$show_header = true;
+			$show_scroll = true;
+			include $this->admin_tpl('role_priv');
+		}
+    }
 
 }
 

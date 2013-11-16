@@ -52,7 +52,7 @@
                         <td width="5%" align="center"><a href="?m=admin&c=role&a=change_status&roleid=<?php echo $info['roleid'] ?>&disabled=<?php echo ($info['disabled'] == 1 ? 0 : 1) ?>"><?php echo $info['disabled'] ? $this->lang->line('icon_locked') : $this->lang->line('icon_unlock') ?></a></td>
                         <td  align="center">
                             <?php if ($info['roleid'] > 1) { ?>
-                                <a href="javascript:setting_role(<?php echo $info['roleid'] ?>, '<?php echo $info['rolename'] ?>')"><?php echo $this->lang->line('role_setting'); ?></a> | <a href="javascript:void(0)" onclick="setting_cat_priv(<?php echo $info['roleid'] ?>, '<?php echo $info['rolename'] ?>')"><?php echo $this->lang->line('usersandmenus') ?></a> |
+                                <a data-roleid="<?php echo $info['roleid'] ?>" class="setPriv" href="javascript:void(0);"><?php echo $this->lang->line('role_setting'); ?></a> | <a href="javascript:void(0)" onclick="setting_cat_priv(<?php echo $info['roleid'] ?>, '<?php echo $info['rolename'] ?>')"><?php echo $this->lang->line('usersandmenus') ?></a> |
                             <?php } else { ?>
                                 <font color="#cccccc"><?php echo $this->lang->line('role_setting'); ?></font> | <font color="#cccccc"><?php echo $this->lang->line('usersandmenus') ?></font> |
                             <?php } ?>
@@ -78,6 +78,7 @@
         location.href="?d=admin&c=role&m=index";return false;
     });
     
+    //角色删除
     $('.deleteRole').click(function(){
         if(confirm("<?php echo $this->lang->line('role_del_cofirm'); ?>")){
             var roleid=$(this).attr('data-roleid');
@@ -93,12 +94,21 @@
         }
     });
     
+    //权限设置
+    $('.setPriv').click(function(){
+        var roleid=$(this).attr('data-roleid');
+        if(!roleid) return false;
+        location.href='?d=admin&c=role&m=setPriv&roleid='+roleid;
+    });
+    
+    //角色编辑
     $('.editRole').click(function(){
         var roleid=$(this).attr('data-roleid');
         if(!roleid) return false;
         location.href='?d=admin&c=role&m=edit&roleid='+roleid;
     })
     
+    //成员管理
     $('.getRoleMembers').click(function(){
         var roleid=$(this).attr('data-roleid');
         if(!roleid) return false;
