@@ -78,6 +78,25 @@ class Model_role extends CI_Model {
         }
     }
     
+    /**
+     * 更新角色
+     */
+    public function change_status($data,$where=''){
+        $str ='';
+        if(is_array($data)){
+            $comma = '';          
+            foreach($data as $k=>$v){
+                $str .=$comma;
+                $str .="`{$k}`={$v}";
+                $comma = ',';
+            }
+        }else{
+            $str = $data;
+        }
+        $sql = "update {$this->tbl_prefix}admin_role set {$str} where {$where}";
+        return $this->db->query($sql);
+    }
+    
     /*
      * 删除角色
      */

@@ -49,7 +49,7 @@
                         <td width="10%" align="center"><?php echo $info['roleid'] ?></td>
                         <td width="15%"  ><?php echo $info['rolename'] ?></td>
                         <td width="23%" ><?php echo $info['description'] ?></td>
-                        <td width="5%" align="center"><a href="?m=admin&c=role&a=change_status&roleid=<?php echo $info['roleid'] ?>&disabled=<?php echo ($info['disabled'] == 1 ? 0 : 1) ?>"><?php echo $info['disabled'] ? $this->lang->line('icon_locked') : $this->lang->line('icon_unlock') ?></a></td>
+                        <td width="5%" align="center"><a class="updateStatus" data-roleid="<?php echo $info['roleid']?>" data-disabled="<?php echo $info['disabled']==1?0:1;?>" href="javascript:void(0);"><?php echo $info['disabled'] ? $this->lang->line('icon_locked') : $this->lang->line('icon_unlock') ?></a></td>
                         <td  align="center">
                             <?php if ($info['roleid'] > 1) { ?>
                                 <a data-roleid="<?php echo $info['roleid'] ?>" class="setPriv" href="javascript:void(0);"><?php echo $this->lang->line('role_setting'); ?></a> | <a href="javascript:void(0)" onclick="setting_cat_priv(<?php echo $info['roleid'] ?>, '<?php echo $info['rolename'] ?>')"><?php echo $this->lang->line('usersandmenus') ?></a> |
@@ -106,7 +106,31 @@
         var roleid=$(this).attr('data-roleid');
         if(!roleid) return false;
         location.href='?d=admin&c=role&m=edit&roleid='+roleid;
-    })
+    });
+ 
+    //更新角色状态
+    $('.updateStatus').click(function(){
+        var that = $(this);
+        var roleid = $(this).attr('data-roleid');
+        var disabled = $(this).attr('data-disabled');
+        
+        if(!roleid) return false;
+        $.get('?d=admin&c=role&m=change_status',{roleid:roleid,disabled:disabled},function(str){
+            if(str=='yes'){
+                if(disabled==1){
+                    that.html('<font color="blue">×</font>');
+                    that.attr('data-disabled',0);
+                }else if (disabled==0){
+                    that.html('<font color="red">√</font>');
+                    that.attr('data-disabled',1);
+               }
+            }else{
+                $('.modal-title').text("提示");
+                $('.modal-body').html("更新角色状态失败！");
+                $('#myModal').modal();
+            }
+        })
+    });
     
     //成员管理
     $('.getRoleMembers').click(function(){

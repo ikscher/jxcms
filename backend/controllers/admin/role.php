@@ -172,6 +172,39 @@ class Role extends CI_Controller {
             exit('no');
     }
     
+    
+    /**
+	 * 更新角色状态
+	 */
+	public function change_status(){
+        $this->load->model('admin/model_role');
+		$roleid = intval($this->input->get('roleid'));
+		$disabled = intval($this->input->get('disabled'));
+        
+        $bl=$this->model_role->change_status(array('disabled'=>$disabled)," roleid={$roleid}");
+		
+        if(!$bl) return false;
+        //更新缓存
+        $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+        $role_serial=$this->cache->get('role');
+        $roles=  unserialize($role_serial);
+   
+        $items = array();
+        foreach($roles as $k=>$v){
+            if($k==$roleid){
+                $v['disabled']=$disabled;
+            }
+            $items[$k]=$v;
+        }
+        
+        $result_serial = serialize($items);
+
+        $this->cache->save('role', $result_serial);
+        
+        exit('yes');
+		
+	}
+    
     /**
 	 * 成员管理
 	 */
@@ -245,9 +278,10 @@ class Role extends CI_Controller {
 
 		} else {
 	
-            $menu = pc_base::load_sys_class('tree');
-            $menu->icon = array('│ ','├─ ','└─ ');
-            $menu->nbsp = '&nbsp;&nbsp;&nbsp;';
+            $this->load->library('tree');
+            $this->tree->icon = array('│ ','├─ ','└─ ');
+            $this->tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+            
             $result = $this->menu_db->select();
             $priv_data = $this->priv_db->select(); //获取权限表数据
             $modules = 'admin,announce,vote,system';
