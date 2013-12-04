@@ -80,7 +80,7 @@
         <div id="content">
             <div class="col-left left_menu">
                 <div id="Scroll"><div id="leftMain"></div></div>
-                <a href="javascript:;" id="openClose"  class="open" title="<?php echo $this->lang->line('spread_or_closed') ?>"><span class="hidden"><?php echo $this->lang->line('expand') ?></span></a>
+                <a href="javascript:;" id="openClose"  class="open" title="<?php echo $this->lang->line('spread_or_closed') ?>"><span class="hidden"></span></a>
             </div>
            <!-- <div class="col-1 lf cat-menu" id="display_center_id" style="display:none" height="100%">
                 <div class="content">

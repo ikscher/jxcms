@@ -1,9 +1,9 @@
 <?php $this->load->view('common/header'); ?>
-<link href="<?php echo base_url('views/default/css/table_form.css'); ?>" rel="stylesheet" type="text/css">
+<link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css">
 <div class="pad_10">
     <!--导航开始-->
     <div class="nav_">
-        <span><?php echo $this->lang->line('edit_member'); ?></span>
+        
         <ul>   
             <li>                       
                 <button  type="button" name="return" class="btn btn-default navbar-btn"><?php echo $this->lang->line('return'); ?></button>
@@ -93,11 +93,20 @@
         });
     })
     
-    //返回
-    $('button[name=return]').click(function(){
+    var curpos=$(window.parent.document).find('#current_pos_attr').text();
+    var title ="<?php echo $this->lang->line('edit_member');?>";
+    
+    if(curpos.indexOf(title, 0)<0) $(window.parent.document).find('#current_pos_attr').text(curpos+'>>'+title);
+    
+    curpos=null;
+
+    $("button[name=return]").click(function(){
+        $(window.parent.document).find('#current_pos_attr').text('');
         var roleid="<?php echo $roleid; ?>";
         location.href='?d=admin&c=role&m=manage_member&roleid='+roleid;
     });
+    
+  
     
     //刷新
     $('button[name=refresh]').click(function(){

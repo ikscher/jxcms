@@ -1,5 +1,5 @@
 <?php $this->load->view('common/header'); ?>
-<link href="<?php echo base_url('views/default/css/table_form.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
 <div class="pad_10">
     <div class="common-form">
 

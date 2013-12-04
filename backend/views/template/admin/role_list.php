@@ -1,5 +1,5 @@
 <?php $this->load->view('common/header'); ?>
-<link href="<?php echo base_url('views/default/css/table_form.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
 
 <div class="pad_10">
 
@@ -27,7 +27,7 @@
             <li><a class="roleAdd" href="?d=admin&c=role&m=add"><?php echo $this->lang->line('role_add'); ?></a></li>
 
         </ul>
-    </div><!-- /.navbar-collapse -->
+    </div>
 
 
     <table class="table table-striped table-bordered table-hover table-condensed center">

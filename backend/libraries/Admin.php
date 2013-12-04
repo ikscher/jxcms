@@ -7,12 +7,14 @@ class Admin {
     private $db;
     private $session;
     private $lang;
+    private $tbl_prefix;
 
     public function __construct() {
         $CI =& get_instance();
         $this->db = &$CI->db;
         $this->session = &$CI->session;
         $this->lang = &$CI->lang;
+        $this->tbl_prefix = $this->db->dbprefix;
 
     }
     /**
@@ -24,8 +26,8 @@ class Admin {
 		$parentid = intval($parentid);
 
 		$where = array($parentid,'1');
-	    $tbl_pre=$this->db->dbprefix;
-        $sql="select * from {$tbl_pre}menu where parentid=? and display=? order by listorder ASC";
+	    
+        $sql="select * from {$this->tbl_prefix}menu where parentid=? and display=? order by listorder ASC";
         
 		$query =$this->db->query($sql,$where);
         $result_array=$query->result_array();
@@ -34,7 +36,7 @@ class Admin {
         $result=array();
         if($with_child) {
             foreach($result_array as $v){
-               $sql="select * from {$tbl_pre}menu where parentid={$v['id']}";
+               $sql="select * from {$this->tbl_prefix}menu where parentid={$v['id']}";
                $query_=$this->db->query($sql);
                $v['child']=$query_->result_array();
                $result[]=$v;
@@ -55,7 +57,7 @@ class Admin {
 			} else {
 				if(preg_match('/^ajax_([a-z]+)_/',$action,$_match)) $action = $_match[1];
                 $where=array('d'=>$v['d'], 'c'=>$v['c'], 'm'=>$v['m'], 'roleid'=>$roleid);
-                $sql="select * from {$tbl_pre}admin_role_priv where d=? and c=? and m=? and roleid=? limit 1 ";
+                $sql="select * from {$this->tbl_prefix}admin_role_priv where d=? and c=? and m=? and roleid=? limit 1 ";
                 $q=$this->db->query($sql,$where);
 				$r = $q->row();
 				if($r) $array[] = $v;
@@ -73,8 +75,7 @@ class Admin {
 	public  function current_pos($id) {
 		$this->lang->load('system');
  
-        $tbl_pre=$this->db->dbprefix;
-        $sql="select id,name,parentid from {$tbl_pre}menu where id='{$id}'";
+        $sql="select id,name,parentid from {$this->tbl_prefix}menu where id='{$id}'";
 
 		$query = $this->db->query($sql);
         

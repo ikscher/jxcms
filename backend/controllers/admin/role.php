@@ -219,7 +219,7 @@ class Role extends CI_Controller {
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
         $role_serial=$this->cache->get('role');
         $roles=  unserialize($role_serial);
-        
+    
         //分页显示
         $perpage = $this->config->item('per_page');
         $page = $this->input->get('per_page');
@@ -254,10 +254,13 @@ class Role extends CI_Controller {
     public function setPriv(){
         $this->lang->load('admin_role');
         $this->lang->load('admin_manage');
+        $this->lang->load('system');
+        
         $roleid = $this->input->get('roleid');
         
         $sbt = $this->input->post('dosubmit');
-        if(isset($sbt)){
+       
+        if(!empty($sbt)){
 			if (is_array($_POST['menuid']) && count($_POST['menuid']) > 0) {
 			
 				$this->priv_db->delete(array('roleid'=>$_POST['roleid'],'siteid'=>$_POST['siteid']));
@@ -277,30 +280,42 @@ class Role extends CI_Controller {
 			showmessage(L('operation_success'), HTTP_REFERER);
 
 		} else {
-	
+
             $this->load->library('tree');
+            $this->load->library('roleop');
             $this->tree->icon = array('│ ','├─ ','└─ ');
             $this->tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+        
+            $this->load->model('admin/model_menu');
+            $this->load->model('admin/model_privilege');
             
-            $result = $this->menu_db->select();
-            $priv_data = $this->priv_db->select(); //获取权限表数据
+            $result = $this->model_menu->getMenus();
+            
+            $priv_data = $this->model_privilege->getRolePrivileges(); //获取权限表数据
+           
             $modules = 'admin,announce,vote,system';
             foreach ($result as $n=>$t) {
-                $result[$n]['cname'] = L($t['name'],'',$modules);
-                $result[$n]['checked'] = ($this->op->is_checked($t,$_GET['roleid'],$siteid, $priv_data))? ' checked' : '';
-                $result[$n]['level'] = $this->op->get_level($t['id'],$result);
+                //$result[$n]['cname'] = L($t['name'],'',$modules);
+                
+                $result[$n]['cname'] = $this->lang->line($t['name']);
+                $result[$n]['checked'] = ($this->roleop->isChecked($t,$this->input->get('roleid'), $priv_data))? ' checked' : '';
+                $result[$n]['level'] = $this->roleop->getLevel($t['id'],$result);
                 $result[$n]['parentid_node'] = ($t['parentid'])? ' class="child-of-node-'.$t['parentid'].'"' : '';
             }
             $str  = "<tr id='node-\$id' \$parentid_node>
                         <td style='padding-left:30px;'>\$spacer<input type='checkbox' name='menuid[]' value='\$id' level='\$level' \$checked onclick='javascript:checknode(this);'> \$cname</td>
                     </tr>";
 
-            $menu->init($result);
-            $categorys = $menu->get_tree(0, $str);
+            $this->tree->init($result);
+            $categories = $this->tree->getTree(0, $str);
 			
 			$show_header = true;
 			$show_scroll = true;
-			include $this->admin_tpl('role_priv');
+            
+            $this->data['categories'] = $categories;
+            $this->data['roleid'] = $this->input->get('roleid');
+                    
+			$this->load->view('admin/role_priv',$this->data);
 		}
     }
 

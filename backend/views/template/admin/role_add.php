@@ -1,9 +1,9 @@
 <?php $this->load->view('common/header'); ?>
-<link href="<?php echo base_url('views/default/css/table_form.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
 
 <div class="pad_10">
     <div class="nav_">
-        <span><?php echo $this->lang->line('role_add'); ?></span>
+        
         <ul>   
             <li>                       
                 <button  type="button" name="return" class="btn btn-default navbar-btn"><?php echo $this->lang->line('return'); ?></button>
@@ -45,8 +45,16 @@
 
 </div>
 <script type="text/javascript">
-    $('button[name=return]').click(function(){
-        location.href='index.php?d=admin&c=role&index';
+    var curpos=$(window.parent.document).find('#current_pos_attr').text();
+    var title ="<?php echo $this->lang->line('role_add');?>";
+    
+    if(curpos.indexOf(title, 0)<0) $(window.parent.document).find('#current_pos_attr').text(curpos+'>>'+title);
+    
+    curpos=null;
+
+    $("button[name=return]").click(function(){
+        $(window.parent.document).find('#current_pos_attr').text('');
+        location.href="?d=admin&c=role&m=index";
     });
     
     $('button[name=refresh]').click(function(){

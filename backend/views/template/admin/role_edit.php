@@ -1,12 +1,12 @@
 <?php $this->load->view('common/header'); ?>
-<link href="<?php echo base_url('views/default/css/table_form.css'); ?>" rel="stylesheet" type="text/css" />
+<link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
 <style type="text/css">
     .col-xs-3,.col-xs-2{padding-left:0px;}
 </style>
 <div class="pad_10">
     <!--导航-->
     <div class="nav_">
-        <span><?php echo $this->lang->line('role_edit');?></span>
+
         <ul>   
 
             <li>                       
@@ -50,8 +50,16 @@
 
 </div>
 <script type="text/javascript">
-    $('button[name=return]').click(function(){
-        location.href='index.php?d=admin&c=role&index';
+    var curpos=$(window.parent.document).find('#current_pos_attr').text();
+    var title ="<?php echo $this->lang->line('role_edit');?>";
+    
+    if(curpos.indexOf(title, 0)<0) $(window.parent.document).find('#current_pos_attr').text(curpos+'>>'+title);
+    
+    curpos=null;
+
+    $("button[name=return]").click(function(){
+        $(window.parent.document).find('#current_pos_attr').text('');
+        location.href="?d=admin&c=role&m=index";
     });
     
     $('button[name=refresh]').click(function(){
