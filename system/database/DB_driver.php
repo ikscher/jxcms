@@ -909,7 +909,7 @@ class CI_DB_driver {
 			$fields[] = $this->_escape_identifiers($key);
 			$values[] = $this->escape($val);
 		}
-
+ 
 		return $this->_insert($this->_protect_identifiers($table, TRUE, NULL, FALSE), $fields, $values);
 	}
 

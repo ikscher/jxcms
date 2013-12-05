@@ -54,7 +54,7 @@ class RoleOp {
 	 */
 	public function getMenuInfo($menuid,$menu_info) {
 		$menuid = intval($menuid);
-		unset($menu_info[$menuid][id]);
+		unset($menu_info[$menuid]['id']);
 		return $menu_info[$menuid];
 	}
 	

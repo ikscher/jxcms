@@ -46,7 +46,7 @@ class Admin {
 		//权限检查
         $roleid=$this->session->userdata('roleid');
  
-		if( $roleid== 1) return $result;
+		if( $roleid== 1) return $result; //administrator
        
         
 		$array = array();

@@ -52,9 +52,9 @@
                         <td width="5%" align="center"><a class="updateStatus" data-roleid="<?php echo $info['roleid']?>" data-disabled="<?php echo $info['disabled']==1?0:1;?>" href="javascript:void(0);"><?php echo $info['disabled'] ? $this->lang->line('icon_locked') : $this->lang->line('icon_unlock') ?></a></td>
                         <td  align="center">
                             <?php if ($info['roleid'] > 1) { ?>
-                                <a data-roleid="<?php echo $info['roleid'] ?>" class="setPriv" href="javascript:void(0);"><?php echo $this->lang->line('role_setting'); ?></a> | <a href="javascript:void(0)" onclick="setting_cat_priv(<?php echo $info['roleid'] ?>, '<?php echo $info['rolename'] ?>')"><?php echo $this->lang->line('usersandmenus') ?></a> |
+                                <a data-roleid="<?php echo $info['roleid'] ?>" data-rolename="<?php echo $info['rolename'] ?>" class="setPriv" href="javascript:void(0);"><?php echo $this->lang->line('role_setting'); ?></a> | <!--<a href="javascript:void(0)" onclick="setting_cat_priv(<?php echo $info['roleid'] ?>, '<?php echo $info['rolename'] ?>')"><?php echo $this->lang->line('usersandmenus') ?></a> |-->
                             <?php } else { ?>
-                                <font color="#cccccc"><?php echo $this->lang->line('role_setting'); ?></font> | <font color="#cccccc"><?php echo $this->lang->line('usersandmenus') ?></font> |
+                                <font color="#cccccc"><?php echo $this->lang->line('role_setting'); ?></font>  |
                             <?php } ?>
                             <a  data-roleid="<?php echo $info['roleid'] ?>" class="getRoleMembers" href="javascript:void(0);" ><?php echo $this->lang->line('role_member_manage'); ?></a> | 
                             <?php if ($info['roleid'] > 1) { ?><a class='editRole' data-roleid="<?php echo $info['roleid'] ?>" href="javascript:void(0);"><?php echo $this->lang->line('edit') ?></a> | 
@@ -97,8 +97,9 @@
     //权限设置
     $('.setPriv').click(function(){
         var roleid=$(this).attr('data-roleid');
+        var rolename = $(this).attr('data-rolename');
         if(!roleid) return false;
-        location.href='?d=admin&c=role&m=setPriv&roleid='+roleid;
+        location.href='?d=admin&c=role&m=setPriv&roleid='+roleid+'&rolename='+rolename;
     });
     
     //角色编辑

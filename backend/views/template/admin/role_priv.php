@@ -1,5 +1,5 @@
 <?php $this->load->view('common/header'); ?>
-<script type="text/javascript" src="<?php echo base_url('views/javascript/jquery.treetable.js'); ?>"></script>
+
 <link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url('views/default/css/jquery.treeTable.css'); ?>" rel="stylesheet" type="text/css" />
 
@@ -54,7 +54,7 @@
        
     </div>
 
-    <form name="myform" action="?d=admin&c=role&m=setPriv" method="post">
+    <!--<form name="myform" action="?d=admin&c=role&m=setPriv" method="post">-->
         <input type="hidden" name="roleid" value="<?php echo $roleid ?>" />
 
         <table width="100%" cellspacing="0" id="treeTable" class="table table-condensed table-hover ">
@@ -63,14 +63,15 @@
             </tbody>
         </table>
         <input type="submit" class="btn btn-default" name="dosubmit" id="dosubmit" value="<?php echo $this->lang->line('submit'); ?>" />
-    </form>
+    <!--</form>-->
 </div>
 <script type="text/javascript">
     
     var curpos=$(window.parent.document).find('#current_pos_attr').text();
     var title ="<?php echo $this->lang->line('priv_setting');?>";
+    var rolename = "<?php echo $rolename;?>";
     
-    if(curpos.indexOf(title, 0)<0) $(window.parent.document).find('#current_pos_attr').text(curpos+'>>'+title);
+    if(curpos.indexOf(title, 0)<0) $(window.parent.document).find('#current_pos_attr').text(curpos+'>>'+title+'>>'+rolename);
     
     curpos=null;
 
@@ -104,6 +105,27 @@
             $(this).expand();
         }
     });
+    
+    
+    $('input[name=dosubmit]').click(function(){
+        $.ajax({
+            type:'post',
+            url:'?d=admin&c=role&m=setPriv',
+            dataType:'text',
+            data:$('input[type="hidden"],input[type="submit"],input[name^="menuid"]:checked'),
+            success:function(str){
+                if(str=='yes'){
+                    $('.modal-title').text("提示");
+                    $('.modal-body').html("权限设置成功！");
+                    $('#myModal').modal();
+                }else{
+                    $('.modal-title').text("提示");
+                    $('.modal-body').html("权限设置失败！");
+                    $('#myModal').modal();
+                }
+            }
+        });
+    });
 </script>
-
+<script type="text/javascript" src="<?php echo base_url('views/javascript/jquery.treetable.js'); ?>"></script>
 <?php $this->load->view('common/footer'); ?>

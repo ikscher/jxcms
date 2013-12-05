@@ -18,7 +18,7 @@ class Model_privilege extends CI_Model {
     /*
      * 列出所有菜单项
      */
-    function getRolePrivileges(){
+    public function getRolePrivileges(){
         $result = array();
         $sql = "select roleid,d,c,m,`data` from {$this->tbl_prefix}admin_role_priv ";
         $query=$this->db->query($sql);
@@ -27,6 +27,13 @@ class Model_privilege extends CI_Model {
         return $result;
     }
     
+    /*
+     * 删除指定角色下的权限
+     */
+    public function delete($where){
+        $sql = "delete from {$this->tbl_prefix}admin_role_priv where roleid = ?";
+        $this->db->query($sql,$where);
+    }
    
 }
 ?>
