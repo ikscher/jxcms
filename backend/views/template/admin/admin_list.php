@@ -6,10 +6,10 @@
         
         <ul>   
 
-            <li>                       
+            <!--<li>                       
                 <button  type="button" name="return" class="btn btn-default navbar-btn"><?php echo $this->lang->line('return'); ?></button>
                 <button  type="button" name="refresh" class="btn btn-default navbar-btn"><?php echo $this->lang->line('refresh'); ?></button>
-            </li>
+            </li>-->
         </ul>
 
 
@@ -43,7 +43,7 @@
                         <td width="15%"><?php echo $info['email'] ?></td>
                         <td width="10%"  align="center"><?php echo $info['realname'] ?></td>
                         <td width="15%"  align="center">
-                            <a  class="editMember" data-userid="<?php  echo $info['userid']?>" href="javascript:void(0);"><?php echo $this->lang->line('edit') ?></a> | 
+                            <a  class="editMember" data-roleid="<?php  echo $info['roleid']?>" data-userid="<?php  echo $info['userid']?>" href="javascript:void(0);"><?php echo $this->lang->line('edit') ?></a> | 
                             <?php if (!in_array($info['userid'], array($admin_founders))) { ?>
                                 <a class="deleteMember" data-userid="<?php  echo $info['userid']?>"  href="javascript:void(0);"><?php echo $this->lang->line('delete') ?></a>
                             <?php } else { ?>
@@ -63,25 +63,11 @@
 
 </div>
 <script type="text/javascript">
-    var curpos=$(window.parent.document).find('#current_pos_attr').text();
-    var title ="<?php echo $this->lang->line('manage_member');?>";
     
-    if(curpos.indexOf(title, 0)<0) $(window.parent.document).find('#current_pos_attr').text(curpos+'>>'+title);
-    
-    curpos=null;
-
-    $("button[name=return]").click(function(){
-        $(window.parent.document).find('#current_pos_attr').text('');
-        location.href="?d=admin&c=role&m=index";
-    });
-    
-    $('button[name=refresh]').click(function(){
-        location.href=location.href;
-    });
     
     $('.editMember').click(function(){
         var userid=$(this).attr('data-userid');
-        var roleid = "<?php echo $roleid;?>";
+        var roleid = $(this).attr('data-roleid');
         location.href='index.php?d=admin&c=manage&m=edit&userid='+userid+'&roleid='+roleid;
     });
     

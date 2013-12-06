@@ -14,7 +14,33 @@ class Model_manage extends CI_Model {
         parent::__construct();
         $this->tbl_prefix = $this->db->dbprefix;
     }
+    
+     /*
+     * 返回所有管理成员
+     */
+    public function getAdmins($where,$con=array()){
+        $result=array();
 
+        $sql="select userid,username,password,roleid,encrypt,lastloginip,lastlogintime,email,realname from {$this->tbl_prefix}admin {$where} order by userid asc limit ?,?";
+       
+        $query = $this->db->query($sql,$con);
+        $result= $query->result_array();
+        return $result;
+    }
+    
+    /*
+     * 返回管理成员总数
+     */
+    public function getAdminsTotal($where){
+        $result=array();
+        
+        $sql="select userid,username,password,roleid,encrypt,lastloginip,lastlogintime,email,realname from {$this->tbl_prefix}admin {$where} ";
+        $query = $this->db->query($sql);
+        
+        return  $query->num_rows()?$query->num_rows():0;
+    }
+    
+    
     /*
      * 返回管理员的信息
      */

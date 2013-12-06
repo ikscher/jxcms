@@ -8,7 +8,7 @@ class CI_User {
 
     private $userid;
     private $username;
-    private $permission = array();
+    //private $permission = array();
     private $db;
     private $session;
     private $cookie;

@@ -62,7 +62,7 @@ $lang['selected'] = '选中';
 $lang['title'] = '标题';
 $lang['hits'] = '浏览次数';
 $lang['inputtime'] = '发表时间';
-$lang['operations_manage'] = '管理操作';
+
 $lang['selected'] = '选中';
 $lang['selected_all'] = '全选';
 $lang['cancel'] = '取消';

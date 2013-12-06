@@ -102,8 +102,9 @@
 
     $("button[name=return]").click(function(){
         $(window.parent.document).find('#current_pos_attr').text('');
-        var roleid="<?php echo $roleid; ?>";
-        location.href='?d=admin&c=role&m=manage_member&roleid='+roleid;
+
+        var page = "<?php echo $page;?>";
+        location.href='?d=admin&c=manage&m=index&per_page='+page;
     });
     
   

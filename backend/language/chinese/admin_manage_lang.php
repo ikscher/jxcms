@@ -24,4 +24,7 @@ $lang['manage_member']="成员管理";
 $lang['edit_member']="编辑成员（管理员）";
 $lang['refresh']='刷新';
 $lang['return']='返回';
+$lang['edit'] = '编辑';
+$lang['delete'] = '删除';
+$lang['operations_manage'] = '管理操作';
 ?>

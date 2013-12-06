@@ -1,5 +1,4 @@
 <?php
-
 /*
  * author:ikscher
  * date:2013-11-11
@@ -13,14 +12,61 @@ class Manage extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
     }
+    
+    
+    /**
+	 * 管理员管理列表
+	 */
+	public function index() {
+        $this->load->model('admin/model_manage');
+        $this->lang->load('admin_manage');
+        
+        $this->data['adminusername'] = $this->cookie->AuthCode($this->input->cookie('adminusername'), 'DECODE');
+        $this->data['rolename'] = $this->session->userdata('userid');
+        
+	    $where = ' where 1';//初始化
+        
+        //分页显示
+        $perpage = $this->config->item('per_page');
+        
+        $page = intval($this->input->get('per_page'));
+        $page = isset($page) && $page > 0 ? $page : 1;
+        $limit = ($page - 1) * $perpage;
+
+        $con=array($limit,$perpage);
+         
+		$infos = $this->model_manage->getAdmins($where,$con);
+
+        $this->load->library('pagination');
+        $config['base_url'] = '?d=admin&c=manage&m=index';
+        $config['total_rows'] = $this->model_manage->getAdminsTotal($where);
+        $this->pagination->initialize($config);
+
+        $pagination = $this->pagination->create_links();
+        
+	
+        $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+        $role_serial=$this->cache->get('role');
+        $roles=  unserialize($role_serial);
+        
+        $this->cookie->SetCookie("page", $this->cookie->AuthCode($page, 'ENCODE'), 24 * 3600);
+        $this->data['infos'] = $infos;
+        $this->data['roles'] = $roles;
+        $this->data['pagination'] = $pagination;
+        
+		$this->load->view('admin/admin_list',$this->data);
+	}
+    
     /*
-     * 编辑用户信息
+     * 管理员个人信息修改
      */
 
     public function edit_info() {
         
         $this->lang->load('admin_manage');
         $userid = $this->session->userdata('userid');
+        
+        if(empty($userid)) return;
         if ($this->input->post('dosubmit')) {
             $admin_fields = array('email', 'realname');
             $info = array();
@@ -56,7 +102,7 @@ class Manage extends CI_Controller {
     }
 
     /**
-     * 管理员自助修改密码
+     * 管理员自身修改密码
      */
     public function edit_pwd() {
         $this->lang->load('admin_manage');
@@ -105,12 +151,13 @@ class Manage extends CI_Controller {
     }
 
     /**
-     *  修改个人信息
+     *  编辑管理员信息
      */
     public function edit() {
         $this->lang->load('admin_manage');
         $this->load->model('admin/model_manage');
          
+
         $admin_roleid = $this->session->userdata('roleid');
         $roleid = $this->input->get('roleid');
         $userid = $this->input->get('userid');//这是a链接过来的，直接显示的
@@ -171,11 +218,15 @@ class Manage extends CI_Controller {
         $this->data['info']  = $info;
         $this->data['roleid'] = $roleid;
         $this->data['admin_roleid'] = $admin_roleid;
+        $this->data['page']=$this->cookie->AuthCode($this->input->cookie('page'), 'DECODE');
         
         $this->load->view('admin/admin_edit', $this->data);
    
     }
     
+    /*
+     * 删除管理员
+     */
     public function delete(){
         $this->load->model('admin/model_manage');
         
