@@ -21,7 +21,7 @@ class Model_manage extends CI_Model {
     public function getAdmins($where,$con=array()){
         $result=array();
 
-        $sql="select userid,username,password,roleid,encrypt,lastloginip,lastlogintime,email,realname from {$this->tbl_prefix}admin {$where} order by userid asc limit ?,?";
+        $sql="select userid,username,password,roleid,encrypt,lastloginip,lastlogintime,email,realname,status,dateadd from {$this->tbl_prefix}admin {$where} order by userid asc limit ?,?";
        
         $query = $this->db->query($sql,$con);
         $result= $query->result_array();
@@ -66,7 +66,8 @@ class Model_manage extends CI_Model {
      * 删除管理员
      */
     public function deleteAdmin($userid){
-        $sql="delete from {$this->tbl_prefix}admin where `userid`=?";
+        //$sql="delete from {$this->tbl_prefix}admin where `userid`=?";
+        $sql = "update {$this->tbl_prefix}admin set status=3 where `userid`=?";
         return $this->db->query($sql,$userid);
     }
    

@@ -1,6 +1,31 @@
 <?php $this->load->view('common/header'); ?>
-<link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
 
+<link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
+<style type='text/css'>
+    .modal {
+	top: 10%;
+	left: 50%;
+	z-index: 1050;
+	width: 560px;
+	margin-left: -280px;
+	background-color: #fff;
+	border: 1px solid #999;
+	border: 1px solid rgba(0,0,0,0.3);
+	*border: 1px solid #999;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	outline: 0;
+	-webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+	box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
+    overflow-y:hidden;
+    bottom:50%
+}
+</style>
 <div class="pad_10">
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,7 +83,7 @@
                             <?php } ?>
                             <a  data-roleid="<?php echo $info['roleid'] ?>" class="getRoleMembers" href="javascript:void(0);" ><?php echo $this->lang->line('role_member_manage'); ?></a> | 
                             <?php if ($info['roleid'] > 1) { ?><a class='editRole' data-roleid="<?php echo $info['roleid'] ?>" href="javascript:void(0);"><?php echo $this->lang->line('edit') ?></a> | 
-                                <a  data-roleid="<?php echo $info['roleid'] ?>" class="deleteRole" href="javascript:void(0);"><?php echo $this->lang->line('delete') ?></a>
+                                <a  data-roleid="<?php echo $info['roleid'] ?>" data-title="确认删除吗？" data-trigger='confirm'  class="deleteRole" href="javascript:void(0);"><?php echo $this->lang->line('delete') ?></a>
                             <?php } else { ?>
                                 <font color="#cccccc"><?php echo $this->lang->line('edit') ?></font> | <font color="#cccccc"><?php echo $this->lang->line('delete') ?></font>
                             <?php } ?>
@@ -72,27 +97,48 @@
     </table>
     <ul class="pagination"><?php echo $pagination; ?></ul>
 </div>
-</body>
+
+<script type="text/javascript" src="<?php echo base_url('views/javascript/sco.modal.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('views/javascript/sco.confirm.js'); ?>"></script>
 <script type="text/javascript">
     $("button[name=refresh]").click(function(){
         location.href="?d=admin&c=role&m=index";return false;
     });
     
-    //角色删除
-    $('.deleteRole').click(function(){
-        if(confirm("<?php echo $this->lang->line('role_del_cofirm'); ?>")){
-            var roleid=$(this).attr('data-roleid');
-            $.get('?d=admin&c=role&m=delete',{roleid:roleid},function(str){
-                if(str=='yes'){
-                    location.href=location.href;
-                }else{
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("删除角色失败！");
-                    $('#myModal').modal()
-                }
-            });
-        }
+    /*
+    $('.deleteRole').on('click',function(){
+        $('.modal-title').text("提示");
+        $('.modal-body').html("<?php echo $this->lang->line('role_del_cofirm'); ?>");
+        $('.modal-footer button:eq(0)').text('取消');
+        $('.modal-footer button:eq(1)').text('确定');
+        $('.modal-footer button:eq(1)').removeClass('hidden');
+        
+        $('#myModal').modal();
     });
+    */
+   
+    //角色删除
+    $('.modal-footer button:eq(1)').click(function(){
+        alert(roleid);
+        var roleid=$(this).attr('data-roleid');
+        alert(roleid);
+        if (!roleid) return false;
+        $.get('?d=admin&c=role&m=delete',{roleid:roleid},function(str){
+            if(str=='yes'){
+                location.href=location.href;
+            }else if(str=='exist'){
+                $('.modal-title').text("提示");
+                $('.modal-body').html("角色下存在成员，请先删除角色下的成员！");
+                $('#myModal').modal();
+            }else if(str=='no'){
+                $('.modal-title').text("提示");
+                $('.modal-body').html("删除角色失败！");
+                $('#myModal').modal();
+            }
+        });
+   
+    });
+
     
     //权限设置
     $('.setPriv').click(function(){

@@ -3,15 +3,39 @@
 <div class="pad_10">
     <!--导航-->
     <div class="nav_">
-        
-        <ul>   
+        <?php if (isset($field)){ ?>
+        <form name="myform" action="?d=admin&c=manage&m=index" method="post">
+            <ul >
+                <li><?php echo $this->lang->line('keyword'); ?></li><li><input name="keyword" type="text" class="form-control input-sm" placeholder="" value="<?php echo $keyword;?>" /></li>
+                <li> 
+                    <select name="field" class="form-control input-sm">
+                        <option value="username" <?php if ($field == 'username') { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('username');?></option>
+                        <option value="realname" <?php if ($field == 'realname') { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('realname');?></option>
+                        <option value="email" <?php if ($field == 'email') { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('email');?></option>
+                    </select>
+                </li>
+                <li><select name="status" class="form-control input-sm">
+                        <option value='1' <?php if ($status == 1) { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('unlocked'); ?></option>
+                        <option value='2' <?php if ($status == 2) { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('locked'); ?></option>
+                        <option value='3' <?php if ($status == 3) { ?>selected="selected"<?php } ?>><?php echo $this->lang->line('deleted'); ?></option>
+                    </select></li>
 
-            <!--<li>                       
+                <li>
+                    <button type="submit" class="btn btn-default"><?php echo $this->lang->line('query'); ?></button>
+                    <button  name="refresh" class="btn btn-default"><?php echo $this->lang->line('refresh'); ?></button>
+                </li>
+            </ul>
+        </form>
+        <?php }else{ ?>
+         <ul>   
+
+            <li>                       
                 <button  type="button" name="return" class="btn btn-default navbar-btn"><?php echo $this->lang->line('return'); ?></button>
                 <button  type="button" name="refresh" class="btn btn-default navbar-btn"><?php echo $this->lang->line('refresh'); ?></button>
-            </li>-->
+            </li>
         </ul>
 
+        <?php } ?>
 
     </div>
     <!--导航-->
@@ -63,6 +87,22 @@
 
 </div>
 <script type="text/javascript">
+    
+    var curpos=$(window.parent.document).find('#current_pos_attr').text();
+    var title ="<?php echo $this->lang->line('role_member_manage');?>";
+    
+    if(curpos.indexOf(title, 0)<0) $(window.parent.document).find('#current_pos_attr').text(curpos+'>>'+title);
+    
+    curpos=null;
+
+    $("button[name=return]").click(function(){
+        $(window.parent.document).find('#current_pos_attr').text('');
+        location.href="?d=admin&c=role&m=index";
+    });
+    
+    $('button[name=refresh]').click(function(){
+        location.href=location.href;
+    });
     
     
     $('.editMember').click(function(){

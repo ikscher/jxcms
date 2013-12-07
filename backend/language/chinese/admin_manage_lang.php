@@ -22,9 +22,15 @@ $lang['old_password_wrong'] = '旧密码输入错误';
 $lang['old_password_right'] = '旧密码输入正确';
 $lang['manage_member']="成员管理";
 $lang['edit_member']="编辑成员（管理员）";
+$lang['query']='查询';
 $lang['refresh']='刷新';
 $lang['return']='返回';
 $lang['edit'] = '编辑';
 $lang['delete'] = '删除';
 $lang['operations_manage'] = '管理操作';
+$lang['keyword'] = '关键字';
+$lang['unlocked'] = '正常';
+$lang['locked'] ='封锁';
+$lang['deleted'] = '删除';
+$lang['noresult'] = '没有符合条件的数据';
 ?>

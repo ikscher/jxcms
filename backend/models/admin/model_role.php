@@ -102,8 +102,17 @@ class Model_role extends CI_Model {
      */
     public function delete($roleid){
         if(empty($roleid)) return false;
+        
+        $sql ="select userid from {$this->tbl_prefix}admin where roleid={$roleid}";
+        $query = $this->db->query($sql);
+        if($query->num_rows()>0) return 'exist';
+        
         $sql="delete from {$this->tbl_prefix}admin_role where roleid='{$roleid}'";
-        return $this->db->query($sql);
+        if($this->db->query($sql)){
+            return 'yes';
+        }else{
+            return 'no';
+        }
     }
     
     

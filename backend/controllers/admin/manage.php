@@ -26,6 +26,14 @@ class Manage extends CI_Controller {
         
 	    $where = ' where 1';//初始化
         
+        $status   = $this->input->post('status')?$this->input->post('status'):1;
+        $field    = $this->input->post('field')?$this->input->post('field'):'username';
+        $keyword  = $this->input->post('keyword')?$this->input->post('keyword'):'';
+        
+        $where .=" and `status`={$status}";
+        
+        if(!empty($keyword)) $where .=" and `{$field}` like '{$keyword}%'";
+        
         //分页显示
         $perpage = $this->config->item('per_page');
         
@@ -53,6 +61,11 @@ class Manage extends CI_Controller {
         $this->data['infos'] = $infos;
         $this->data['roles'] = $roles;
         $this->data['pagination'] = $pagination;
+        
+        $this->data['status'] = $status;
+        $this->data['field'] = $field;
+        $this->data['keyword'] = $keyword;
+
         
 		$this->load->view('admin/admin_list',$this->data);
 	}

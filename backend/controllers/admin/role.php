@@ -103,10 +103,15 @@ class Role extends CI_Controller {
         $this->load->model('admin/model_role');
         $roleid = $this->input->get('roleid');
         $bl = $this->model_role->delete($roleid);
-        if ($bl)
-            exit('yes');
-        else
-            exit('no');
+        switch ($bl){
+            case 'exist':
+                exit('exist');
+            case 'yes':
+                exit('yes');
+            case 'no':
+                exit('no');
+        }
+         
     }
 
     /*
