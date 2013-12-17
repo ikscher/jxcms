@@ -322,9 +322,6 @@ class Role extends CI_Controller {
             $this->tree->init($result);
             $categories = $this->tree->getTree(0, $str);
 
-            //$show_header = true;
-            //$show_scroll = true;
-
             $this->data['categories'] = $categories;
             $this->data['roleid'] = $this->input->get('roleid');
             $this->data['rolename'] = $this->input->get('rolename');

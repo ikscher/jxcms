@@ -183,8 +183,9 @@ if (defined('ENVIRONMENT'))
 
 	// Path to the system folder
 	define('BASEPATH', str_replace("\\", "/", $system_path));
-  
-
+    
+    define('FRONTPATH','../frontend/views/template');
+ 
 	// Path to the front controller (this file)
 	define('FCPATH', str_replace(SELF, '', __FILE__));
 
@@ -208,7 +209,8 @@ if (defined('ENVIRONMENT'))
 
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
-
+    
+    
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE

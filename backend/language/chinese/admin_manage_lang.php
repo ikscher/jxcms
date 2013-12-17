@@ -32,5 +32,6 @@ $lang['keyword'] = '关键字';
 $lang['unlocked'] = '正常';
 $lang['locked'] ='封锁';
 $lang['deleted'] = '删除';
+$lang['user_del_confirm'] = '您确认删除此管理员吗？';
 $lang['noresult'] = '没有符合条件的数据';
 ?>

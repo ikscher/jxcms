@@ -15,6 +15,14 @@ class Main extends CI_Controller {
 
     public function index() {
         $this->load->helper('url');
+        
+        $token=$this->input->get('token')?$this->input->get('token'):'';
+        
+        if (!$this->input->cookie('adminuserid') || !$this->session->userdata('userid') || $token!=$this->session->userdata('token')) {
+            redirect('d=common&c=login&m=index');
+        }
+        
+        
         $this->lang->load('system');
 
         $this->data['adminusername'] = $this->cookie->AuthCode($this->input->cookie('adminusername'), 'DECODE');
@@ -39,9 +47,7 @@ class Main extends CI_Controller {
         }
 
 
-        if (!$this->input->cookie('adminuserid') || !$this->session->userdata('userid')) {
-            redirect('d=common&c=login&m=index&token=' . $this->session->userdata('token'));
-        }
+       
 
         $this->lang->load('main');
 
@@ -199,21 +205,14 @@ class Main extends CI_Controller {
 
         $this->data['adminusername'] = $username;
         $this->data['rolename'] = $rolename;
-        $sysinfo = get_sysinfo();
+        $sysinfo = getSysInfo();
         $sysinfo['mysqlv'] = mysql_get_server_info();
         $this->data['sysinfo'] = $sysinfo;
 
         $this->load->view('common/public_main', $this->data);
     }
 
-    /*
-     * 清空缓存
-     */
-
-    public function cleanCache() {
-        $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
-        $this->cache->clean();
-    }
+   
 
 }
 

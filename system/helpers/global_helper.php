@@ -1,31 +1,9 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * CodeIgniter
- *
- * An open source application development framework for PHP 5.1.6 or newer
- *
- * @package		CodeIgniter
- * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
- * @license		http://codeigniter.com/user_guide/license.html
- * @link		http://codeigniter.com
- * @since		Version 1.0
- * @filesource
+ * @package	public function
+ * @date	    2013-12-13
+ * @author		ikscher
  */
-
-// ------------------------------------------------------------------------
-
-/**
- * CodeIgniter Language Helpers
- *
- * @package		CodeIgniter
- * @subpackage	Helpers
- * @category	Helpers
- * @author		ExpressionEngine Dev Team
- * @link		http://codeigniter.com/user_guide/helpers/language_helper.html
- */
-
-// ------------------------------------------------------------------------
 
 /**
  * 获取请求ip
@@ -50,48 +28,11 @@ if ( ! function_exists('getIp'))
 
 
 /**
-* 语言文件处理
-*
-* @param	string		$language	标示符
-* @param	array		$pars	转义的数组,二维数组 ,'key1'=>'value1','key2'=>'value2',
-* @param	string		$modules 多个模块之间用半角逗号隔开，如：member,guestbook
-* @return	string		语言字符
-*/
-/*
-function L($language = 'no_language',$pars = array(), $modules = '',$lang="chinese") {
-	static $LANG = array();
-	static $LANG_MODULES = array();
-	static $lang = '';
-
-	if(!$LANG) {
-		require_once APPPATH.'language'.DIRECTORY_SEPARATOR.$lang.DIRECTORY_SEPARATOR.'system_lang.php';
-		if(file_exists(PC_PATH.'language'.DIRECTORY_SEPARATOR.$lang.DIRECTORY_SEPARATOR.ROUTE_M.'.lang.php')) require_once PC_PATH.'language'.DIRECTORY_SEPARATOR.$lang.DIRECTORY_SEPARATOR.ROUTE_M.'.lang.php';
-	}
-	if(!empty($modules)) {
-		$modules = explode(',',$modules);
-		foreach($modules AS $m) {
-			if(!isset($LANG_MODULES[$m])) require_once PC_PATH.'language'.DIRECTORY_SEPARATOR.$lang.DIRECTORY_SEPARATOR.$m.'.lang.php';
-		}
-	}
-	if(!array_key_exists($language,$LANG)) {
-		return $language;
-	} else {
-		$language = $LANG[$language];
-		if($pars) {
-			foreach($pars AS $_k=>$_v) {
-				$language = str_replace('{'.$_k.'}',$_v,$language);
-			}
-		}
-		return $language;
-	}
-}
-*/
-    /**
-	 * 获取系统信息
-	 */
-if ( ! function_exists('get_sysinfo'))
+ * 获取系统信息
+ */
+if ( ! function_exists('geSysInfo'))
 {
-	function get_sysinfo() {
+	function getSysInfo() {
 		$sys_info['os']             = PHP_OS;
 		$sys_info['zlib']           = function_exists('gzclose');//zlib
 		$sys_info['safe_mode']      = (boolean) ini_get('safe_mode');//safe_mode = Off
@@ -103,6 +44,76 @@ if ( ! function_exists('get_sysinfo'))
 		$sys_info['fileupload']     = @ini_get('file_uploads') ? ini_get('upload_max_filesize') :'unknown';
 		return $sys_info;
 	}
+}
+
+
+/**
+* 模板风格列表
+* @param integer $info    站点可使用的模板风格列表
+* @param integer $disable 是否显示停用的{1:是,0:否}
+*/
+if ( ! function_exists('getTemplateList'))
+{
+	function getTemplateList($info, $disable = 0) {
+		$list = glob(FRONTPATH.DIRECTORY_SEPARATOR.'*', GLOB_ONLYDIR);
+		$arr = $template = array();
+
+        if($info['template']) $template = explode(',', $info['template']);
+		
+		foreach ($list as $key=>$v) {
+			$dirname = basename($v);
+			if (!in_array($dirname, $template)) continue;
+			if (file_exists($v.DIRECTORY_SEPARATOR.'config.php')) {
+				$arr[$key] = include $v.DIRECTORY_SEPARATOR.'config.php';
+				if (!$disable && isset($arr[$key]['disable']) && $arr[$key]['disable'] == 1) {
+					unset($arr[$key]);
+					continue;
+				}
+			} else {
+				$arr[$key]['name'] = $dirname;
+			}
+			$arr[$key]['dirname']=$dirname;
+		}
+		return $arr;
+	}
+}
+
+
+/**
+ * 生成上传附件验证
+ * @param $args   参数
+ * @param $operation   操作类型(加密解密)
+ */
+
+function upload_key($args) {
+	$pc_auth_key = md5((COOKIE_AUTHKEY).$_SERVER['HTTP_USER_AGENT']);
+	$authkey = md5($args.$pc_auth_key);
+	return $authkey;
+}
+
+
+/**
+ * 对数据进行编码转换
+ * @param array/string $data       数组
+ * @param string $input     需要转换的编码
+ * @param string $output    转换后的编码
+ */
+if ( ! function_exists('array_iconv'))
+{
+    function array_iconv($data, $input = 'gbk', $output = 'utf-8') {
+        if (!is_array($data)) {
+            return iconv($input, $output, $data);
+        } else {
+            foreach ($data as $key=>$val) {
+                if(is_array($val)) {
+                    $data[$key] = array_iconv($val, $input, $output);
+                } else {
+                    $data[$key] = iconv($input, $output, $val);
+                }
+            }
+            return $data;
+        }
+    }
 }
 // ------------------------------------------------------------------------
 /* End of file language_helper.php */

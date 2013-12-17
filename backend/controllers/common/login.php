@@ -16,11 +16,6 @@ class Login extends CI_Controller {
         $this->lang->load('login');
 
 
-        $token = $this->input->get('token');
-        if ($this->input->cookie('adminuserid') && isset($token) && (isset($token) ? $token : '' == $this->session->userdata('token'))) {
-
-            redirect('d=common&c=main&m=index&token=' . $this->session->userdata('token'));
-        }
 
         if (($this->input->server('REQUEST_METHOD') == 'POST') && $this->validate()) {
  

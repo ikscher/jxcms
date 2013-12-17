@@ -154,7 +154,7 @@ body fieldset.blue legend{padding:3px 8px;font-weight:700;color:#347add; backgro
 .col-tab ul.tabBut li.icon{background-image:url(../images/icon/exclamation_small.png);padding-left:18px;background-repeat: no-repeat;background-position: 3px center;}
 .col-tab .content{border:1px solid #dce3ed;_zoom:1;}
 .col-tab .content-r{border-top:1px solid #dce3ed}
-.col-tab .contentList{border:1px solid #dce3ed;_zoom:1;}
+.col-tab .contentList{border-left:1px solid #dce3ed;border-bottom:1px solid #dce3ed;border-right:1px solid #dce3ed;_zoom:1;}
 
 .col-1{ border:1px solid #f4f6f5;zoom:1; background:#fff;}
 .col-1 div.content{border:1px solid #c2d1d8;zoom:1;}

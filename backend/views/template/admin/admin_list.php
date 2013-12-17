@@ -1,5 +1,30 @@
 <?php $this->load->view('common/header'); ?>
 <link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
+<style type='text/css'>
+    .modal {
+	top: 10%;
+	left: 50%;
+	z-index: 1050;
+	width: 560px;
+	margin-left: -280px;
+	background-color: #fff;
+	border: 1px solid #999;
+	border: 1px solid rgba(0,0,0,0.3);
+	*border: 1px solid #999;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	outline: 0;
+	-webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+	box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+	-webkit-background-clip: padding-box;
+	-moz-background-clip: padding-box;
+	background-clip: padding-box;
+    overflow-y:hidden;
+    bottom:60%
+}
+</style>
 <div class="pad_10">
     <!--导航-->
     <div class="nav_">
@@ -83,9 +108,10 @@
         </tbody>
     </table>
     <ul class="pagination"><?php echo $pagination; ?></ul>
-
-
+    <input type='hidden' name='userid' value='' />
+ 
 </div>
+
 <script type="text/javascript">
     
     var curpos=$(window.parent.document).find('#current_pos_attr').text();
@@ -111,14 +137,22 @@
         location.href='index.php?d=admin&c=manage&m=edit&userid='+userid+'&roleid='+roleid;
     });
     
-    $('.deleteMember').click(function(){
-        var userid=$(this).attr('data-userid');
-        if(confirm("<?php echo $this->lang->line('admin_del_cofirm');?>")){
+    
+    var confirm=$.scojs_confirm({
+        content: "<?php echo $this->lang->line('user_del_confirm');?>",
+        action: function() {
+            var userid = $('input[name=userid]').val();
             $.post("?d=admin&c=manage&m=delete",{userid:userid},function(){
                 
             })
             location.href=location.href;
         }
+    });
+    
+    $('.deleteMember').click(function(){
+        var userid=$(this).attr('data-userid');
+        $('input[name=userid]').val(userid);
+        confirm.show();
     })
 </script>
 <?php $this->load->view('common/footer'); ?>

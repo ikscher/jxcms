@@ -23,7 +23,7 @@
 	-moz-background-clip: padding-box;
 	background-clip: padding-box;
     overflow-y:hidden;
-    bottom:50%
+    height:140px;
 }
 </style>
 <div class="pad_10">
@@ -83,7 +83,7 @@
                             <?php } ?>
                             <a  data-roleid="<?php echo $info['roleid'] ?>" class="getRoleMembers" href="javascript:void(0);" ><?php echo $this->lang->line('role_member_manage'); ?></a> | 
                             <?php if ($info['roleid'] > 1) { ?><a class='editRole' data-roleid="<?php echo $info['roleid'] ?>" href="javascript:void(0);"><?php echo $this->lang->line('edit') ?></a> | 
-                                <a  data-roleid="<?php echo $info['roleid'] ?>" data-title="确认删除吗？" data-trigger='confirm'  class="deleteRole" href="javascript:void(0);"><?php echo $this->lang->line('delete') ?></a>
+                                <a  data-roleid="<?php echo $info['roleid'] ?>"   class="deleteRole" href="javascript:void(0);"><?php echo $this->lang->line('delete') ?></a>
                             <?php } else { ?>
                                 <font color="#cccccc"><?php echo $this->lang->line('edit') ?></font> | <font color="#cccccc"><?php echo $this->lang->line('delete') ?></font>
                             <?php } ?>
@@ -96,6 +96,7 @@
         </tbody>
     </table>
     <ul class="pagination"><?php echo $pagination; ?></ul>
+    <input type='hidden' name='roleid' value='' />
 </div>
 
 <script type="text/javascript" src="<?php echo base_url('views/javascript/sco.modal.js'); ?>"></script>
@@ -105,40 +106,45 @@
         location.href="?d=admin&c=role&m=index";return false;
     });
     
-    /*
-    $('.deleteRole').on('click',function(){
-        $('.modal-title').text("提示");
-        $('.modal-body').html("<?php echo $this->lang->line('role_del_cofirm'); ?>");
-        $('.modal-footer button:eq(0)').text('取消');
-        $('.modal-footer button:eq(1)').text('确定');
-        $('.modal-footer button:eq(1)').removeClass('hidden');
-        
-        $('#myModal').modal();
-    });
-    */
-   
     //角色删除
-    $('.modal-footer button:eq(1)').click(function(){
-        alert(roleid);
-        var roleid=$(this).attr('data-roleid');
-        alert(roleid);
-        if (!roleid) return false;
-        $.get('?d=admin&c=role&m=delete',{roleid:roleid},function(str){
-            if(str=='yes'){
-                location.href=location.href;
-            }else if(str=='exist'){
-                $('.modal-title').text("提示");
-                $('.modal-body').html("角色下存在成员，请先删除角色下的成员！");
-                $('#myModal').modal();
-            }else if(str=='no'){
-                $('.modal-title').text("提示");
-                $('.modal-body').html("删除角色失败！");
-                $('#myModal').modal();
-            }
-        });
-   
+    var confirm=$.scojs_confirm({
+        content: "<?php echo $this->lang->line('role_del_confirm');?>",
+        action: function() {
+            
+            var roleid = $('input[name=roleid]').val();
+            $.get('?d=admin&c=role&m=delete',{roleid:roleid},function(str){
+                if(str=='yes'){
+                    location.href=location.href;
+                }else if(str=='exist'){
+                     $('.modal-footer .btn:eq(1)').addClass('hidden');
+                     $.scojs_confirm({
+                        content: "<?php echo $this->lang->line('role_del_exists');?>"
+                      }).show();
+                    
+                }else if(str=='no'){
+                     $('.modal-footer .btn:eq(1)').addClass('hidden');
+                     $.scojs_confirm({
+                        content: "<?php echo $this->lang->line('role_del_fail');?>"
+                      }).show();
+                }
+            });
+            this.close();
+        }
     });
+    
+    $('.deleteRole').on('click',function(){
+       var roleid=$(this).attr('data-roleid');
+       if (!roleid) return false;
+       $('input[name=roleid]').val(roleid);
+       $('.modal-footer .btn:eq(1)').removeClass('hidden');
+       confirm.show();
+    });
+    
 
+   
+       
+   
+  
     
     //权限设置
     $('.setPriv').click(function(){

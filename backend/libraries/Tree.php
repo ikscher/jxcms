@@ -124,7 +124,6 @@ class Tree {
 		if(is_array($child)){
 		    $total = count($child);
 			foreach($child as $id=>$value){
-                
 				$j=$k='';
 				if($number==$total){
 					$j .= $this->icon[2];

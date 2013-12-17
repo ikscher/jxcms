@@ -91,7 +91,7 @@
                 <div class="crumbs">
                     <div class="shortcut cu-span">
                         <a href="?m=content&c=create_html&a=public_index&pc_hash=" target="right"><span><?php echo $this->lang->line('create_index'); ?></span></a>
-                        <a href="index.php?d=common&c=main&m=cleanCache" target="right"><span><?php echo $this->lang->line('update_backup') ?></span></a>
+                        <a href="index.php?d=common&c=cache&m=updateCache" target="right"><span><?php echo $this->lang->line('update_backup') ?></span></a>
                         <a href="javascript:art.dialog({id:'map',iframe:'?m=admin&c=index&a=public_map', title:'<?php echo $this->lang->line('background_map') ?>', width:'700', height:'500', lock:true});void(0);"><span><?php echo $this->lang->line('background_map') ?></span></a>
                     </div>
                     <?php echo $this->lang->line('current_position'); ?><span id="current_pos"></span></div>
