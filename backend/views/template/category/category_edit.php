@@ -1,7 +1,6 @@
 <?php $this->load->view('common/header'); ?>
-<script src="<?php echo base_url('views/javascript/jqueryFileUpload/js/vendor/jquery.ui.widget.js'); ?>"></script>
-<script src="<?php echo base_url('views/javascript/jqueryFileUpload/js/jquery.iframe-transport.js'); ?>"></script>
-<script src="<?php echo base_url('views/javascript/jqueryFileUpload/js/jquery.fileupload.js'); ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('views/javascript/kindeditor/kindeditor.js');?>" ></script>
+<script type="text/javascript" src="<?php echo base_url('views/javascript/kindeditor/lang/zh_CN.js');?> "></script>
 <link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
 
 <div class="pad_10">
@@ -16,7 +15,6 @@
         </ul>
     </div>
     <!--导航结束-->
-
     <form name="myform" id="myform" action="?d=admin&c=category&m=edit" method="post" enctype="multipart/form-data">
 
         <div class="col-tab">
@@ -64,12 +62,12 @@
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('catgory_img') ?>：</td>
-                        <td><input id="fileupload" type="file" name="file" value="<?php echo $r['image']; ?>" ></td>
+                        <td><input  type="text" name="userfile" class="form-control width_50" value="<?php echo $r['image']; ?>" /><button type="button" id="fileUpload" class="btn btn-primary">上传图片</button></td>
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('description') ?>：</td>
                         <td>
-                            <textarea name="info[description]" maxlength="255" class="form-control width_50" row="3"><?php echo $r['description']; ?></textarea>
+                            <textarea name="info[description]" id="description"  maxlength="255" class="form-control width_50" row="3"><?php echo $r['description']; ?></textarea>
                         </td>
                     </tr>
                    <!--<tr>
@@ -256,7 +254,8 @@
             </div>
             
             <input name="catid" type="hidden" value="<?php echo $catid; ?>" />
-            <input name="dosubmit" type="submit" value="<?php echo $this->lang->line('submit') ?>" class="btn btn-default" />
+            <input type='hidden' name='dosubmit' value="1" />
+            <input name='submit' type="submit" value="<?php echo $this->lang->line('submit') ?>" class="btn btn-default" />
         </div>
 
 
@@ -265,6 +264,23 @@
 
 </div>
 <script type="text/javascript">
+    
+   KindEditor.ready(function(K) {
+        var editor = K.create('#description',{items:['source','fontsize','fontname','|','forecolor','hilitecolor','bold','italic','underline','removeformat','|','justifyleft','justifycenter','justifyright','|','emoticons','image','multiimage','table','link','unlink','|','preview','fullscreen'],resizeType:1});
+        K('#fileUpload').click(function() {
+            editor.loadPlugin('image', function() {
+                editor.plugin.imageDialog({
+                    imageSizeLimit:"512KB",
+                    showRemote : false,
+                    clickFn : function(url, title, width, height, border, align) {  
+                        K('input[name=userfile]').val(url);
+                        editor.hideDialog();
+                    }
+                });
+            });
+        });
+    });
+    
     function SwapTab(name,cls_show,cls_hide,cnt,cur){
         for(i=1;i<=cnt;i++){
             if(i==cur){
@@ -300,14 +316,7 @@
         location.href=location.href;
     });
     
-    var uploader = $("#fileupload");
-    uploader.fileupload({
-        dataType: 'json',
-        autoUpload: false,
-        acceptFileTypes:  /(\.|\/)(gif|jpe?g|png)$/i,
-        maxNumberOfFiles : 1,
-        maxFileSize: 5000000 //5mb
-    });
+   
     
     $('.col-tab ul.nav-tabs').css('border-bottom','none');
     

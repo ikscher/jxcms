@@ -127,11 +127,13 @@ class Category extends CI_Controller {
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
         $this->lang->load('category');
         $this->load->helper('string');
+    
         if ($this->input->post('dosubmit')) {
             //pc_base::load_sys_func('iconv');
-            
+          
             $catid = 0;
             $catid = intval($this->input->post('catid'));
+             
             $setting = $this->input->post('setting');
             //栏目生成静态配置
             if ($this->input->post('type') != 2) {
@@ -142,6 +144,10 @@ class Category extends CI_Controller {
                     $this->input->post('info')['url'] = '';
                 }
             }
+            
+           
+
+            
             //内容生成静态配置
             if ($setting['content_ishtml']) {
                 $setting['show_ruleid'] = $this->input->post('show_html_ruleid');
@@ -197,6 +203,8 @@ class Category extends CI_Controller {
             $this->updatePriv($catid, $this->input->post('priv_roleid'));
             $this->updatePriv($catid, $this->input->post('priv_groupid'), 0);
             $this->updateCache();
+            
+            
             //更新附件状态
 //            if ($_POST['info']['image'] && pc_base::load_config('system', 'attachment_stat')) {
 //                $this->attachment_db = pc_base::load_model('attachment_model');
@@ -260,7 +268,7 @@ class Category extends CI_Controller {
             
             $group_priv='';
             $group_cache = unserialize($this->cache->get('grouplist'));
-       
+            
             foreach ($group_cache as $_key => $_value) {
                 if ($_value['groupid'] == 1) continue;
                

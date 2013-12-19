@@ -142,14 +142,14 @@ class CI_Upload {
 	 */
 	public function do_upload($field = 'userfile')
 	{
-
+    
 	// Is $_FILES[$field] set? If not, no reason to continue.
 		if ( ! isset($_FILES[$field]))
 		{
 			$this->set_error('upload_no_file_selected');
 			return FALSE;
 		}
-
+     
 		// Is the upload path valid?
 		if ( ! $this->validate_upload_path())
 		{
@@ -233,7 +233,7 @@ class CI_Upload {
 				return FALSE;
 			}
 		}
-
+ 
 		// Convert the file size to kilobytes
 		if ($this->file_size > 0)
 		{
@@ -254,7 +254,7 @@ class CI_Upload {
 			$this->set_error('upload_invalid_dimensions');
 			return FALSE;
 		}
-
+ 
 		// Sanitize the file name for security
 		$this->file_name = $this->clean_file_name($this->file_name);
 
@@ -302,7 +302,7 @@ class CI_Upload {
 				return FALSE;
 			}
 		}
-
+ 
 		/*
 		 * Move the file to the final destination
 		 * To deal with different server configurations
@@ -670,7 +670,7 @@ class CI_Upload {
 		if (function_exists('getimagesize'))
 		{
 			$D = @getimagesize($this->file_temp);
-
+         
 			if ($this->max_width > 0 AND $D['0'] > $this->max_width)
 			{
 				return FALSE;
@@ -699,12 +699,13 @@ class CI_Upload {
 	 */
 	public function validate_upload_path()
 	{
+     
 		if ($this->upload_path == '')
 		{
 			$this->set_error('upload_no_filepath');
 			return FALSE;
 		}
-
+       
 		if (function_exists('realpath') AND @realpath($this->upload_path) !== FALSE)
 		{
 			$this->upload_path = str_replace("\\", "/", realpath($this->upload_path));
@@ -712,6 +713,7 @@ class CI_Upload {
 
 		if ( ! @is_dir($this->upload_path))
 		{
+            
 			$this->set_error('upload_no_filepath');
 			return FALSE;
 		}
@@ -723,6 +725,7 @@ class CI_Upload {
 		}
 
 		$this->upload_path = preg_replace("/(.+?)\/*$/", "\\1/",  $this->upload_path);
+        
 		return TRUE;
 	}
 
