@@ -89,7 +89,11 @@
             action: function() {
                 var catid_ = $('input[name=catid]').val();
                 $.get("?d=admin&c=category&m=delete",{catid:catid_},function(){
-                    
+                    $('tbody').find('a.delete').map(function(i,w){
+                         if($(w).attr('data-id')==catid_){
+                             $(w).parents('tr').remove();
+                         }
+                    });
                 })
                 this.close();
             }
@@ -101,11 +105,10 @@
         var catid=$(this).attr('data-id');
         if(!catid) return false;
         $('input[name=catid]').val(catid);
+        
         confirm.show();
     });
-   
-    
-    //window.top.$('#display_center_id').css('display','none');
+  
    
 </script>
 <?php $this->load->view('common/footer'); ?>

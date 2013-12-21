@@ -15,7 +15,7 @@
         </ul>
     </div>
     <!--导航结束-->
-    <!--<form name="myform" id="myform" action="?d=admin&c=category&m=edit" method="post" >-->
+    <form name="myform" id="myform" action="?d=admin&c=category&m=add" method="post" >
 
         <div class="col-tab">
 
@@ -54,20 +54,20 @@
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('catname') ?>：</td>
-                        <td><input type="text" name="info[catname]" id="catname" class="form-control width_50" value="<?php echo $r['catname']; ?>"></td>
+                        <td><input type="text" name="info[catname]" id="catname" class="form-control width_50" value=""></td>
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('catdir') ?>：</td>
-                        <td><input type="text" name="info[catdir]" id="catdir" class="form-control width_50" value="<?php echo $r['catdir']; ?>"></td>
+                        <td><input type="text" name="info[catdir]" id="catdir" class="form-control width_50" value=""></td>
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('catgory_img') ?>：</td>
-                        <td><input  id="image" type="text" name="info[image]" class="form-control width_50" value="<?php echo $r['image']; ?>" /><button type="button" id="fileUpload" class="btn btn-primary">上传图片</button></td>
+                        <td><input  id="image" type="text" name="info[image]" class="form-control width_50" value="" /><button type="button" id="fileUpload" class="btn btn-primary">上传图片</button></td>
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('description') ?>：</td>
                         <td>
-                            <textarea name="info[description]" id="description"  maxlength="255" class="form-control width_50" row="3"><?php echo $r['description']; ?></textarea>
+                            <textarea name="info[description]" id="description"  maxlength="255" class="form-control width_50" row="3"></textarea>
                         </td>
                     </tr>
                    <!--<tr>
@@ -92,8 +92,8 @@
                     <tr>
                         <td><?php echo $this->lang->line('ismenu'); ?>：</td>
                         <td>
-                            <input type='radio' name='info[ismenu]' value='1' <?php if ($r['ismenu']) echo 'checked'; ?>> <?php echo $this->lang->line('yes'); ?>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type='radio' name='info[ismenu]' value='0' <?php if (!$r['ismenu']) echo 'checked'; ?>> <?php echo $this->lang->line('no'); ?></td>
+                            <input type='radio' name='info[ismenu]' value='1' checked> <?php echo $this->lang->line('yes'); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type='radio' name='info[ismenu]' value='0' > <?php echo $this->lang->line('no'); ?></td>
                     </tr>
 
                 </table>
@@ -104,15 +104,15 @@
                     <tr>
                         <td width="200"><?php echo $this->lang->line('html_category'); ?>：</td>
                         <td>
-                            <input type='radio' name='setting[ishtml]' value='1' <?php if (!empty($setting['ishtml'])) echo 'checked'; ?> onClick="$('#category_php_ruleid').css('display','none');$('#category_html_ruleid').css('display','');$('#tr_domain').css('display','');"> <?php echo $this->lang->line('yes'); ?>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type='radio' name='setting[ishtml]' value='0' <?php if (empty($setting['ishtml'])) echo 'checked'; ?>  onClick="$('#category_php_ruleid').css('display','');$('#category_html_ruleid').css('display','none');$('#tr_domain').css('display','none');"> <?php echo $this->lang->line('no'); ?>
+                            <input type='radio' name='setting[ishtml]' value='1' checked onClick="$('#category_php_ruleid').css('display','none');$('#category_html_ruleid').css('display','');$('#tr_domain').css('display','');"> <?php echo $this->lang->line('yes'); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type='radio' name='setting[ishtml]' value='0'   onClick="$('#category_php_ruleid').css('display','');$('#category_html_ruleid').css('display','none');$('#tr_domain').css('display','none');"> <?php echo $this->lang->line('no'); ?>
                         </td>
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('html_show'); ?>：</td>
                         <td>
-                            <input type='radio' name='setting[content_ishtml]' value='1' <?php if (!empty($setting['content_ishtml'])) echo 'checked'; ?> onClick="$('#show_php_ruleid').css('display','none');$('#show_html_ruleid').css('display','')"> <?php echo $this->lang->line('yes'); ?>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type='radio' name='setting[content_ishtml]' value='0' <?php if (empty($setting['content_ishtml'])) echo 'checked'; ?>  onClick="$('#show_php_ruleid').css('display','');$('#show_html_ruleid').css('display','none')"> <?php echo $this->lang->line('no'); ?>
+                            <input type='radio' name='setting[content_ishtml]' value='1' checked onClick="$('#show_php_ruleid').css('display','none');$('#show_html_ruleid').css('display','')"> <?php echo $this->lang->line('yes'); ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type='radio' name='setting[content_ishtml]' value='0'   onClick="$('#show_php_ruleid').css('display','');$('#show_html_ruleid').css('display','none')"> <?php echo $this->lang->line('no'); ?>
                         </td>
                     </tr>
                     <tr>
@@ -194,15 +194,15 @@
                 <table width="100%" class="table   table-hover ">
                     <tr>
                         <td width="200"><?php echo $this->lang->line('meta_title'); ?></td>
-                        <td><input name='setting[meta_title]' type='text' id='meta_title' class='form-control width_50' value='<?php echo !empty($setting['meta_title'])?$setting['meta_title']:''; ?>' size='60' maxlength='60'></td>
+                        <td><input name='setting[meta_title]' type='text' id='meta_title' class='form-control width_50' value='' size='60' maxlength='60'></td>
                     </tr>
                     <tr>
                         <td ><?php echo $this->lang->line('meta_keywords'); ?></td>
-                        <td><textarea name='setting[meta_keywords]' id='meta_keywords' class='form-control' row='3'><?php echo !empty($setting['meta_keywords'])?$setting['meta_keywords']:''; ?></textarea></td>
+                        <td><textarea name='setting[meta_keywords]' id='meta_keywords' class='form-control' row='3'></textarea></td>
                     </tr>
                     <tr>
                         <td ><strong><?php echo $this->lang->line('meta_description'); ?></td>
-                        <td><textarea name='setting[meta_description]' id='meta_description' class='form-control' row='3'><?php echo !empty($setting['meta_description'])?$setting['meta_description']:''; ?></textarea></td>
+                        <td><textarea name='setting[meta_description]' id='meta_description' class='form-control' row='3'></textarea></td>
                     </tr>
                 </table>
             </div>
@@ -253,18 +253,18 @@
                 </table>
             </div>
             
-            <input name="catid" type="hidden" value="<?php echo $catid; ?>" />
+            <!--<input name="catid" type="hidden" value="<?php echo $catid; ?>" />-->
             <input type='hidden' name='dosubmit' value="1" />
             <input name='submit' type="submit" value="<?php echo $this->lang->line('submit') ?>" class="btn btn-default" />
         </div>
 
 
-    <!--</form>-->
+    </form>
     <!--table_form_off-->
 
 </div>
 <script type="text/javascript">
-   
+   /*
    $('input[name=submit]').click(function(){
         //if(!($.trim($('#rolename').val())) || $('.onError').length>0) return false;
         var content=$.trim($('.ke-edit-iframe').contents().find('.ke-content').html());
@@ -277,14 +277,14 @@
             success:function(str){
                 if(str=='yes'){
                     $('.modal-title').text("提示");
-                    $('.modal-body').html("修改栏目成功！");
+                    $('.modal-body').html("添加栏目成功！");
                     $('#myModal').modal();
                     
                 }
             }
         });
     });
-   
+   */
    
    KindEditor.ready(function(K) {
         var editor = K.create('#description',{items:['source','fontsize','fontname','|','forecolor','hilitecolor','bold','italic','underline','removeformat','|','justifyleft','justifycenter','justifyright','|','emoticons','image','multiimage','table','link','unlink','|','preview','fullscreen'],resizeType:1});
@@ -320,7 +320,7 @@
 	
     //返回
     var curpos=$(window.parent.document).find('#current_pos_attr').text();
-    var title ="<?php echo $this->lang->line('edit'); ?>";
+    var title ="<?php echo $this->lang->line('add'); ?>";
     
     if(curpos.indexOf(title, 0)<0) $(window.parent.document).find('#current_pos_attr').text(curpos+'>>'+title);
     
@@ -343,11 +343,18 @@
     
     $('.col-tab ul.nav-tabs').css('border-bottom','none');
     
+    
+    function change_tpl(modelid) {
+		if(modelid) {
+			$.getJSON('?d=admin&c=category&m=publicChangeTpl&modelid='+modelid, function(data){console.log(data);$('#template_list').val(data.template_list);$('#category_template').html(data.category_template);$('#list_template').html(data.list_template);$('#show_template').html(data.show_template);});
+		}
+	}
+    
     function load_file_list(id) {
         if(id=='') return false;
-        $.getJSON('?d=admin&c=category&m=publicTplFileList&style='+id+'&catid=<?php echo $catid ?>', function(data){$('#category_template').html(data.category_template);$('#list_template').html(data.list_template);$('#show_template').html(data.show_template);});
+        $.getJSON('?d=admin&c=category&m=publicTplFileList&style='+id+'&catid=<?php echo $parentid ?>', function(data){$('#category_template').html(data.category_template);$('#list_template').html(data.list_template);$('#show_template').html(data.show_template);});
     }
     
-<?php if (isset($setting['template_list']) && !empty($setting['template_list'])) echo "load_file_list('" . $setting['template_list'] . "')" ?>
+<?php if(isset($modelid)) echo "change_tpl($modelid);";?>
 </script>
 <?php $this->load->view('common/footer'); ?>

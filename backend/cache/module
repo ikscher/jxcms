@@ -1,4 +1,4 @@
-a:3:{s:4:"time";i:1387247318;s:3:"ttl";i:86400;s:4:"data";s:15555:"a:28:{i:0;a:11:{s:6:"module";s:5:"admin";s:4:"name";s:5:"admin";s:3:"url";s:0:"";s:6:"iscore";s:1:"1";s:7:"version";s:3:"1.0";s:11:"description";s:0:"";s:7:"setting";s:399:"array (
+a:3:{s:4:"time";i:1387507483;s:3:"ttl";i:86400;s:4:"data";s:15555:"a:28:{i:0;a:11:{s:6:"module";s:5:"admin";s:4:"name";s:5:"admin";s:3:"url";s:0:"";s:6:"iscore";s:1:"1";s:7:"version";s:3:"1.0";s:11:"description";s:0:"";s:7:"setting";s:399:"array (
   'admin_email' => 'phpcms@phpcms.cn',
   'adminaccessip' => '0',
   'maxloginfailedtimes' => '8',

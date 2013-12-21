@@ -15,7 +15,7 @@
 |
 */
 $config['base_url']	= 'http://test.jx.com/jxcms/backend/';
-
+$config['server'] = 'http://test.jx.com';
 /*
 |--------------------------------------------------------------------------
 | Index File

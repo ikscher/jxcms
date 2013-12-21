@@ -314,7 +314,7 @@ if ( ! function_exists('string2array'))
     function string2array($data) {
         if($data == '') return array();
         @eval("\$array = $data;");
-        return $array;
+        return isset($array)?$array:array();
     }
 }
 
@@ -330,7 +330,8 @@ if ( ! function_exists('array2string'))
     function array2string($data, $isformdata = 1) {
         if($data == '') return '';
         if($isformdata) $data = new_stripslashes($data);
-        return addslashes(var_export($data, TRUE));
+        return var_export($data, TRUE);
+        //return addslashes(var_export($data, TRUE));
     }
 }
 
