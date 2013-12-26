@@ -368,6 +368,6 @@ $config['proxy_ips'] = '';
 /*max 'maxloginfailedtimes' */
 $config['maxloginfailedtimes'] = 8;
 
-$config['web_path'] ='/jxcms/';
+$config['web_path'] ='jxcms/';
 
 $config['html_root' ]= '/html';//生成静态文件路径

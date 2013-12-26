@@ -220,5 +220,14 @@ if (defined('ENVIRONMENT'))
  */
 require_once BASEPATH.'core/CodeIgniter.php';
 
+/*** only entrance from here ****/
+$token=$CI->session->userdata('token');
+$token_=$CI->input->get('token')?$CI->input->get('token'):'';
+if(!empty($token_) && $token!=$token_){
+    echo "<script>location.href='index.php?d=common&c=login&m=index'</script>;";
+}
+
+/*** only entrance from here ****/
+
 /* End of file index.php */
 /* Location: ./index.php */

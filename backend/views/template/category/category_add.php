@@ -15,7 +15,7 @@
         </ul>
     </div>
     <!--导航结束-->
-    <form name="myform" id="myform" action="?d=admin&c=category&m=add" method="post" >
+    <!--<form name="myform" id="myform" action="?d=admin&c=category&m=add" method="post" >-->
 
         <div class="col-tab">
 
@@ -49,12 +49,12 @@
                     <tr>
                         <td width="200"><?php echo $this->lang->line('parent_category') ?>：</td>
                         <td>
-                            <?php echo $this->form->select_category('category_content', $r['parentid'], 'name="info[parentid]" id="parentid"', $this->lang->line('please_select_parent_category'), 0, -1); ?> 
+                            <?php echo $this->form->select_category('category_content', $parentid, 'name="info[parentid]" id="parentid"', $this->lang->line('please_select_parent_category'), 0, -1); ?> 
                         </td>
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('catname') ?>：</td>
-                        <td><input type="text" name="info[catname]" id="catname" class="form-control width_50" value=""></td>
+                        <td><input type="text" name="info[catname]" id="catname" class="form-control width_50" value=""><div id="catnameTips"></div></td>
                     </tr>
                     <tr>
                         <td><?php echo $this->lang->line('catdir') ?>：</td>
@@ -259,19 +259,24 @@
         </div>
 
 
-    </form>
+    <!--</form>-->
     <!--table_form_off-->
 
 </div>
 <script type="text/javascript">
-   /*
+   
    $('input[name=submit]').click(function(){
-        //if(!($.trim($('#rolename').val())) || $('.onError').length>0) return false;
+        if(!$('#catname').val()){
+            $("#catnameTips").addClass('onError');
+            $("#catnameTips").html("模型名称应该为2-10位之间汉字（字母）");
+        }
+        if($('.onError').length>0) return false;
+        
         var content=$.trim($('.ke-edit-iframe').contents().find('.ke-content').html());
         $("#description").text(content);
         $.ajax({
             type:'post',
-            url:'?d=admin&c=category&m=edit',
+            url:'?d=admin&c=category&m=add',
             dataType:'text',
             data:$('input[type="text"],input[type="radio"]:checked,input[type="checkbox"]:checked,.ke-edit iframe body[class=ke-content],textarea[name^=info],textarea[name^=setting],select,input[type="hidden"]'),
             success:function(str){
@@ -284,7 +289,7 @@
             }
         });
     });
-   */
+   
    
    KindEditor.ready(function(K) {
         var editor = K.create('#description',{items:['source','fontsize','fontname','|','forecolor','hilitecolor','bold','italic','underline','removeformat','|','justifyleft','justifycenter','justifyright','|','emoticons','image','multiimage','table','link','unlink','|','preview','fullscreen'],resizeType:1});

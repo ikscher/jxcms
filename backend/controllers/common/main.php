@@ -15,12 +15,13 @@ class Main extends CI_Controller {
 
     public function index() {
         $this->load->helper('url');
+
         
-        $token=$this->input->get('token')?$this->input->get('token'):'';
-        
-        if (!$this->input->cookie('adminuserid') || !$this->session->userdata('userid') || $token!=$this->session->userdata('token')) {
-            redirect('d=common&c=login&m=index');
-        }
+//        $token=$this->input->get('token')?$this->input->get('token'):'';
+//        
+//        if (!$this->input->cookie('adminuserid') || !$this->session->userdata('userid') || $token!=$this->session->userdata('token')) {
+//            redirect('d=common&c=login&m=index');
+//        }
         
         
         $this->lang->load('system');

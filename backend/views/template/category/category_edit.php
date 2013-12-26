@@ -273,7 +273,7 @@
             type:'post',
             url:'?d=admin&c=category&m=edit',
             dataType:'text',
-            data:$('input[type="text"],input[type="radio"]:checked,input[type="checkbox"]:checked,.ke-edit iframe body[class=ke-content],textarea[name^=info],textarea[name^=setting],select,input[type="hidden"]'),
+            data:$('input[type="text"],input[type="radio"]:checked,input[type="checkbox"]:checked,textarea[name^=info],textarea[name^=setting],select,input[type="hidden"]'),
             success:function(str){
                 if(str=='yes'){
                     $('.modal-title').text("提示");

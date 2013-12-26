@@ -89,6 +89,8 @@ class Admin {
 		}
 		return $str.$this->lang->line($r['name']);
 	}
+    
+   
 }
 
 /* End of file Admin.php */

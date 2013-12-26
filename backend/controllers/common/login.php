@@ -11,14 +11,12 @@ if (!defined('BASEPATH'))
 class Login extends CI_Controller {
 
     public function index() {
-
         $this->load->helper('url');
         $this->lang->load('login');
 
 
-
         if (($this->input->server('REQUEST_METHOD') == 'POST') && $this->validate()) {
- 
+            
             $this->session->set_userdata('token', md5(mt_rand()));
 
             if ($this->input->post('redirect')) {

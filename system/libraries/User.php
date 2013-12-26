@@ -112,6 +112,7 @@ class CI_User {
     public function getUserName() {
         return $this->username;
     }
+    
 
 }
 

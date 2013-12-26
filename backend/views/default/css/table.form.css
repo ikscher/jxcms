@@ -125,3 +125,7 @@ div#areaid{border:1px solid #A7A6AA;height:18px;margin:0 5px 0 0;padding:2px 5px
 .width_20{width:20%;display: inline-block;}
 .width_50{width:50%;display: inline-block;}
 .active a{font-weight:bold;}
+
+legend{font-size: 12px;}
+
+.bk15{margin:5px 0;}

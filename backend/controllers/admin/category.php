@@ -171,6 +171,7 @@ class Category extends CI_Controller {
             $this->updatePriv($catid, $this->input->post('priv_groupid'),0);
 
 			$this->updateCache();
+            exit('yes');
 
 		} else {
 			//获取站点模板信息

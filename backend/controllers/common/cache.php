@@ -1,7 +1,7 @@
 <?php
 
 /*
- * function :后台导航主界面
+ * function :后台更新缓存
  * author   :ikscher
  * date     :2013-12-10
  */
@@ -23,6 +23,7 @@ class Cache extends CI_Controller {
         $this->updateCategory();
         $this->updateUrlRule();
         $this->memberGroup();
+        $this->type();
         
     }
     
@@ -188,6 +189,22 @@ class Cache extends CI_Controller {
         $results = $this->model_member_group->getMemberGroup();
 		$this->cache->save('grouplist', serialize($results));
 		
+	}
+    
+    /**
+	 * 更新类别缓存方法
+	 */
+	private function type($param = '') {
+		$datas = array();
+        $this->load->model('content/model_type');
+		$result_datas = $this->model_type->getModelTypes(" where module='{$param}'");
+		foreach($result_datas as $_key=>$_value) {
+			$datas[$_value['typeid']] = $_value;
+		}
+		
+	    $this->cache->save('type_'.$param, $datas);
+		
+		return true;
 	}
 	
 

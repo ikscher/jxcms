@@ -22,7 +22,7 @@
 	-moz-background-clip: padding-box;
 	background-clip: padding-box;
     overflow-y:hidden;
-    bottom:60%
+    height:140px;
 }
 </style>
 <div class="pad_10">
