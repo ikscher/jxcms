@@ -79,7 +79,7 @@
         <input type="submit" class="btn btn-default" id="dosubmit" name="dosubmit" value="<?php echo $this->lang->line('submit'); ?>" />
     <!--</form>-->
 </div>
-<script language="JavaScript">
+<script type="text/javascript">
     var curpos=$(window.parent.document).find('#current_pos_attr').text();
     var title ="<?php echo $this->lang->line('add_model');?>";
     

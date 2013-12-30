@@ -32,7 +32,7 @@
 
         <ul>
             <li><a class="addModel" href="?d=content&c=sitemodel&m=add"><?php echo $this->lang->line('add_model'); ?></a></li>
-            <li><a class="importModel" href="?d=admin&c=role&m=add"><?php echo $this->lang->line('import_model'); ?></a></li>
+            <!--<li><a class="importModel" href="?d=admin&c=role&m=add"><?php echo $this->lang->line('import_model'); ?></a></li>-->
         </ul>
     </div>
     <div class="table-list">
@@ -64,8 +64,8 @@
                             <!--<a href="?m=content&c=sitemodel_field&a=init&modelid=<?php echo $r['modelid'] ?>&menuid=<?php echo $menuid; ?>"><?php echo $this->lang->line('field_manage'); ?></a> |--> 
                             <a href="javascript:;" class="edit" data-modelid="<?php echo $r['modelid']?>"><?php echo $this->lang->line('edit'); ?></a> | 
                             <a href="javascript:;" class="yorn" data-modelid="<?php echo $r['modelid']?>" data-enabled="<?php echo $r['disabled'];?>"><?php echo $r['disabled'] ? $this->lang->line('field_enabled') : $this->lang->line('field_disabled'); ?></a> | 
-                            <a href="javascript:;" class="delete" data-modelid="<?php echo $r['modelid']?>"><?php echo $this->lang->line('delete') ?></a> | 
-                            <a href="?m=content&c=sitemodel&a=export&modelid=<?php echo $r['modelid'] ?>&menuid=<?php echo $menuid; ?>""><?php echo $this->lang->line('export'); ?></a></td>
+                            <a href="javascript:;" class="delete" data-modelid="<?php echo $r['modelid']?>"><?php echo $this->lang->line('delete') ?></a>  
+                            <!--<a href="?m=content&c=sitemodel&a=export&modelid=<?php echo $r['modelid'] ?>&menuid=<?php echo $menuid; ?>""><?php echo $this->lang->line('export'); ?></a></td>-->
                     </tr>
                 <?php } ?>
             </tbody>

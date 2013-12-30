@@ -9,8 +9,13 @@ $lang['return']='返回';
 $lang['refresh']='刷新';
 $lang['submit'] = '提交';
 $lang['please_select']='请选择';
+$lang['listorder'] = '排序';
+$lang['orderfinished'] ='排序完成！';
+$lang['addfinished'] = '添加完成！';
+$lang['editfinished'] = '修改完成！';
 /*public*/
 $lang['add_model']='添加模型';
+$lang['confirm'] = '您確認刪除此模型嗎？';
 
 $lang['import_model']='导入模型';
 $lang['2s_close'] = '<font color="red"><B><span id="secondid">2</span></B> 秒后自动关闭</font>';
@@ -74,6 +79,7 @@ $lang['the_value_must_not_repeat'] = '的值不得重复！';
 $lang['add_type'] = '添加类别';
 $lang['select_model_name'] = '所属模型';
 $lang['type_name'] = '类型名称';
+$lang['empty_category'] = '栏目缓存为空，请重新生成栏目缓存！';
 //workflow
 $lang['workflow_name'] = '工作流名称';
 $lang['steps'] = '审核级数';

@@ -129,16 +129,7 @@ class Cache extends CI_Controller {
 				$this->cache->save('category_items_'.$modelid, serialize($array));
 			}
 		}
-        
-//		$array = array();
-//		$categories = $this->model_category->getCategories('catid,siteid', " where  `module`='content' order by listorder ASC");
-//        
-//		foreach ($categories as $r) {
-//			$array[$r['catid']] = $r['siteid'];
-//		}
-//    
-//		$this->cache->save('category_content',$array);
-        
+
 		
 		$categories = $this->model_category->getCategories('*'," where  module='content' order by  listorder ASC");
         

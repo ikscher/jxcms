@@ -422,16 +422,20 @@ class Category extends CI_Controller {
             
             $group_priv='';
             $group_cache = unserialize($this->cache->get('grouplist'));
-    
-            foreach ($group_cache as $_key => $_value) {
-                if ($_value['groupid'] == 1) continue;
-               
-                $group_priv .="<tr>
-                    <td align=\"left\">{$_value['name']}</td>
-                    <td align=\"left\"><input type=\"checkbox\" name=\"priv_groupid[]\" ". $this->checkCategoryPriv('visit', $_value['groupid'], 0) . " value=\"visit,{$_value['groupid']}\" ></td>
-                    <td align=\"left\"><input type=\"checkbox\" name=\"priv_groupid[]\"  ".  $this->checkCategoryPriv('add', $_value['groupid'], 0)." value=\"add,{$_value['groupid']}\" ></td>
-                </tr>";
-                                   
+            
+            $group_priv='';
+            
+            if(!empty($group_cache)){
+                foreach ($group_cache as $_key => $_value) {
+                    if ($_value['groupid'] == 1) continue;
+
+                    $group_priv .="<tr>
+                        <td align=\"left\">{$_value['name']}</td>
+                        <td align=\"left\"><input type=\"checkbox\" name=\"priv_groupid[]\" ". $this->checkCategoryPriv('visit', $_value['groupid'], 0) . " value=\"visit,{$_value['groupid']}\" ></td>
+                        <td align=\"left\"><input type=\"checkbox\" name=\"priv_groupid[]\"  ".  $this->checkCategoryPriv('add', $_value['groupid'], 0)." value=\"add,{$_value['groupid']}\" ></td>
+                    </tr>";
+
+                }
             }
             
             $this->data['catid'] = $catid;

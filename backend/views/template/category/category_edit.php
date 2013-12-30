@@ -38,10 +38,12 @@
                             $disabled = $category_items[$r['catid']] ? 'disabled' : '';
                             $models = unserialize($this->cache->get('model'));
                             $model_datas = array();
-                            foreach ($models as $_k => $_v) {
-                                $model_datas[$_v['modelid']] = $_v['name'];
+                            if(!empty($models)){
+                                foreach ($models as $_k => $_v) {
+                                    $model_datas[$_v['modelid']] = $_v['name'];
+                                }
+                                echo $this->form->select($model_datas, $r['modelid'], 'name="info[modelid]" id="modelid" ' . $disabled, $this->lang->line('select_model'));
                             }
-                            echo $this->form->select($model_datas, $r['modelid'], 'name="info[modelid]" id="modelid" ' . $disabled, $this->lang->line('select_model'));
                             echo $this->lang->line('modelid_edit_tips');
                             ?>
                         </td>

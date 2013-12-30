@@ -100,7 +100,6 @@
         });
     
     $('.delete').on('click',function(){
-        //javascript:confirmurl(\'?m=admin&c=category&a=delete&catid='.$r['catid'].'&menuid='.$_GET['menuid'].'\',\''.$this->lang->line('confirm').'\')
         $('.modal-footer .btn:eq(1)').removeClass('hidden');
         var catid=$(this).attr('data-id');
         if(!catid) return false;

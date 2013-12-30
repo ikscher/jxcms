@@ -36,6 +36,20 @@ class Model_type extends CI_Model {
     }
     
     /*
+     * 返回单条记录
+     */
+    public function getModelType($typeid){
+        $result = array();
+        $sql="select `typeid`,`siteid`, `module`, `modelid` , `name` ,`parentid`, `typedir`,`url` , `template` , `listorder`,`description` from {$this->tbl_prefix}{$this->table} where typeid=?";
+        $query=$this->db->query($sql,$typeid);
+        
+        $result = $query->row_array();
+        
+        return $result;
+        
+    }
+    
+    /*
      * 返回模型总数
      */
     public function getModelTypeTotal($where){
@@ -45,10 +59,22 @@ class Model_type extends CI_Model {
         return $query->num_rows()?$query->num_rows():0;
     }
     
-    public function deleteModelType($where){
-        $sql = "delete from {$this->tbl_prefix}{$this->table} {$where}";
-        $this->db->query($sql);
+    /*
+     * 刪除
+     */
+    public function deleteModelType($typeid){
+        $sql = "delete from {$this->tbl_prefix}{$this->table} where typeid=?";
+        return $this->db->query($sql,$typeid);
     }
+    
+    /*
+     * 更新
+     */
+    public function updateModelType($sql,$typeid){
+        $sql = "update {$this->tbl_prefix}{$this->table} set {$sql} where typeid=?";
+        return $this->db->query($sql,$typeid);
+    }
+    
     
 }
 ?>
