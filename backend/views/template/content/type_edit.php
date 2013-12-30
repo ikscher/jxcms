@@ -136,7 +136,7 @@
         $.ajax({
             type:'post',
             url:'?d=content&c=type_manage&m=edit',
-            dataType:'json',
+            dataType:'text',
             data:$("input[type='submit'],textarea,input[type='checkbox']:checked,input[type='hidden']"),
             success:function(data){
                 console.log(data);

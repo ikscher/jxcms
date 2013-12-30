@@ -159,7 +159,7 @@ class Type_manage extends CI_Controller {
                         if($r['usable_type']) {
                             $usable_type_arr = explode(',', $r['usable_type']);
                             $key = array_search($typeid, $usable_type_arr);
-                            if(!empty($key)) unset($usable_type_arr[$key]);
+                            if(isset($key)) unset($usable_type_arr[$key]);
                             $usable_type = implode(',', $usable_type_arr);
 
                         } else {
