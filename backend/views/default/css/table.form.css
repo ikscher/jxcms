@@ -31,7 +31,7 @@ ul li{padding:0 10px 0 0;}
 .common-form .set table td{ padding:3px 0 3px 5px}
 .common-form .set table td.y-bg{background: url(../image/set_y_line.png) repeat-y right top}
 .common-form .set table td input{ background-image:none; height:18px; font-size:12px}
-.input-text,.measure-input,textarea,input.date,input.endDate,.input-focus{border:1px solid #A7A6AA;height:18px;margin:0 5px 0 0;padding:2px 0 2px 5px;border: 1px solid #d0d0d0;background: #FFF url(../image/input.png) repeat-x; font-family: Verdana, Geneva, sans-serif,"宋体";font-size:12px;}
+.input-text,.measure-input,textarea,input.date,input.endDate,.input-focus{border:1px solid #A7A6AA;height:25px;margin:0 5px 0 0;padding:2px 0 2px 5px;border: 1px solid #d0d0d0;background: #FFF url(../image/input.png) repeat-x; font-family: Verdana, Geneva, sans-serif,"宋体";font-size:12px;}
 .input-focus{background: #FFF url(../image/input_focus.png) repeat-x; border-color:#afcee6;font-size:12px;}
 input.date,input.endDate{background: #fff url(../image/input_date.png) no-repeat right 3px; padding-right:18px;font-size:12px;}
 textarea,textarea.input-text,textarea.input-focus{font-size:12px;height:auto; padding:5px; margin:0;}
@@ -122,6 +122,7 @@ div#areaid{border:1px solid #A7A6AA;height:18px;margin:0 5px 0 0;padding:2px 5px
 
 .cu, .cu-li li, .cu-span span {cursor: pointer;}
 
+.width_12{width:12%;display: inline-block;}
 .width_20{width:20%;display: inline-block;}
 .width_50{width:50%;display: inline-block;}
 .active a{font-weight:bold;}

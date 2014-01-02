@@ -167,7 +167,8 @@ if (defined('ENVIRONMENT'))
     define('COOKIE_AUTHKEY','YT%3434_M');
   
     define('SYS_TIME', time());
- 
+    
+    define('_ADMIN_',1);//是否属于后台
 
 /*
  * -------------------------------------------------------------------
@@ -184,6 +185,8 @@ if (defined('ENVIRONMENT'))
 	// Path to the system folder
 	define('BASEPATH', str_replace("\\", "/", $system_path));
     
+    //custome defined constant
+    define('JS_PATH','views/javascript/');
     define('FRONTPATH','../frontend/views/template');
  
 	// Path to the front controller (this file)

@@ -138,8 +138,7 @@
             url:'?d=content&c=type_manage&m=edit',
             dataType:'text',
             data:$("input[type='submit'],textarea,input[type='checkbox']:checked,input[type='hidden']"),
-            success:function(data){
-                console.log(data);
+            success:function(){
                 $.scojs_confirm({
                     content: "<?php echo $this->lang->line('editfinished');?>",
                     action: function() {

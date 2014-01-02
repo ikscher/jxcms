@@ -10,6 +10,7 @@ $lang['module'] = '插件模块';
 $lang['content'] = '内容管理';
 $lang['members'] = '会员管理';
 $lang['statistics'] = '数据统计';
+$lang['category'] = '栏目管理';
 $lang['admin_setting'] = '管理员设置';
 $lang['admin_manage'] = '管理员管理';
 $lang['role_manage'] = '角色管理';
@@ -56,7 +57,7 @@ $lang['delete'] = '删除';
 $lang['listorder'] = '排序';
 
 $lang['module_manage'] = '模块管理';
-$lang['category'] = '栏目';
+//$lang['category'] = '栏目';
 
 $lang['selected'] = '选中';
 $lang['title'] = '标题';

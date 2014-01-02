@@ -221,7 +221,7 @@
         
     //$REQUEST =& load_class('Request','core');
 
-
+    
 
     $COOKIE  =& load_class('Cookie','core');
 

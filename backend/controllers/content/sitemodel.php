@@ -21,10 +21,9 @@ class Sitemodel extends CI_Controller {
      * 模型管理列表
      */
     public function index() {
-        
-        
         $categories = unserialize($this->cache->get('category_content'));
-
+        $this->data['categories'] = $categories;
+        
         $where = ' where 1';
         $order = $this->input->get('order');
         $by = $this->input->get('by');

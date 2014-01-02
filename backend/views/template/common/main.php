@@ -82,11 +82,15 @@
                 <div id="Scroll"><div id="leftMain"></div></div>
                 <a href="javascript:;" id="openClose"  class="open" title="<?php echo $this->lang->line('spread_or_closed') ?>"><span class="hidden"></span></a>
             </div>
-           <!-- <div class="col-1 lf cat-menu" id="display_center_id" style="display:none" height="100%">
+            
+            <!--内容条目-->
+            <div class="col-1 lf cat-menu" id="display_center_id" style="display:none" height="100%">
                 <div class="content">
-                    <iframe name="center_frame" id="center_frame" src="index.php?d=common&c=main&m=public_main" frameborder="false" scrolling="auto" style="border:none" width="100%" height="auto" allowtransparency="true"></iframe>
+        	       <iframe name="center_frame" id="center_frame" src="" frameborder="false" scrolling="auto" style="border:none" width="100%" height="auto" allowtransparency="true"></iframe>
                 </div>
-            </div>-->
+            </div>
+            <!--内容条目-->
+            
             <div class="col-auto mr8">
                 <div class="crumbs">
                     <div class="shortcut cu-span">

@@ -215,7 +215,7 @@ class Tree {
 	 * @param $effected_id 需要生成treeview目录数的id
 	 * @param $str 末级样式
 	 * @param $str2 目录级别样式
-	 * @param $showlevel 直接显示层级数，其余为异步显示，0为全部限制
+	 * @param $showlevel 直接显示层级数，其余为异步显示，0为全部显示
 	 * @param $style 目录样式 默认 filetree 可增加其他样式如'filetree treeview-famfamfam'
 	 * @param $currentlevel 计算当前层级，递归使用 适用改函数时不需要用该参数
 	 * @param $recursion 递归使用 外部调用时为FALSE

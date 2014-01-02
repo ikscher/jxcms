@@ -12,10 +12,9 @@ html.on,html.on body{background: #e2e9ea; background-image:none;}
 html.addbg,html.addbg body{background:#e2e9ea}
 
 a{text-decoration:none;}
-
+.f14{font-size: 14px;}
+.bk10 {height: 10px;}
 .white,.white a{color: #fff;}
-
-
 ul, ol, li {list-style: none;}
 
 .header {background:#3a6ea5 ; height:80px; position:relative;}
@@ -23,7 +22,7 @@ ul, ol, li {list-style: none;}
 .header .logo a{display:block;height:80px;text-decoration: none;}
 
 
- ul li {display:inline-block;zoom:1;*display:inline;}
+ ul li {zoom:1;*display:inline;}
  
 .header .rt-col{position:absolute;top:0px; right:0px; width:280px; height:44px; z-index:10}
 .header .nav{ display:block; height:34px; position:relative;bottom:-10px;}
@@ -156,6 +155,7 @@ body fieldset.blue legend{padding:3px 8px;font-weight:700;color:#347add; backgro
 .col-tab .content-r{border-top:1px solid #dce3ed}
 .col-tab .contentList{border-left:1px solid #dce3ed;border-bottom:1px solid #dce3ed;border-right:1px solid #dce3ed;_zoom:1;}
 
+.lf {float: left;}
 .col-1{ border:1px solid #f4f6f5;zoom:1; background:#fff;}
 .col-1 div.content{border:1px solid #c2d1d8;zoom:1;}
 

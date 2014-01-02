@@ -87,14 +87,11 @@ class Main extends CI_Controller {
     /*
      * 锁屏
      */
-
     public function public_lock_screen() {
         $this->session->set_userdata('lock_screen', 1);
     }
 
     public function public_login_screenlock() {
-
-        //if(empty($_GET['lock_password'])) showmessage(L('password_can_not_be_empty'));
         //密码错误剩余重试次数
         $rtime = array();
         $r = array();

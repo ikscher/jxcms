@@ -192,7 +192,7 @@ class Form {
 			<script type="text/javascript" src="'.JS_PATH.'calendar/calendar.js"></script>
 			<script type="text/javascript" src="'.JS_PATH.'calendar/lang/en.js"></script>';
 		}
-		$str .= '<input type="text" name="'.$name.'" id="'.$id.'" value="'.$value.'" size="'.$size.'" class="date" readonly>&nbsp;';
+		$str .= '<input type="text" name="'.$name.'" id="'.$id.'" value="'.$value.'" size="'.$size.'" class="date form-control width_12" >&nbsp;';
 		$str .= '<script type="text/javascript">
 			Calendar.setup({
 			weekNumbers: '.$showweek.',

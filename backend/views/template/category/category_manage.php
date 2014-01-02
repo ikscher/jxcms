@@ -55,17 +55,22 @@
 </form>
 <script type="text/javascript">
     $('.updateCategory').on('click',function(){
-        setTimeout( function updateCategoryCache(){
-            $.ajax({
-                type:'post',
-                url:'?d=admin&c=category&m=updateCache',
-                success:function(){
-                    location.href=location.href;
-                }
-            })
-        },3000);
-    })
-
+        setTimeout( updateCategoryCache,3000);
+    });
+    
+    <?php if(empty($categories)) :?>
+        updateCategoryCache();
+    <?php endif;?>
+    
+    function updateCategoryCache(){
+        $.ajax({
+            type:'post',
+            url:'?d=admin&c=category&m=updateCache',
+            success:function(){
+                location.href=location.href;
+            }
+        })
+    }
     
     $('input[name^=listorders]').on('keydown',function(e){
        if(e.keyCode==13){

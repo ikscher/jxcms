@@ -90,12 +90,29 @@
         }
     });
     
+    //自动更新缓存
+    <?php if(empty($categories)) :?>
+        updateCategoryCache();
+    <?php endif;?>
+    
+    function updateCategoryCache(){
+        $.ajax({
+            type:'post',
+            url:'?d=admin&c=category&m=updateCache',
+            success:function(){
+                location.href=location.href;
+            }
+        })
+    }
+    
+    //删除
     $('.delete').click(function(){
         var modelid=$(this).attr('data-modelid');
         $('input[name=modelid]').val(modelid);
         confirm.show();
     })
     
+    //编辑
     $('.edit').click(function(){
         var modelid=$(this).attr('data-modelid');
         location.href='index.php?d=content&c=sitemodel&m=edit&modelid='+modelid;

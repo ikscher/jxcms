@@ -36,11 +36,13 @@ $lang['html_category'] = '栏目生成Html';
 $lang['html_show'] = '内容页生成Html';
 $lang['category_urlrules'] = '栏目页URL规则';
 $lang['show_urlrules'] = '内容页URL规则';
+$lang['urlrules']='URL规则';
 $lang['create_to_rootdir'] = '是否生成到根目录';
 $lang['create_to_rootdir_tips'] = '当设置了 caches/configs/system.php 中的 html_root 时，将生成到该目录';
 $lang['available_styles'] = '可用风格';
 $lang['category_index_tpl'] = '栏目首页模板';
 $lang['category_list_tpl'] = '栏目列表页模板';
+$lang['page_templates'] = '单网页模板';
 $lang['content_tpl'] = '内容页模板';
 $lang['meta_title'] = '<strong>META Title（栏目标题）</strong><br/>针对搜索引擎设置的标题';
 $lang['meta_keywords'] = '<strong>META Keywords（栏目关键词）</strong><br/>关键字中间用半角逗号隔开';
@@ -84,4 +86,5 @@ $lang['group_name']='会员组名称';
 $lang['allow_vistor']='允许访问';
 $lang['allow_contribute']='允许投稿';
 $lang['role_private']='角色权限';
+
 ?>

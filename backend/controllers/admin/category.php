@@ -28,8 +28,8 @@ class Category extends CI_Controller {
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
         $models = unserialize($this->cache->get('model'));
         $sitelist = unserialize($this->cache->get('site'));
-
-
+       
+        
         $category_items = array();
 
         if (!empty($models)) {
@@ -110,7 +110,7 @@ class Category extends CI_Controller {
 					<td align='center'>\$help</td>
 					<td align='center' >\$str_manage</td>
 				</tr>";
-
+        
         $this->tree->init($categories);
         $categories = $this->tree->getTree(0, $str);
       
@@ -232,7 +232,10 @@ class Category extends CI_Controller {
             
             $group_priv='';
             $group_cache = unserialize($this->cache->get('grouplist'));
-    
+            if(empty($group_cache)){
+                $this->load->model('admin/model_member_group');
+                $group_cache = $this->model_member_group->getMemberGroup();
+            }
             foreach ($group_cache as $_key => $_value) {
                 if ($_value['groupid'] == 1) continue;
                
@@ -251,8 +254,27 @@ class Category extends CI_Controller {
 			
 			$this->load->library('form');
 			
-			
-//            showmessage(L('please_add_model'),'?m=content&c=sitemodel&a=init&menuid=59',5000);
+            
+            $category_items = unserialize($this->cache->get('category_items_' . $r['modelid']));
+            $disabled = $category_items[$r['catid']] ? 'disabled' : '';
+            $models=array();
+            $models = unserialize($this->cache->get('model'));
+            $model_datas = array();
+            if(empty($models)){
+                $this->load->model('admin/model_model');
+                $result_array = $this->model_model->getAllModels();
+                foreach($result_array as $v){
+                    $models[$v['modelid']] = $v;
+                }
+            }
+            
+            foreach ($models as $_k => $_v) {
+                $model_datas[$_v['modelid']] = $_v['name'];
+            }
+            
+            $this->data['disabled'] = $disabled;
+            $this->data['model_datas']=$model_datas;
+
             $this->load->view('category/category_add',$this->data);
 			
 		}
@@ -398,23 +420,42 @@ class Category extends CI_Controller {
             $this->data['catid'] = $catid;
             $this->load->model('admin/model_category_priv');
             $this->privs = $this->model_category_priv->getCategoryPrivs(array('catid'=>$catid));
-
+            
+            $type = intval($this->input->get('type'));
+             
+             
             $role_priv = '';
+            $roles=array();
             $roles = unserialize($this->cache->get('role'));
+            if(empty($roles)){
+                $this->load->model('admin/model_role');
+                $result_array = $this->model_role->getAllRoles();
+
+                foreach($result_array as $v){
+                    $roles[$v['roleid']]=$v;
+                }
+            }
             foreach ($roles as $roleid => $role) {
                 $disabled = $roleid == 1 ? 'disabled' : '';
-
-                $role_priv .="
-                <tr>
-                <td align=\"left\">{$role['rolename']}</td>
-                <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('index', $roleid) . " value=\"index,$roleid\" /></td>
-                <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('add', $roleid) . " value=\"add,$roleid\" /></td>
-                <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('edit', $roleid) . " value=\"edit,$roleid\" /></td>
-                <td><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('delete', $roleid) . " value=\"delete,$roleid\" /></td>
-                <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('listorder', $roleid) . " value=\"listorder,$roleid\" /></td>
-                <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('push', $roleid) . " value=\"push,$roleid\" /></td>
-                <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('move', $roleid) . " value=\"move,$roleid\" /></td>
-               </tr>";
+                
+                if($type==0){
+                    $role_priv .="
+                    <tr>
+                    <td align=\"left\">{$role['rolename']}</td>
+                    <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('index', $roleid) . " value=\"index,$roleid\" /></td>
+                    <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('add', $roleid) . " value=\"add,$roleid\" /></td>
+                    <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('edit', $roleid) . " value=\"edit,$roleid\" /></td>
+                    <td><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('delete', $roleid) . " value=\"delete,$roleid\" /></td>
+                    <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('listorder', $roleid) . " value=\"listorder,$roleid\" /></td>
+                    <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('push', $roleid) . " value=\"push,$roleid\" /></td>
+                    <td ><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled " . $this->checkCategoryPriv('move', $roleid) . " value=\"move,$roleid\" /></td>
+                   </tr>";
+                }elseif ($type==1){
+                    $role_priv .="<tr>
+				      <td align=\"left\">{$role['rolename']}</td>
+				      <td align=\"center\"><input type=\"checkbox\" name=\"priv_roleid[]\" $disabled ". $this->checkCategoryPriv('init',$roleid)." value=\"init,$roleid\" ></td>
+			        </tr>";
+                }
             }
             
             $this->data['role_priv']=$role_priv;
@@ -428,12 +469,19 @@ class Category extends CI_Controller {
             if(!empty($group_cache)){
                 foreach ($group_cache as $_key => $_value) {
                     if ($_value['groupid'] == 1) continue;
-
-                    $group_priv .="<tr>
-                        <td align=\"left\">{$_value['name']}</td>
-                        <td align=\"left\"><input type=\"checkbox\" name=\"priv_groupid[]\" ". $this->checkCategoryPriv('visit', $_value['groupid'], 0) . " value=\"visit,{$_value['groupid']}\" ></td>
-                        <td align=\"left\"><input type=\"checkbox\" name=\"priv_groupid[]\"  ".  $this->checkCategoryPriv('add', $_value['groupid'], 0)." value=\"add,{$_value['groupid']}\" ></td>
-                    </tr>";
+                    
+                    if($type==0){
+                        $group_priv .="<tr>
+                            <td align=\"left\">{$_value['name']}</td>
+                            <td align=\"left\"><input type=\"checkbox\" name=\"priv_groupid[]\" ". $this->checkCategoryPriv('visit', $_value['groupid'], 0) . " value=\"visit,{$_value['groupid']}\" ></td>
+                            <td align=\"left\"><input type=\"checkbox\" name=\"priv_groupid[]\"  ".  $this->checkCategoryPriv('add', $_value['groupid'], 0)." value=\"add,{$_value['groupid']}\" ></td>
+                        </tr>";
+                    }elseif($type==1){
+                        $group_priv .="<tr>
+				          <td align=\"left\">{$_value['name']}</td>
+				          <td align=\"center\"><input type=\"checkbox\" name=\"priv_groupid[]\" ". $this->checkCategoryPriv('visit',$_value['groupid'],0)."  value=\"visit,{$_value['groupid']}\" ></td>
+			            </tr>";
+                    }
 
                 }
             }
@@ -441,11 +489,11 @@ class Category extends CI_Controller {
             $this->data['catid'] = $catid;
             $this->data['group_priv'] = $group_priv;
 
-            $type = intval($this->input->get('type'));
+           
             if ($type == 0) {
                 $this->load->view('category/category_edit', $this->data);
             } elseif ($type == 1) {
-                $this->load->view('category_page_edit');
+                $this->load->view('category/category_page_edit',$this->data);
             } else {
                 $this->load->view('category_link');
             }

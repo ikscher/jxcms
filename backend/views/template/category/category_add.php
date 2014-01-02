@@ -34,15 +34,8 @@
                         <td width="200"><?php echo $this->lang->line('select_model') ?>：</td>
                         <td>
                             <?php
-                            $category_items = unserialize($this->cache->get('category_items_' . $r['modelid']));
-                            $disabled = $category_items[$r['catid']] ? 'disabled' : '';
-                            $models = unserialize($this->cache->get('model'));
-                            $model_datas = array();
-                            foreach ($models as $_k => $_v) {
-                                $model_datas[$_v['modelid']] = $_v['name'];
-                            }
-                            echo $this->form->select($model_datas, $r['modelid'], 'name="info[modelid]" id="modelid" ' . $disabled, $this->lang->line('select_model'));
-                            echo $this->lang->line('modelid_edit_tips');
+                                echo $this->form->select($model_datas, $r['modelid'], 'name="info[modelid]" id="modelid" ' . $disabled, $this->lang->line('select_model'));
+                                echo $this->lang->line('modelid_edit_tips');
                             ?>
                         </td>
                     </tr>
