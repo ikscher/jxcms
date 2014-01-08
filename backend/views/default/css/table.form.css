@@ -8,7 +8,7 @@ body fieldset.blue legend{padding:3px 8px;font-weight:700;color:#347add; backgro
 .table td,.table-list th{padding-left:12px}
 .table thead th{ height:30px; background:#F4F4F4; border-bottom:1px solid #d5dfe8; font-weight:bold;text-align: center;}
 .table tbody td,.table-list .btn{padding-top:5px; padding-bottom:5px}
-div.btn{background:#f6f6f6; padding:6px 12px 0 12px; height:30px;line-height:30px}
+div.btn{ padding:6px 12px 0 12px; height:30px;line-height:30px}
 .table tr:hover,.table-list table tbody tr:hover{ background:#fbffe4}
 .nHover tr:hover,.nHover tr:hover td{ background:none}
 .table .input-text-c{ padding:0; height:18px}
@@ -31,7 +31,7 @@ ul li{padding:0 10px 0 0;}
 .common-form .set table td{ padding:3px 0 3px 5px}
 .common-form .set table td.y-bg{background: url(../image/set_y_line.png) repeat-y right top}
 .common-form .set table td input{ background-image:none; height:18px; font-size:12px}
-.input-text,.measure-input,textarea,input.date,input.endDate,.input-focus{border:1px solid #A7A6AA;height:25px;margin:0 5px 0 0;padding:2px 0 2px 5px;border: 1px solid #d0d0d0;background: #FFF url(../image/input.png) repeat-x; font-family: Verdana, Geneva, sans-serif,"宋体";font-size:12px;}
+.input-text,.measure-input,textarea,input.date,input.endDate,.input-focus{border:1px solid #A7A6AA;height:30px;margin:0 5px 0 0;padding:2px 0 2px 5px;border: 1px solid #d0d0d0;background: #FFF url(../image/input.png) repeat-x; font-family: Verdana, Geneva, sans-serif,"宋体";font-size:12px;}
 .input-focus{background: #FFF url(../image/input_focus.png) repeat-x; border-color:#afcee6;font-size:12px;}
 input.date,input.endDate{background: #fff url(../image/input_date.png) no-repeat right 3px; padding-right:18px;font-size:12px;}
 textarea,textarea.input-text,textarea.input-focus{font-size:12px;height:auto; padding:5px; margin:0;}
@@ -114,9 +114,10 @@ div#areaid{border:1px solid #A7A6AA;height:18px;margin:0 5px 0 0;padding:2px 5px
 .nav_>form{float:left;padding-top: 10px;padding-left:15px;}
 .nav_>ul{float: right;}
 .nav_ span{margin:10px 0 0 15px;display: inline-block;font-size: 12px;}
+.nav_ ul li{float:left;}
 .nav_>ul>li>a{display: block;padding-top:10px;}
 
-.pagination{margin:0;}/*修正boot分页用的*/
+.pagination{margin:0;float:right;}/*修正boot分页用的*/
 
 .col-xs-3,.col-xs-2{padding-left:0px;} /*修正input 左边距*/
 
@@ -130,3 +131,6 @@ div#areaid{border:1px solid #A7A6AA;height:18px;margin:0 5px 0 0;padding:2px 5px
 legend{font-size: 12px;}
 
 .bk15{margin:5px 0;}
+
+/*修正弹出的模太窗口*/
+ .modal {top: 10%;left: 50%;z-index: 1050;width: 560px;margin-left: -280px;background-color: #fff;border: 1px solid #999;border: 1px solid rgba(0,0,0,0.3);*border: 1px solid #999;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;outline: 0;-webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);-moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);box-shadow: 0 3px 7px rgba(0,0,0,0.3);-webkit-background-clip: padding-box;-moz-background-clip: padding-box;background-clip: padding-box;overflow-y:hidden;height:140px;}

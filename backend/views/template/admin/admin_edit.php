@@ -81,13 +81,21 @@
             data:$('input[name^="info"],input[type="submit"],input[type="hidden"],select[name^="info"]'),
             success:function(str){
                 if(str=='yes'){
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("修改管理员成功！");
-                    $('#myModal').modal();
+                     $.scojs_confirm({
+                        content: "修改管理员成功！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                 }else{
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("修改管理员失败！");
-                    $('#myModal').modal();
+                     $.scojs_confirm({
+                        content: "修改管理员成功！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                 }
             }
         });

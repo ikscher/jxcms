@@ -1,31 +1,7 @@
 <?php $this->load->view('common/header'); ?>
 
 <link href="<?php echo base_url('views/default/css/table.form.css'); ?>" rel="stylesheet" type="text/css" />
-<style type='text/css'>
-    .modal {
-	top: 10%;
-	left: 50%;
-	z-index: 1050;
-	width: 560px;
-	margin-left: -280px;
-	background-color: #fff;
-	border: 1px solid #999;
-	border: 1px solid rgba(0,0,0,0.3);
-	*border: 1px solid #999;
-	-webkit-border-radius: 6px;
-	-moz-border-radius: 6px;
-	border-radius: 6px;
-	outline: 0;
-	-webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
-	-moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);
-	box-shadow: 0 3px 7px rgba(0,0,0,0.3);
-	-webkit-background-clip: padding-box;
-	-moz-background-clip: padding-box;
-	background-clip: padding-box;
-    overflow-y:hidden;
-    height:140px;
-}
-</style>
+
 <div class="pad_10">
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -178,9 +154,13 @@
                     that.attr('data-disabled',1);
                }
             }else{
-                $('.modal-title').text("提示");
-                $('.modal-body').html("更新角色状态失败！");
-                $('#myModal').modal();
+                $.scojs_confirm({
+                    content: "更新状态失败！",
+                    action: function() {
+                       window.location.href=location.href;
+                   }
+                }).show();
+                $('.modal-footer a:eq(0)').addClass('hidden');
             }
         })
     });

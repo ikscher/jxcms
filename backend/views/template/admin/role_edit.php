@@ -75,14 +75,22 @@
             data:$('input[name^="info"]:checked,input[name^="_info"],input[type="submit"],textarea[name^="info"],input[type="hidden"]'),
             success:function(str){
                 if(str=='yes'){
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("修改角色成功！");
-                    $('#myModal').modal();
+                     $.scojs_confirm({
+                        content: "修改角色成功！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                     
                 }else{
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("修改角色失败！");
-                    $('#myModal').modal()
+                    $.scojs_confirm({
+                        content: "修改角色失败！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                 }
             }
         });

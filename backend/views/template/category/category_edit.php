@@ -278,9 +278,13 @@
             data:$('input[type="text"],input[type="radio"]:checked,input[type="checkbox"]:checked,textarea[name^=info],textarea[name^=setting],select,input[type="hidden"]'),
             success:function(str){
                 if(str=='yes'){
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("修改栏目成功！");
-                    $('#myModal').modal();
+                     $.scojs_confirm({
+                        content: "修改栏目成功！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                     
                 }
             }

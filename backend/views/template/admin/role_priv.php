@@ -117,13 +117,21 @@
             data:$('input[type="hidden"],input[type="submit"],input[name^="menuid"]:checked'),
             success:function(str){
                 if(str=='yes'){
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("权限设置成功！");
-                    $('#myModal').modal();
+                     $.scojs_confirm({
+                        content: "权限设置成功！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                 }else{
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("权限设置失败！");
-                    $('#myModal').modal();
+                     $.scojs_confirm({
+                        content: "权限设置失败！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                 }
             }
         });

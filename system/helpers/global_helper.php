@@ -134,6 +134,33 @@ if ( ! function_exists('showMessage')){
         exit;
     }
 }
+
+
+
+/**
+ * 安全过滤函数
+ *
+ * @param $string
+ * @return string
+ */
+if ( ! function_exists('safeReplace')){
+    function safeReplace($string) {
+        $string = str_replace('%20','',$string);
+        $string = str_replace('%27','',$string);
+        $string = str_replace('%2527','',$string);
+        $string = str_replace('*','',$string);
+        $string = str_replace('"','&quot;',$string);
+        $string = str_replace("'",'',$string);
+        $string = str_replace('"','',$string);
+        $string = str_replace(';','',$string);
+        $string = str_replace('<','&lt;',$string);
+        $string = str_replace('>','&gt;',$string);
+        $string = str_replace("{",'',$string);
+        $string = str_replace('}','',$string);
+        $string = str_replace('\\','',$string);
+        return $string;
+    }
+}
 // ------------------------------------------------------------------------
 /* End of file language_helper.php */
 /* Location: ./system/helpers/language_helper.php */

@@ -125,13 +125,21 @@
             data:$("input[type='text'],input[type='submit'],textarea,select,input[type='hidden']"),
             success:function(str){
                 if(str==1){
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("修改模型成功！");
-                    $('#myModal').modal();
+                     $.scojs_confirm({
+                        content: "模型修改成功！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                 }else{
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("修改模型失败！");
-                    $('#myModal').modal();
+                     $.scojs_confirm({
+                        content: "模型修改成功！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                 }
             }
         });

@@ -13,9 +13,21 @@ $lang['listorder'] = '排序';
 $lang['orderfinished'] ='排序完成！';
 $lang['addfinished'] = '添加完成！';
 $lang['editfinished'] = '修改完成！';
+$lang['search'] ='搜索';
+$lang['all'] = '全部';
+$lang['noResults']='无数据记录!';
+$lang['restore'] ='还原';
 /*public*/
+$lang['btcategory']='所属栏目';
+$lang['checked']='已发布';
+$lang['unchecked'] = '待审核';
+$lang['archived'] = '归档';
+$lang['rejected'] ='退稿';
 $lang['add_model']='添加模型';
 $lang['confirm'] = '您確認刪除此模型嗎？';
+$lang['intro'] ='简介';
+$lang['username']='用户名';
+$lang['operateRecord'] = '请选择要操作的记录！';
 
 $lang['import_model']='导入模型';
 $lang['2s_close'] = '<font color="red"><B><span id="secondid">2</span></B> 秒后自动关闭</font>';
@@ -138,10 +150,11 @@ $lang['today_hits'] = '今日点击';
 $lang['yestoday_hits'] = '昨日点击';
 $lang['week_hits'] = '本周点击';
 $lang['month_hits'] = '本月点击';
+$lang['total_hits'] = '总点击';
 $lang['member_contribute'] = '会员投稿';
 $lang['comment'] = '评论';
 $lang['createhtml'] = '批量生成HTML';
-$lang['passed_checked'] = '通过审核';
+$lang['passed_checked'] = '审核';
 $lang['view_comment'] = '查看评论';
 $lang['copyfrom_tips'] = '≡请选择≡';
 

@@ -60,8 +60,7 @@ class Role extends CI_Controller {
         $this->pagination->initialize($config);
 
         $pagination = $this->pagination->create_links();
-        
-        
+
         $this->data['order'] = $order;
         $this->data['roles'] = $roles;
         $this->data['rolename'] = $rolename;

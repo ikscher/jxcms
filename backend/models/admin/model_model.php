@@ -18,15 +18,26 @@ class Model_model extends CI_Model {
     /*
      * 列出所有模块项
      */
-    function getAllModels($where=''){
-        $result = array();
+    public function getAllModels($where=''){
+        $results = array();
         $sql = "select modelid,name,description,tablename,setting,addtime,items,enablesearch,disabled,default_style,category_template,list_template,show_template,js_template,admin_list_template,member_add_template,member_list_template,sort,type  from {$this->tbl_prefix}model {$where}";
         $query=$this->db->query($sql);
-        $result = $query->result_array();
+        $results = $query->result_array();
+        
+        return $results;
+    }
+    
+    /*
+     * 列出对于的模型项
+     */
+    public function getModel($modelid){
+        $result = array();
+        $sql = "select modelid,name,description,tablename,setting,addtime,items,enablesearch,disabled,default_style,category_template,list_template,show_template,js_template,admin_list_template,member_add_template,member_list_template,sort,type  from {$this->tbl_prefix}model where modelid=?";
+        $query=$this->db->query($sql,$modelid);
+        $result = $query->row_array();
         
         return $result;
     }
-    
    
 }
 ?>

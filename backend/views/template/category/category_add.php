@@ -274,9 +274,13 @@
             data:$('input[type="text"],input[type="radio"]:checked,input[type="checkbox"]:checked,.ke-edit iframe body[class=ke-content],textarea[name^=info],textarea[name^=setting],select,input[type="hidden"]'),
             success:function(str){
                 if(str=='yes'){
-                    $('.modal-title').text("提示");
-                    $('.modal-body').html("添加栏目成功！");
-                    $('#myModal').modal();
+                    $.scojs_confirm({
+                        content: "添加栏目成功！",
+                        action: function() {
+                           window.location.href=location.href;
+                       }
+                    }).show();
+                    $('.modal-footer a:eq(0)').addClass('hidden');
                     
                 }
             }

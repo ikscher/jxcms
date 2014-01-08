@@ -562,7 +562,7 @@ class Category extends CI_Controller {
      * @param $catid 要删除的栏目id
      */
     private function delete_($catid, $modelid) {
-        $this->load->model('admin/model_content');
+        $this->load->model('content/model_content');
         $this->model_content->set($modelid);
         $result = $this->model_content->select('id', array('catid' => $catid));
         if (is_array($result) && !empty($result)) {

@@ -36,96 +36,222 @@ class Content extends CI_Controller {
     public function index () {
         $this->lang->load('content');
         $this->lang->load('message');
-        //$show_header = $show_dialog  = $show_pc_hash = '';
-		if($this->input->get('catid')) {
-			$catid =  intval($this->input->get('catid'));
-			$categories = $this->categories[$catid];
-			$modelid = $categories['modelid'];
-			$model_arr = getcache('model', 'commons');
-			$MODEL = $model_arr[$modelid];
-			unset($model_arr);
-			$admin_username = param::get_cookie('admin_username');
-			//查询当前的工作流
-			$setting = string2array($category['setting']);
-			$workflowid = $setting['workflowid'];
-			$workflows = getcache('workflow_'.$this->siteid,'commons');
-			$workflows = $workflows[$workflowid];
-			$workflows_setting = string2array($workflows['setting']);
+        $this->load->helper('global');
+        
+        $where = array();
+        $order = $this->input->get('order');
+        $by = $this->input->get('by');
 
-			//将有权限的级别放到新数组中
-			$admin_privs = array();
-			foreach($workflows_setting as $_k=>$_v) {
-				if(empty($_v)) continue;
-				foreach($_v as $_value) {
-					if($_value==$admin_username) $admin_privs[$_k] = $_k;
-				}
-			}
-			//工作流审核级别
-			$workflow_steps = $workflows['steps'];
-			$workflow_menu = '';
-			$steps = isset($_GET['steps']) ? intval($_GET['steps']) : 0;
-			//工作流权限判断
-			if($_SESSION['roleid']!=1 && $steps && !in_array($steps,$admin_privs)) showmessage(L('permission_to_operate'));
-			$this->db->set_model($modelid);
-			if($this->db->table_name==$this->db->db_tablepre) showmessage(L('model_table_not_exists'));;
-			$status = $steps ? $steps : 99;
-			if(isset($_GET['reject'])) $status = 0;
-			$where = 'catid='.$catid.' AND status='.$status;
-			//搜索
-			
-			if(isset($_GET['start_time']) && $_GET['start_time']) {
-				$start_time = strtotime($_GET['start_time']);
-				$where .= " AND `inputtime` > '$start_time'";
-			}
-			if(isset($_GET['end_time']) && $_GET['end_time']) {
-				$end_time = strtotime($_GET['end_time']);
-				$where .= " AND `inputtime` < '$end_time'";
-			}
-			if($start_time>$end_time) showmessage(L('starttime_than_endtime'));
-			if(isset($_GET['keyword']) && !empty($_GET['keyword'])) {
-				$type_array = array('title','description','username');
-				$searchtype = intval($_GET['searchtype']);
-				if($searchtype < 3) {
-					$searchtype = $type_array[$searchtype];
-					$keyword = strip_tags(trim($_GET['keyword']));
-					$where .= " AND `$searchtype` like '%$keyword%'";
-				} elseif($searchtype==3) {
-					$keyword = intval($_GET['keyword']);
-					$where .= " AND `id`='$keyword'";
-				}
-			}
-			if(isset($_GET['posids']) && !empty($_GET['posids'])) {
-				$posids = $_GET['posids']==1 ? intval($_GET['posids']) : 0;
-				$where .= " AND `posids` = '$posids'";
-			}
-			
-			$datas = $this->db->listinfo($where,'id desc',$_GET['page']);
-			$pages = $this->db->pages;
-			$pc_hash = $_SESSION['pc_hash'];
-			for($i=1;$i<=$workflow_steps;$i++) {
-				if($_SESSION['roleid']!=1 && !in_array($i,$admin_privs)) continue;
-				$current = $steps==$i ? 'class=on' : '';
-				$r = $this->db->get_one(array('catid'=>$catid,'status'=>$i));
-				$newimg = $r ? '<img src="'.IMG_PATH.'icon/new.png" style="padding-bottom:2px" onclick="window.location.href=\'?m=content&c=content&a=&menuid='.$_GET['menuid'].'&catid='.$catid.'&steps='.$i.'&pc_hash='.$pc_hash.'\'">' : '';
-				$workflow_menu .= '<a href="?m=content&c=content&a=&menuid='.$_GET['menuid'].'&catid='.$catid.'&steps='.$i.'&pc_hash='.$pc_hash.'" '.$current.' ><em>'.L('workflow_'.$i).$newimg.'</em></a><span>|</span>';
-			}
-			if($workflow_menu) {
-				$current = isset($_GET['reject']) ? 'class=on' : '';
-				$workflow_menu .= '<a href="?m=content&c=content&a=&menuid='.$_GET['menuid'].'&catid='.$catid.'&pc_hash='.$pc_hash.'&reject=1" '.$current.' ><em>'.L('reject').'</em></a><span>|</span>';
-			}
-			//$ = 153fc6d28dda8ca94eaa3686c8eed857;获取模型的thumb字段配置信息
-			$model_fields = getcache('model_field_'.$modelid, 'model');
-			$setting = string2array($model_fields['thumb']['setting']);
-			$args = '1,'.$setting['upload_allowext'].','.$setting['isselectimage'].','.$setting['images_width'].','.$setting['images_height'].','.$setting['watermark'];
-			$authkey = upload_key($args);
-			$template = $MODEL['admin_list_template'] ? $MODEL['admin_list_template'] : 'content_list';
-			include $this->admin_tpl($template);
+        if ($order == 'asc') {
+            $order = 'desc';
+        } else {
+            $order = 'asc';
+        }
+        
+		if($this->input->post('search')) {
+			$start_time = strtotime($this->input->post('start_time'));
+            $end_time = strtotime($this->input->post('end_time'));
+            $posids = $this->input->post('posids');
+            $searchtype = $this->input->post('searchtype');
+            $status = $this->input->post('status');
+            $status = isset($status)?$status:1;
+            $keyword = $this->input->post('keyword') ? trim($this->input->post('keyword')) : '';
+            switch ($searchtype) {
+                case 0:
+                    if(isset($keyword) && $keyword!='') array_push($where,"title like '{$keyword}%'");
+                    break;
+                case 1:
+                    if(isset($keyword) && $keyword!='') array_push($where,"keywords like '{$keyword}%'");
+                    break;
+                case 2:
+                    if(isset($keyword) && $keyword!='') array_push($where,"username like '{$keyword}%'");
+                    break;
+                case 3:
+                    if(isset($keyword)) array_push($where,"id = '{$keyword}'");
+                    break;
+                default:
+                    if(isset($keyword)) array_push($where,"id ='{$keyword}'");
+                    break;
+            }
+            
+            if(isset($posids) && is_numeric($posids)) {
+                array_push($where," posids={$posids}");
+            }
+            
+            if(!empty($start_time)) array_push($where,"inputtime>={$start_time}");
+            if(!empty($end_time)) array_push($where,"inputtime<={$end_time}");
+            if(!empty($status)) array_push($where,"`a`.`status`='{$status}'"); 
+            
+           
 		} else {
-              
-			$this->load->view('content/index.php');
-		}
+            $posids='all';
+            $searchtype=0;
+            $status=1;
+            array_push($where ,"`a`.`status`=1");
+        }
+        
+        $modelid = $this->input->get('modelid');
+        if(!empty($modelid)){
+            array_push($where,"modelid={$modelid}");
+        }
+        
+        if(empty($where)){
+            $where =" where `a`.`status`=1";
+        }else{
+            $where = " where ".implode(' and ',$where);
+        }
+       
+       
+            
+        $table_ = array();
+
+        $model = unserialize($this->cache->get('model'));
+        if(empty($model)){ 
+            $this->load->model('admin/model_model');
+            $model = $this->model_model->getAllModels();
+        }
+
+
+        foreach($model as $k=>$v){
+            array_push($table_,$v['tablename']);
+        }
+        $table = array_unique($table_);
+
+        $this->load->model('content/model_content');
+        $contents = $this->model_content->getAllContents($table,$where, $by, $order);
+        
+        $this->load->model('admin/model_model');
+        $this->load->model('content/model_hits');
+        foreach($contents as $k=>$v){
+            $r=$this->model_model->getModel($v['modelid']);
+            $contents[$k]['modelname'] = isset($r['name'])?$r['name']:'';
+            $contents[$k]['hits'] = $this->model_hits->getHits(array('c-'.$v['modelid'].'-'.$v['id']));
+        }
+
+        $perpage = $this->config->item('per_page');
+        $page = $this->input->get('per_page');
+        $page = isset($page) && $page > 0 ? $page : 1;
+        $limit = ($page - 1) * $perpage;
+
+        $datas=array_slice($contents,$limit,$perpage);
+
+        //分页
+        $this->load->library('pagination');
+        $config['base_url'] = '?d=content&c=content&m=index';
+        $config['total_rows'] = count($contents);
+        $this->pagination->initialize($config);
+
+        $pagination = $this->pagination->create_links();
+
+
+        $sitelist = unserialize($this->cache->get('site'));
+        $release_siteurl = $sitelist['url'];
+        $path_len = -strlen($this->config->item('web_path'));
+        $release_siteurl = substr($release_siteurl, 0, $path_len);
+        $this->data['release_siteurl'] = $release_siteurl;
+
+        $this->data['order'] = $order;
+        $this->data['start_time'] = $this->input->post('start_time');
+        $this->data['end_time'] = $this->input->post('end_time');
+        $this->data['posids'] = $posids;
+        $this->data['searchtype'] = $searchtype;
+        $this->data['keyword'] = isset($keyword)?$keyword:'';
+        $this->data['pagination'] = $pagination;
+        $this->data['datas'] = $datas;
+        $this->data['status']=$status;
+        $this->data['category']=array();
+        $this->data['workflow_menu'] =1;
+
+        $this->load->view('content/index.php',$this->data);
+    }
+	
+    /**
+	 * 发布内容=》审核,删除，还原，退稿
+	 */
+	public function operate() {
+        $this->lang->load('content');
+        $admin_username = $this->cookie->AuthCode($this->input->cookie('adminusername'), 'DECODE');
+        
+        $steps = $this->input->post('steps');
+        if(empty($steps)) $steps=1;
+        $admin_privs=array(1,2,3);//1:待审核，2:已审核（已发布），3：归档（删除）
+	    
+	    if($this->session->userdata('roleid')!=1 && $steps && !in_array($steps,$admin_privs)) { 
+            //showmessage(L('permission_to_operate'));
+            //$this->data['permission_to_operate'] = $this->lang->line('permission_to_operate');
+        }
+        
+        //更改内容状态
+        if($this->input->post('type')=='pass'){
+            $status = 2;
+        }elseif($this->input->post('type')=='reject'){
+			$status = 1;
+        }elseif($this->input->post('type')=='delete'){
+            $status = 3;
+        }elseif($this->input->post('type')=='restore'){
+		    $status = 1;
+        }
+        //审核通过，检查投稿奖励或扣除积分
+        $this->load->model('content/model_content');
+        $this->load->model('admin/model_member');
+        
+        $ids = $this->input->post('ids');
+        if (isset($ids) && !empty($ids)) {
+            foreach ($ids as $id) {
+                $id_=array();
+                $id_=explode(',',$id);
+               
+                $id = $id_[0];
+                $modelid = $id_[1];
+                $this->model_content->set($modelid);
+             
+                $content_info = $this->model_content->select('username',array($id));
+                if(isset($content_info['username'])){
+                    $memberinfo = $this->model_member->getMemberInfo(array('username'=>$content_info['username']), 'userid, username');
+                
+//                $flag = $catid.'_'.$id;
+//                if($setting['presentpoint']>0) {
+//                    pc_base::load_app_class('receipts','pay',0);
+//                    receipts::point($setting['presentpoint'],$memberinfo['userid'], $memberinfo['username'], $flag,'selfincome',L('contribute_add_point'),$memberinfo['username']);
+//                } else {
+//                    pc_base::load_app_class('spend','pay',0);
+//                    spend::point($setting['presentpoint'], L('contribute_del_point'), $memberinfo['userid'], $memberinfo['username'], '', '', $flag);
+//                }
+                }
+                $this->model_content->updateStatus(array($id),$status);
+                //更新到全站搜索
+//                $inputinfo = '';
+//                $inputinfo['system'] = $content_info;
+//                $this->db->search_api($id,$inputinfo);
+            }
+        } 
+
+//        if(isset($_GET['ajax_preview'])) {
+//            $_POST['ids'] = $_GET['id'];
+//        }
+       
+
+		//showmessage(L('operation_success'),HTTP_REFERER);
 	}
     
+    /*
+     * 批量移动（从一个栏目move到另一个栏目）
+     */
+    public function move(){
+        $ids = $this->input->post('ids');
+        if (isset($ids) && !empty($ids)) {
+            foreach ($ids as $id) {
+                $id_=array();
+                $id_=explode(',',$id);
+               
+                $id = $id_[0];
+                $modelid = $id_[1];
+                $this->model_content->set($modelid);
+                $this->model_content->move(array($id),$status);
+            }
+        }
+               
+    }
     
     /**
 	 * 显示栏目菜单列表
@@ -171,21 +297,22 @@ class Content extends CI_Controller {
 				} else {
 					$r['icon_type'] = $r['vs_show'] = '';
 					$r['type'] = 'init';
-					$r['add_icon'] = "<a target='right' href='?m=content&c=content&menuid=".$this->input->get('menuid')."&catid=".$r['catid']."' onclick=javascript:openwinx('?m=content&c=content&a=add&menuid=".$_GET['menuid']."&catid=".$r['catid']."&token=".$this->session->userdata('token')."','')><img src='views/default/image/add_content.gif' alt='".$this->lang->line('add')."'></a> ";
+					$r['add_icon'] = "<a target='right' href='?d=content&c=content&menuid=".$this->input->get('menuid')."&catid={$r['catid']}&modelid={$r['modelid']}&token=".$this->session->userdata('token')."'><img src='views/default/image/add_content.gif' alt='".$this->lang->line('add')."'></a> ";
 				}
 				$categories[$r['catid']] = $r;
 			}
 		}
+
 		if(!empty($categories)) {
 			$this->tree->init($categories);
 				switch($from) {
 					case 'block':
-						$strs = "<span class='\$icon_type'>\$add_icon<a href='?m=block&c=block_admin&a=public_visualization&menuid=".$_GET['menuid']."&catid=\$catid&type=list' target='right'>\$catname</a> \$vs_show</span>";
-						$strs2 = "<img src='views/default/image/folder.gif'> <a href='?m=block&c=block_admin&a=public_visualization&menuid=".$_GET['menuid']."&catid=\$catid&type=category' target='right'>\$catname</a>";
+						$strs = "<span class='\$icon_type'>\$add_icon<a href='?m=block&c=block_admin&a=public_visualization&menuid=".$this->input->get('menuid')."&catid=\$catid&type=list' target='right'>\$catname</a> \$vs_show</span>";
+						$strs2 = "<img src='views/default/image/folder.gif'> <a href='?m=block&c=block_admin&a=public_visualization&menuid=".$this->input->get('menuid')."&catid=\$catid&type=category' target='right'>\$catname</a>";
 					break;
 
 					default:
-						$strs = "<span class='\$icon_type'>\$add_icon<a href='?m=content&c=content&a=\$type&menuid=".$_GET['menuid']."&catid=\$catid' target='right' onclick='open_list(this)'>\$catname</a></span>";
+						$strs = "<span class='\$icon_type'>\$add_icon<a href='?d=content&c=content&m=index&menuid=".$this->input->get('menuid')."&modelid=\$modelid' target='right' >\$catname</a></span>";
 						$strs2 = "<span class='folder'>\$catname</span>";
 						break;
 				}
