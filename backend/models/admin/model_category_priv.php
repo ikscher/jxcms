@@ -34,7 +34,7 @@ class Model_category_priv extends CI_Model {
      */
     public function getCategoryPriv($data){
         $result = array();
-        $sql = "select catid,roleid,is_admin,action  from {$this->tbl_prefix}{$this->table} where catid=? and is_admin=1 and action=?";
+        $sql = "select cp.catid,cp.roleid,cp.is_admin,cp.action,c.catname  from {$this->tbl_prefix}{$this->table} cp left join {$this->tbl_prefix}category c on cp.catid=c.catid where cp.roleid=? and cp.catid=?  and cp.action=?";
         
         $query=$this->db->query($sql,$data);
         $result = $query->row_array();

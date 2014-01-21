@@ -15,6 +15,7 @@ class Cache extends CI_Controller {
 
     public function updateCache() {
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
+        $this->load->helper('string');
         
         $this->updateRole();
         $this->updateModule();
@@ -24,7 +25,9 @@ class Cache extends CI_Controller {
         $this->updateUrlRule();
         $this->memberGroup();
         $this->type();
-        
+        $this->position();
+        $this->modelField();
+        $this->updateSpecial();
     }
     
     /*
@@ -83,6 +86,23 @@ class Cache extends CI_Controller {
 
             $this->cache->save('model', $result_serial);
         //}
+    }
+    
+    
+     /*
+     * 更新专题缓存
+     */
+    private function updateSpecial(){
+        $result_array = array();
+        $result_serial = '';
+        
+        $this->load->model('content/model_special');
+        $result_array = $this->model_special->getAll();
+
+        $result_serial = serialize($result_array);
+
+        $this->cache->save('special', $result_serial);
+        
     }
     
     /**
@@ -193,9 +213,45 @@ class Cache extends CI_Controller {
 			$datas[$_value['typeid']] = $_value;
 		}
 		
-	    $this->cache->save('type_'.$param, $datas);
+	    $this->cache->save('type_'.$param, serialize($datas));
 		
 		return true;
+	}
+    
+    
+    
+	/**
+	 * 更新推荐位缓存方法
+	 */
+	private function position () {
+        $positions=array();
+        $this->load->model('content/model_position');
+		$infos = $this->model_position->getAllPositions();
+		foreach ($infos as $info){
+			$positions[$info['posid']] = $info;
+		}
+		$this->cache->save('position', serialize($positions));
+	}
+    
+    /**
+	 * 更新模型字段缓存方法
+	 */
+	private function modelField() {
+        $model_array = array();
+        $field_array = array();
+        $this->load->model('content/model_field');
+        $this->load->model('admin/model_model');
+		$datas = $this->model_model->getModelByType(array('type'=>0));
+		foreach ($datas as $r) {
+
+            $fields = $this->model_field->getFieldByModel(array('modelid'=>$r['modelid'],'disabled'=>0));
+            foreach($fields as $_value) {
+                $setting = string2array($_value['setting']);
+                $_value = array_merge($_value,$setting);
+                $field_array[$_value['field']] = $_value;
+            }
+            $this->cache->save('model_field_'.$r['modelid'],  serialize($field_array));
+        }
 	}
 	
 

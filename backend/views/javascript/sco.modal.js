@@ -49,7 +49,7 @@
 				$backdrop = $('.modal-backdrop');
 			}
 			if (!this.$modal.length) {
-				this.$modal = $('<div class="modal fade" id="' + this.options.target.substr(1) + '"><div class="modal-header"><a class="close" href="#" data-dismiss="modal">×</a><h3>&nbsp;</h3></div><div class="inner"/></div>').appendTo(this.options.appendTo).hide();
+				this.$modal = $('<div class="modal fade" id="' + this.options.target.substr(1) + '"><div class="modal-header"><a class="close" href="#" data-dismiss="modal">×</a><h3>&nbsp;</h3></div><div class="inner clearfix"/></div>').appendTo(this.options.appendTo).hide();
 			}
 
 			this.$modal.find('.modal-header h5').html(this.options.title);

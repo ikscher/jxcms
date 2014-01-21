@@ -17,7 +17,10 @@ $lang['search'] ='搜索';
 $lang['all'] = '全部';
 $lang['noResults']='无数据记录!';
 $lang['restore'] ='还原';
+$lang['cancel'] ='取消';
+$lang['ok']='确定';
 /*public*/
+$lang['select_category'] ='请选择栏目';
 $lang['btcategory']='所属栏目';
 $lang['checked']='已发布';
 $lang['unchecked'] = '待审核';

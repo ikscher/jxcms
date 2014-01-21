@@ -19,12 +19,32 @@ class Model_content extends CI_Model {
     public function set($modelid) {
         $this->load->driver('cache', array('adapter' => 'file', 'backup' => 'memcached'));
         
-		$this->model = unserialize($this->cache->get('model'));
+		$models = array();
+        $models=unserialize($this->cache->get('model'));
+        if(empty($models)){
+            $this->load->model('admin/model_model');
+            $result_array = $this->model_model->getAllModels();
+           
+            foreach($result_array as $v){
+                $models[$v['modelid']] = $v;
+            }
+        }
+        
+        $this->model = $models;
 		$this->modelid = $modelid;
 		$this->table_name = $this->tbl_prefix.$this->model[$modelid]['tablename'];
 		$this->model_tablename = $this->model[$modelid]['tablename'];
 	}
     
+    public function getTable(){
+        return $this->table_name;
+    }
+    
+
+    
+    /*
+     * 返回一条记录，根据catid
+     */
     public function select($fields,$catid){
         $result = array();
         $sql ="select {$fields} from {$this->table_name} where catid=?";
@@ -32,6 +52,46 @@ class Model_content extends CI_Model {
         $result = $query->row_array();
         return $result;
     }
+    
+    /*
+     * 返回一条记录，根据id
+     */
+    public function getOne($id,$fields='*'){
+        $result = array();
+        $sql ="select {$fields} from {$this->table_name} where id=?";
+        $query = $this->db->query($sql,$id);
+        $result = $query->row_array();
+        return $result;
+    }
+    
+   
+    /**
+	 * 获取单篇信息
+	 * 
+	 * @param $catid
+	 * @param $id
+	 */
+	public function getContent($catid,$id) {
+		$catid = intval($catid);
+		$id = intval($id);
+		if(!$catid || !$id) return false;
+	
+		$this->category = unserialize($this->cache->get('category_content'));
+		if(isset($this->category[$catid]) && $this->category[$catid]['type'] == 0) {
+			$modelid = $this->category[$catid]['modelid'];
+			$this->set($modelid);
+			$r = $this->getOne(array('id'=>$id));
+			//附属表
+			$this->table_name = $this->table_name.'_data';
+			$r2 = $this->getOne(array('id'=>$id));
+			if($r2) {
+				return array_merge($r,$r2);
+			} else {
+				return $r;
+			}
+		}
+		return true;
+	}
     
     /**
 	 * 删除内容
@@ -108,17 +168,27 @@ class Model_content extends CI_Model {
     /*
      * 更新状态
      */
-    public function updateStatus($id,$status){
-        if(empty($status)) return;
-        $sql ="update {$this->table_name} set status={$status} where id=?";
-        $this->db->query($sql,$id);
+    public function updateStatus($data){
+        $sql ="update {$this->table_name} set status=? where id=?";
+        return $this->db->query($sql,$data);
+    }
+    
+    /*
+     * 更新推荐位标志
+     */
+    public function updatePos($data){
+        $sql ="update {$this->table_name} set posids=? where id=?";
+        $this->db->query($sql,$data);
     }
     
     /*
      * 内容移动（从一个栏目move到另一个栏目)
+     * $id    需要移动的文章ID
+     * $catid 移动到的栏目ID
      */
-    public function move(){
-        
+    public function move($id,$catid){
+        $sql = "update {$this->table_name} set catid={$catid} where id={$id}";
+        $this->db->query($sql);
     }
 }
 ?>

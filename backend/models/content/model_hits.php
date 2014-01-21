@@ -26,6 +26,16 @@ class Model_hits extends CI_Model {
         
         return $result;
     }
+    
+    /*
+     * 新增
+     * $data :key/value对应的数组（key代表 表的字段名）
+     */
+    public function insert($data){
+        if(!is_array($data)) return;
+        $sql = $this->db->insert("{$this->tbl_prefix}hits",$data);
+        return $this->db->query($sql);
+    }
 
    
 }

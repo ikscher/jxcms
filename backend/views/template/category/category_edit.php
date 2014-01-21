@@ -271,6 +271,7 @@
         //if(!($.trim($('#rolename').val())) || $('.onError').length>0) return false;
         var content=$.trim($('.ke-edit-iframe').contents().find('.ke-content').html());
         $("#description").text(content);
+
         $.ajax({
             type:'post',
             url:'?d=admin&c=category&m=edit',

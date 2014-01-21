@@ -50,6 +50,20 @@ class Model_type extends CI_Model {
     }
     
     /*
+     * 返回单条记录
+     */
+    public function getType($data){
+        $result = array();
+        $sql="select `typeid`,`siteid`, `module`, `modelid` , `name` ,`parentid`, `typedir`,`url` , `template` , `listorder`,`description` from {$this->tbl_prefix}{$this->table} where module=? and parentid=?";
+        $query=$this->db->query($sql,$data);
+        
+        $result = $query->row_array();
+        
+        return $result;
+        
+    }
+    
+    /*
      * 返回模型总数
      */
     public function getModelTypeTotal($where){

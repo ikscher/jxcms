@@ -132,5 +132,21 @@ legend{font-size: 12px;}
 
 .bk15{margin:5px 0;}
 
+.clearfix:before,
+.clearfix:after {
+    content:"";
+    display:table;
+}
+
+.clearfix:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.clearfix {
+    zoom:1;
+}
+.inner .fr{float:right;margin-right: 15px;}
+.inner .category{margin: 10px 0 10px 15px;}
 /*修正弹出的模太窗口*/
  .modal {top: 10%;left: 50%;z-index: 1050;width: 560px;margin-left: -280px;background-color: #fff;border: 1px solid #999;border: 1px solid rgba(0,0,0,0.3);*border: 1px solid #999;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;outline: 0;-webkit-box-shadow: 0 3px 7px rgba(0,0,0,0.3);-moz-box-shadow: 0 3px 7px rgba(0,0,0,0.3);box-shadow: 0 3px 7px rgba(0,0,0,0.3);-webkit-background-clip: padding-box;-moz-background-clip: padding-box;background-clip: padding-box;overflow-y:hidden;height:140px;}

@@ -9,7 +9,7 @@ if (!defined('BASEPATH'))
 
 class Content extends CI_Controller {
     private $categories;
-
+    private $privs=array();
     function __construct() {
         parent::__construct();
         $this->load->library('form');
@@ -18,15 +18,38 @@ class Content extends CI_Controller {
         $this->load->model('content/model_content');
         $this->load->helper('global');
         $this->load->helper('url');
+        $this->load->helper('string');
         
         $this->categories = unserialize($this->cache->get('category_content'));
 		//权限判断
-		if(($this->input->get('catid') && $this->session->userdata('roleid') != 1 && $this->input->get('m')!='pass' && strpos($this->input->get('m'),'public_')===false)) {
-			$catid = intval($this->input->get('catid'));
-			$this->load->model('admin/model_category_priv');
-			$action = $this->categories[$catid]['type']==0 ? $this->input->get('m') : 'init';
-			$priv_datas = $this->model_category_priv->getCategoryPriv(array('catid'=>$catid,'action'=>$action));
-			if(!$priv_datas) showMessage($this->lang->line('permission_to_operate'),'blank');
+        $ids=array();
+        $ids = $this->input->post('ids');
+        $roleid = $this->session->userdata('roleid');
+        $action = $this->input->get('m');
+        
+        //均有权限的操作
+        $operforall=array('pass','restore','reject');
+        
+        //判断是否有添加，删除，推送，移动等操作权限（审核不在范围pass)
+		if(!empty($ids) && $this->session->userdata('roleid') != 1 && !in_array($this->input->get('m'),$operforall) && strpos($this->input->get('m'),'public_')===false) {
+			foreach($ids as $v){
+                $id_ = explode(',',$v);
+                $catid = intval($id_[2]);
+                $this->load->model('admin/model_category_priv');
+                $action_ = $this->categories[$catid]['type']==0 ? $this->input->get('m') : 'index';
+
+                $priv_datas = $this->model_category_priv->getCategoryPriv(array('roleid'=>$roleid,'catid'=>$catid,'action'=>$action_));
+                if(!empty($priv_datas)){
+                   $this->privs[$catid]=$action_;
+                }
+
+            }
+            //exit(array2string($this->privs));
+            if(!in_array($action,$this->privs)){
+                exit('no_privileges');
+                //showMessage($this->lang->line('permission_to_operate'),'blank');
+            }
+            
 		}
     }
     
@@ -37,6 +60,7 @@ class Content extends CI_Controller {
         $this->lang->load('content');
         $this->lang->load('message');
         $this->load->helper('global');
+        $this->load->library('form');
         
         $where = array();
         $order = $this->input->get('order');
@@ -105,14 +129,14 @@ class Content extends CI_Controller {
             
         $table_ = array();
 
-        $model = unserialize($this->cache->get('model'));
-        if(empty($model)){ 
+        $models = unserialize($this->cache->get('model'));
+        if(empty($models)){ 
             $this->load->model('admin/model_model');
-            $model = $this->model_model->getAllModels();
+            $models = $this->model_model->getAllModels();
         }
+       
 
-
-        foreach($model as $k=>$v){
+        foreach($models as $k=>$v){
             array_push($table_,$v['tablename']);
         }
         $table = array_unique($table_);
@@ -166,9 +190,9 @@ class Content extends CI_Controller {
     }
 	
     /**
-	 * 发布内容=》审核,删除，还原，退稿
+	 *  审核
 	 */
-	public function operate() {
+	public function pass() {
         $this->lang->load('content');
         $admin_username = $this->cookie->AuthCode($this->input->cookie('adminusername'), 'DECODE');
         
@@ -180,17 +204,8 @@ class Content extends CI_Controller {
             //showmessage(L('permission_to_operate'));
             //$this->data['permission_to_operate'] = $this->lang->line('permission_to_operate');
         }
+        $status=2;
         
-        //更改内容状态
-        if($this->input->post('type')=='pass'){
-            $status = 2;
-        }elseif($this->input->post('type')=='reject'){
-			$status = 1;
-        }elseif($this->input->post('type')=='delete'){
-            $status = 3;
-        }elseif($this->input->post('type')=='restore'){
-		    $status = 1;
-        }
         //审核通过，检查投稿奖励或扣除积分
         $this->load->model('content/model_content');
         $this->load->model('admin/model_member');
@@ -205,7 +220,7 @@ class Content extends CI_Controller {
                 $modelid = $id_[1];
                 $this->model_content->set($modelid);
              
-                $content_info = $this->model_content->select('username',array($id));
+                $content_info = $this->model_content->getOne(array($id),'username');
                 if(isset($content_info['username'])){
                     $memberinfo = $this->model_member->getMemberInfo(array('username'=>$content_info['username']), 'userid, username');
                 
@@ -218,26 +233,32 @@ class Content extends CI_Controller {
 //                    spend::point($setting['presentpoint'], L('contribute_del_point'), $memberinfo['userid'], $memberinfo['username'], '', '', $flag);
 //                }
                 }
-                $this->model_content->updateStatus(array($id),$status);
-                //更新到全站搜索
-//                $inputinfo = '';
-//                $inputinfo['system'] = $content_info;
-//                $this->db->search_api($id,$inputinfo);
+                $this->model_content->updateStatus(array($status,$id));
+
             }
         } 
-
-//        if(isset($_GET['ajax_preview'])) {
-//            $_POST['ids'] = $_GET['id'];
-//        }
-       
-
-		//showmessage(L('operation_success'),HTTP_REFERER);
 	}
     
     /*
-     * 批量移动（从一个栏目move到另一个栏目）
+     * 退稿
      */
-    public function move(){
+    public function reject() {
+        $this->lang->load('content');
+        $admin_username = $this->cookie->AuthCode($this->input->cookie('adminusername'), 'DECODE');
+        
+        $steps = $this->input->post('steps');
+        if(empty($steps)) $steps=1;
+        $admin_privs=array(1,2,3);//1:待审核，2:已审核（已发布），3：归档（删除）
+	    
+	    if($this->session->userdata('roleid')!=1 && $steps && !in_array($steps,$admin_privs)) { 
+            //showmessage(L('permission_to_operate'));
+            //$this->data['permission_to_operate'] = $this->lang->line('permission_to_operate');
+        }
+        
+        $status=1;
+        //审核通过，检查投稿奖励或扣除积分
+        $this->load->model('content/model_content');
+        
         $ids = $this->input->post('ids');
         if (isset($ids) && !empty($ids)) {
             foreach ($ids as $id) {
@@ -247,10 +268,125 @@ class Content extends CI_Controller {
                 $id = $id_[0];
                 $modelid = $id_[1];
                 $this->model_content->set($modelid);
-                $this->model_content->move(array($id),$status);
+             
+                $this->model_content->updateStatus(array($status,$id));
+
+            }
+        } 
+	}
+    
+    /*
+     * 删除
+     */
+    public function delete() {
+        $this->lang->load('content');
+        $admin_username = $this->cookie->AuthCode($this->input->cookie('adminusername'), 'DECODE');
+
+        $steps = $this->input->post('steps');
+        if(empty($steps)) $steps=1;
+        $admin_privs=array(1,2,3);//1:待审核，2:已审核（已发布），3：归档（删除）
+	    
+	    if($this->session->userdata('roleid')!=1 && $steps && !in_array($steps,$admin_privs)) { 
+            //showmessage(L('permission_to_operate'));
+            //$this->data['permission_to_operate'] = $this->lang->line('permission_to_operate');
+        }
+        $status=3;
+        
+        //审核通过，检查投稿奖励或扣除积分
+        $this->load->model('content/model_content');
+
+        $ids = $this->input->post('ids');
+
+        if (isset($ids) && !empty($ids)) {
+            foreach ($ids as $id) {
+                $id_=array();
+                $id_=explode(',',$id);
+               
+                $id = $id_[0];
+                $modelid = $id_[1];
+                $this->model_content->set($modelid);
+
+                $flag=$this->model_content->updateStatus(array($status,$id));
+                if($flag)
+                    exit('yes');
+                else
+                    exit('no');
+            }
+        } 
+	}
+    
+    /*
+     * 还原
+     */
+    public function restore() {
+        $this->lang->load('content');
+//        $admin_username = $this->cookie->AuthCode($this->input->cookie('adminusername'), 'DECODE');
+        
+//        $steps = $this->input->post('steps');
+//        if(empty($steps)) $steps=1;
+//        $admin_privs=array(1,2,3);//1:待审核，2:已审核（已发布），3：归档（删除）
+//	    
+//	    if($this->session->userdata('roleid')!=1 && $steps && !in_array($steps,$admin_privs)) { 
+//            //showmessage(L('permission_to_operate'));
+//            //$this->data['permission_to_operate'] = $this->lang->line('permission_to_operate');
+//        }
+        $status=1;
+        
+        //审核通过，检查投稿奖励或扣除积分
+        $this->load->model('content/model_content');
+        $this->load->model('admin/model_member');
+        
+        $ids = $this->input->post('ids');
+        if (isset($ids) && !empty($ids)) {
+            foreach ($ids as $id) {
+                $id_=array();
+                $id_=explode(',',$id);
+               
+                $id = $id_[0];
+                $modelid = $id_[1];
+                $this->model_content->set($modelid);
+
+                $this->model_content->updateStatus(array($status,$id));
+
+            }
+        } 
+	}
+    
+    /*
+     * 批量移动（从一个栏目move到另一个栏目）
+     */
+    public function move(){
+        $this->load->model('admin/model_category');
+        $ids = $this->input->post('ids');
+        $catid = $this->input->post('tocategory');
+        $result=$this->model_category->getCategory(" where catid={$catid}");
+        if (isset($ids) && !empty($ids)) {
+            foreach ($ids as $id) {
+                $id_=array();
+                $id_=explode(',',$id);
+               
+                $id = $id_[0];
+                $modelid = $id_[1];
+                if($modelid!=$result['modelid']) exit('no');
+                $this->model_content->set($modelid);
+                $this->model_content->move($id,$catid);
             }
         }
                
+    }
+    
+    /*
+     * 指定栏目ID是否有子栏目
+     */
+    public function hasChildren(){
+        $this->load->model('admin/model_category');
+        $catid=$this->input->post('catid');
+        if(empty($catid)) return;
+        $bl=$this->model_category->hasChildren(array($catid));
+        if($bl)
+            exit('yes');
+        else
+            exit('no');
     }
     
     /**

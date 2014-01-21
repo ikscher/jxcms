@@ -294,16 +294,22 @@ class Form {
 	 */
 	public static function select($array = array(), $id = 0, $str = '', $default_option = '') {
 		$string = '<select class="form-control width_50" '.$str.'>';
+        
 		$default_selected = (empty($id) && $default_option) ? 'selected' : '';
 		if($default_option) $string .= "<option value='' $default_selected>$default_option</option>";
-		if(!is_array($array) || count($array)== 0) return false;
+ 
+		if(!is_array($array) || count($array)== 0)  return false;
+
 		$ids = array();
+      
 		if(isset($id)) $ids = explode(',', $id);
+ 
 		foreach($array as $key=>$value) {
 			$selected = in_array($key, $ids) ? 'selected' : '';
 			$string .= '<option value="'.$key.'" '.$selected.'>'.$value.'</option>';
 		}
 		$string .= '</select>';
+        
 		return $string;
 	}
 	
@@ -326,7 +332,7 @@ class Form {
 			$key = trim($key);
 			$checked = ($id && in_array($key, $id)) ? 'checked' : '';
 			if($width) $string .= '<label class="ib" style="width:'.$width.'px">';
-			$string .= '<input type="checkbox" '.$str.' id="'.$field.'_'.$i.'" '.$checked.' value="'.new_html_special_chars($key).'"> '.new_html_special_chars($value);
+			$string .= '<input type="checkbox" '.$str.' id="'.$field.'_'.$i.'" '.$checked.' value="'.self::new_html_special_chars($key).'"> '.self::new_html_special_chars($value);
 			if($width) $string .= '</label>';
 			$i++;
 		}
@@ -345,7 +351,7 @@ class Form {
 		foreach($array as $key=>$value) {
 			$checked = trim($id)==trim($key) ? 'checked' : '';
 			if($width) $string .= '<label class="ib" style="width:'.$width.'px">';
-			$string .= '<input type="radio" '.$str.' id="'.$field.'_'.new_html_special_chars($key).'" '.$checked.' value="'.$key.'"> '.$value;
+			$string .= '<input type="radio" '.$str.' id="'.$field.'_'.self::new_html_special_chars($key).'" '.$checked.' value="'.$key.'"> '.$value;
 			if($width) $string .= '</label>';
 		}
 		return $string;
@@ -430,6 +436,105 @@ class Form {
             return self::select($array, $id,$str,$default_option);
         }
 	}
-}
+    
+    /**
+    * 返回经htmlspecialchars处理过的字符串或数组
+    * @param $obj 需要处理的字符串或数组
+    * @return mixed
+    */
+    public static function new_html_special_chars($string) {
+        global $CI;
+        $encoding = 'utf-8';
+        
+        if(strtolower($CI->config->item('charset'))=='gbk') $encoding = 'gb2312';
+        if(!is_array($string)) return htmlspecialchars($string,ENT_QUOTES,$encoding);
+        foreach($string as $key => $val) $string[$key] = new_html_special_chars($val);
+        return $string;
+    }
+    
+    
+    
+    
+    /**
+    * 生成标签选项
+    * @param $id HTML ID号
+    * @param $data 生成条件
+    * @param $value 当前值
+    * @param $op 操作名
+    * @return html 返回HTML代码
+    */
 
+   public function creatForm($id, $data, $value = '', $op = '') {
+       global $CI;
+       if (empty($value)) $value = isset($data['defaultvalue'])?$data['defaultvalue']:'';
+       $str = $ajax = '';
+       if(isset($data['ajax']['name'])) {
+           if($data['ajax']['m']) {
+               $url = '$.get(\'?d=content&c=push&m=public_ajax_get\', {html: this.value, id:\''.$data['ajax']['id'].'\', action: \''.$data['ajax']['action'].'\', module: \''.$data['ajax']['m'].'\', token: \''.$this->session->userdata('token').'\'}, function(data) {$(\'#'.$id.'_td\').html(data)});';
+           } else {
+               $url = '$.get(\'?d=template&c=file&m=public_ajax_get\', { html: this.value, id:\''.$data['ajax']['id'].'\', action: \''.$data['ajax']['action'].'\', op: \''.$op.'\', style: \'default\', token: \''.$this->session->userdata('token').'\'}, function(data) {$(\'#'.$id.'_td\').html(data)});';
+           }
+       }
+   
+       switch ($data['htmltype']) {
+           case 'input':
+               if(isset($data['ajax']['name'])) {
+                   $ajax = 'onblur="'.$url.'"';
+               }
+               $str .= '<input type="text" name="'.$id.'" id="'.$id.'" value="'.$value.'" size="30" />';
+
+               break;
+           case 'select':
+               if(isset($data['ajax']['name'])) {
+                   $ajax = 'onchange="'.$url.'"';
+               }
+               $str .= self::select($data['data'], $value, "name='$id' id='$id' $ajax");
+           
+               break;
+           case 'checkbox':
+               if(isset($data['ajax']['name'])) {
+                   $ajax = ' onclick="'.$url.'"';
+               }
+               if (is_array($value)) implode(',', $value);
+               $str .= self::checkbox($data['data'], $value, "name='".$id."[]'".$ajax, '', '120');
+               break;
+           case 'radio':
+               if(isset($data['ajax']['name'])) {
+                   $ajax = ' onclick="'.$url.'"';
+               }
+               $str .= self::radio($data['data'], $value, "name='$id'$ajax", '', '120');
+               break;
+           case 'input_select':
+               if(isset($data['ajax']['name'])) {
+                   $ajax = ';'.$url;
+               }
+               $str .= '<input type="text" name="'.$id.'" id="'.$id.'" value="'.$value.'" size="30" />'.self::select($data['data'], $value, "name='select_$id' id='select_$id' onchange=\"$('#$id').val(this.value);$ajax\"");
+               break;
+
+           case 'input_select_category':
+               if(isset($data['ajax']['name'])) {
+                   $ajax = ';'.$url;
+               }
+               $str .= '<input type="text" name="'.$id.'" id="'.$id.'" value="'.$value.'" size="30" />'.self::selectCategory('', $value, "name='select_$id' id='select_$id' onchange=\"$('#$id').val(this.value);$ajax\"", '', (isset($data['data']['modelid']) ? $data['data']['modelid'] : 0), (isset($data['data']['type']) ? $data['data']['type'] : -1), (isset($data['data']['onlysub']) ? $data['data']['onlysub'] : 0));
+               break;
+
+           case 'select_yp_model':
+               if(isset($data['ajax']['name'])) {
+                   $ajax = ';'.$url;
+               }
+               $yp_models = unserialize($CI->cache->get('yp_model'));
+               $d = array(L('please_select'));
+               if (is_array($yp_models) && !empty($yp_models)) {
+                   foreach ($yp_models as $k =>$v) {
+                       $d[$k] = $v['name'];
+                   }
+               }
+               $str .= '<input type="text" name="'.$id.'" id="'.$id.'" value="'.$value.'" size="30" />'.self::select($d, $value, "name='select_$id' id='select_$id' onchange=\"$('#$id').val(this.value);$ajax\"");
+               break;
+       }
+      
+       return $str;
+   }
+
+}
 ?>

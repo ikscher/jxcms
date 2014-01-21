@@ -38,6 +38,20 @@ class Model_model extends CI_Model {
         
         return $result;
     }
+    
+   
+    
+    /*
+     * 列出对于的模型项
+     */
+    public function getModelByType($type){
+        $results = array();
+        $sql = "select modelid,name,description,tablename,setting,addtime,items,enablesearch,disabled,default_style,category_template,list_template,show_template,js_template,admin_list_template,member_add_template,member_list_template,sort,type  from {$this->tbl_prefix}model where type=?";
+        $query=$this->db->query($sql,$type);
+        $results = $query->result_array();
+        
+        return $results;
+    }
    
 }
 ?>

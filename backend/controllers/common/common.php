@@ -17,6 +17,7 @@ class Common extends CI_Controller {
             redirect('d=common&c=login&m=index');
         }
     }
+
  
 
 }

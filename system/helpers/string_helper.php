@@ -336,6 +336,22 @@ if ( ! function_exists('array2string'))
 }
 
 
+if ( ! function_exists('array2string_'))
+{
+    function array2string_($data) {
+        if(!is_array($data)) return '';
+        $comma='';
+        $str='';
+        foreach($data as $k=>$v){
+            $str .=$comma;
+            $str .=$v;
+            $comma=',';
+        }
+        return $str;
+    }
+}
+
+
 /**
  * 返回经stripslashes处理过的字符串或数组
  * @param $string 需要处理的字符串或数组

@@ -464,7 +464,10 @@ class Category extends CI_Controller {
             $group_priv='';
             $group_cache = unserialize($this->cache->get('grouplist'));
             
-            $group_priv='';
+            if(empty($group_cache)){
+               $this->load->model('admin/model_member_group');
+               $group_cache = $this->model_member_group->getMemberGroup();
+            }
             
             if(!empty($group_cache)){
                 foreach ($group_cache as $_key => $_value) {
@@ -564,9 +567,9 @@ class Category extends CI_Controller {
     private function delete_($catid, $modelid) {
         $this->load->model('content/model_content');
         $this->model_content->set($modelid);
-        $result = $this->model_content->select('id', array('catid' => $catid));
-        if (is_array($result) && !empty($result)) {
-            foreach ($result as $key => $val) {
+        $results = $this->model_content->select('id', array('catid' => $catid));
+        if (is_array($results) && !empty($results)) {
+            foreach ($results as $key => $val) {
                 $this->model_content->delete($val['id'], $catid);
             }
         }
@@ -599,6 +602,16 @@ class Category extends CI_Controller {
         $models = unserialize($this->cache->get('model'));
 
         $this->load->model('admin/model_category');
+        
+        if(!empty($models) || $models==false){
+            $this->load->model('admin/model_model');
+            $result_array = $this->model_model->getAllModels();
+        
+            foreach($result_array as $v){
+                $models[$v['modelid']] = $v;
+            }
+        }
+        
         foreach ($models as $modelid => $model) {
             $datas = $this->model_category->getCategories('catid,type,items', " where modelid={$modelid}");
             $array = array();

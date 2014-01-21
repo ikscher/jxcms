@@ -95,17 +95,19 @@
                                             } if ($r['islink']) {
                                                 echo ' <img src="views/default/image/icon/link.png" title="' . $this->lang->line('islink_url') . '">';
                                             }
-                                            ?></td>
+                                            ?>
+                                </td>
                                 <td align='center' <?php if(isset($r['hits']['views']) && $r['hits']['views']>0):?>title="<?php if(isset($r['hits']['dayviews'])):?>    <?php echo $this->lang->line('today_hits'); ?>：<?php echo $r['hits']['dayviews']; ?><?php endif;?>&#10;<?php if(isset($r['hits']['yesterdayviews'])):?>   <?php echo $this->lang->line('yestoday_hits'); ?>：<?php echo $r['hits']['yesterdayviews']; ?><?php endif;?>&#10;<?php if(isset($r['hits']['weekviews'])):?>    <?php echo $this->lang->line('week_hits'); ?>：<?php echo $r['hits']['weekviews']; ?><?php endif;?>&#10;<?php if(isset($r['hits']['monthviews'])):?>   <?php echo $this->lang->line('month_hits'); ?>：<?php echo $r['hits']['monthviews']; ?><?php endif;?>&#10;"<?php endif;?>> <?php echo isset($r['hits']['views'])?$r['hits']['views']:0; ?></td>
                                 <td align='center'>
                                     <?php
-                                    if ($r['sysadd'] == 0) {
-                                        echo "<a href='?m=member&c=member&a=memberinfo&username=" . urlencode($r['username']) . "&token=" . $this->session->userdata('token') . "' >" . $r['username'] . "</a>";
+                                    if ($r['sysadd'] == 0) {//注册会员发布的
+                                        echo "<a href='?d=member&c=member&m=memberinfo&username=" . urlencode($r['username']) . "&token=" . $this->session->userdata('token') . "' >" . $r['username'] . "</a>";
                                         echo '<img src="views/default/image/icon/contribute.png" title="' . $this->lang->line('member_contribute') . '">';
-                                    } else {
+                                    } else { //管理员后台发布的
                                         echo $r['username'];
                                     }
-                                    ?></td>
+                                    ?>
+                                </td>
                                 <td align='center'><?php echo date('Y-m-d H:i:s', $r['updatetime']); ?></td>
                                 <td align='center'><a href="javascript:;" onclick="javascript:openwinx('?m=content&c=content&a=edit&catid=<?php echo $r['catid']; ?>&id=<?php echo $r['id'] ?>','')"><?php echo $this->lang->line('edit'); ?></a> | <a href="javascript:view_comment('<?php echo urlencode('content_' . $r['catid'].'-'. $r['id']); ?>','<?php echo safeReplace($r['title']); ?>')"><?php echo $this->lang->line('comment'); ?></a></td>
                             </tr>
@@ -116,30 +118,27 @@
                 </tbody>
             </table>
             
-            <label for="check_box"><?php echo $this->lang->line('selected_all'); ?><?php echo $this->lang->line('cancel'); ?></label>
-                <!--<input type="hidden" value="<?php echo $token; ?>" name="token">-->
-                <!--<input type="button" class="btn btn-default" value="<?php echo $this->lang->line('listorder'); ?>" onclick="myform.action='?m=content&c=content&a=listorder&dosubmit=1&catid=&steps=';myform.submit();"/>-->
-                <input type='hidden' name="steps" value="1" />
-                <input type='hidden' name="type" value="pass" />
+            <!--<label for="check_box"><?php echo $this->lang->line('selected_all'); ?><?php echo $this->lang->line('cancel'); ?></label>-->
+            <!--<input type="hidden" value="<?php echo $token; ?>" name="token">-->
+            <!--<input type="button" class="btn btn-default" value="<?php echo $this->lang->line('listorder'); ?>" onclick="myform.action='?m=content&c=content&a=listorder&dosubmit=1&catid=&steps=';myform.submit();"/>-->
+            <input type='hidden' name="type" value="pass" />
+            <input type='hidden' name="tocategory" value="" />
 
-                <?php if($status==1):?>
-                    <input type="button" id="pass" class="btn btn-default" value="<?php echo $this->lang->line('passed_checked'); ?>" />
-                    <input type="button" id="delete" class="btn btn-default" value="<?php echo $this->lang->line('delete'); ?>" />
-                <?php endif;?>
-                <?php if ($status==2) : ?>
-                    <input type="button" class="btn btn-default" value="<?php echo $this->lang->line('push'); ?>" onclick="push();"/>
-                    <input type="button" id="reject" class="btn btn-default" value="<?php echo $this->lang->line('reject'); ?>" />
-                    <div id='reject_content' style='background-color: #fff;border:#006699 solid 1px;position:absolute;z-index:10;padding:1px;display:none;'>
-                        <table cellpadding='0' cellspacing='1' border='0'><tr><tr><td colspan='2'><textarea name='reject_c' id='reject_c' style='width:300px;height:46px;'  onfocus="if(this.value == this.defaultValue) this.value = ''" onblur="if(this.value.replace(' ','') == '') this.value = this.defaultValue;"><?php echo $this->lang->line('reject_msg'); ?></textarea></td><td><input type='button' value=' <?php echo $this->lang->line('submit'); ?> ' class="button" onclick="reject_check(1)"></td></tr>
-                        </table>
-                    </div>
-                <?php endif;?>
-                <?php if($status==3):?>
-                    <input type="button" id="restore" class="btn btn-default" value="<?php echo $this->lang->line('restore'); ?>" />
-                <?php endif;?>
-                    
-                <input type="button" class="btn btn-default" id="move" value="<?php echo $this->lang->line('remove'); ?>" />
-           
+            <?php if($status==1):?>
+                <input type="button" id="pass" class="btn btn-default" value="<?php echo $this->lang->line('passed_checked'); ?>" />
+                <input type="button" id="delete" class="btn btn-default" value="<?php echo $this->lang->line('delete'); ?>" />
+                <input type="button" id="push" class="btn btn-default" value="<?php echo $this->lang->line('push'); ?>" />
+            <?php endif;?>
+            <?php if ($status==2) : ?>
+                <input type="button" id="push" class="btn btn-default" value="<?php echo $this->lang->line('push'); ?>" />
+                <input type="button" id="reject" class="btn btn-default" value="<?php echo $this->lang->line('reject'); ?>" />
+            <?php endif;?>
+            <?php if($status==3):?>
+                <input type="button" id="restore" class="btn btn-default" value="<?php echo $this->lang->line('restore'); ?>" />
+            <?php endif;?>
+
+            <input type="button" class="btn btn-default" id="move" value="<?php echo $this->lang->line('remove'); ?>" />
+
             <div class="pagination"><?php echo $pagination; ?></div>
             
         </div>
@@ -148,12 +147,18 @@
 </div>
 
 <div id="category" style="display:none;">
-    <select name="category">
-        <option value="1">测试</option>
-        <option value="2">合肥</option>
-    </select>
-    <button class="btn btn-default">确定</button>
+    <div class="category">
+        <?php echo $this->form->select_category('category_content',0, 'name="category" id="catid" class="form-control input-sm width_50"', $this->lang->line('select_category'), 0, -1); ?>
+        <div id="warning"></div>
+    </div>
+    <div class="clearfix">
+        <div class="fr "> 
+            <button id="cancel_" class="btn btn-default"><?php echo $this->lang->line('cancel');?></button>
+            <button id="ok_" class="btn btn-default"><?php echo $this->lang->line('ok');?></button>
+        </div>
+    </div>
 </div>
+
 <div class="modal fade" id="modal">
   <div class="modal-header">
     <a class="close" href="#" data-dismiss="modal">×</a>
@@ -185,14 +190,17 @@
         
     }
     
+    var ids=null;//复选框选中的值
     /*是否选中*/
     function checkSubmit(){
+        ids =[];
         var inputs = document.getElementsByTagName('input');
         var len=inputs.length;
         var checkedNum=0;
         for(var i=0;i<len;i++){
             if( inputs[i].getAttribute('name')=='ids[]' &&　inputs[i].getAttribute('type')=='checkbox'){
                 if(inputs[i].checked){
+                    ids.push(inputs[i].value);
                     checkedNum++;
                 }
             }
@@ -215,62 +223,191 @@
     //审核(待审核=》已发布）
     $('#pass').on('click',function(){
         if(!checkSubmit()) return false;
-        $('input[name=steps]').val(1);
-        $('input[name=type]').val('pass');
         var serializedData=$('#myform').serialize();
        
         $.ajax({
-             url:'?d=content&c=content&m=operate',
+             url:'?d=content&c=content&m=pass',
              type:'post',
              data:serializedData,
              dataType:'text',
-             success:function(){
+             success:function(str){
+                 //alert(str);
                  location.href=location.href;
              }
         });
     });
     
+
+    //arguments:ids ( id,modelid,catid)的形式
+    function compare(ids){
+       var f = [];
+       var m = [];
+       for(var i=0;i<ids.length;i++){
+           f=ids[i].split(',');
+           m.push(f[1]);
+       }
+       if(m){
+           for(var i=0;i<m.length;i++){
+               if(m[0]!=m[i]) return 0;
+           }
+       }
+       return 1;
+    }
+    
+    //arguments:ids ( id,modelid,catid)的形式
+    function compare_(ids){
+       var f = [];
+       var m = [];
+       var c = [];
+       for(var i=0;i<ids.length;i++){
+           f=ids[i].split(',');
+           m.push(f[1]);
+           c.push(f[2]);
+       }
+       if(m && c){
+           for(var i=0;i<m.length;i++){
+               if(m[0]!=m[i] || c[0]!=c[i]) return 0;
+           }
+       }
+       return 1;
+    }
+    
      //批量移动（从一个栏目 Move 到另一个栏目）
+    var modal=null;
     $('#move').on('click',function(){
         if(!checkSubmit()) return false;
+        var flag=compare(ids);
+        if (flag==0) {
+            $("#warning").removeClass();
+            $("#warning").addClass('onError');
+            $("#warning").html("只能选择一种模型的文章，返回重选！");
+        }else{
+            $("#warning").removeClass();
+            $("#warning").html("");
+        }
         
-      var modal = $.scojs_modal({
-           title:"请选择要移动到的栏目",
-           content:$('#category').html(),
-            keyboard: true
-          });
-          modal.show();
-            return false;
-        var serializedData=$('#myform').serialize();
+        modal = $.scojs_modal({
+          title:"请选择要移动到的栏目",
+          content:$('#category').html(),
+          keyboard: true
+         });
+         modal.show();
+          
+        
+        
        
+    });
+    
+    $('.inner').on('click','#cancel_',function(){
+        modal.close();
+    })
+    
+
+    $('.inner').on('click','#ok_',function(){
+        
+        if($(".inner .onError").length>0) return false;
+        if($('.inner select[name=category]').val()==0) return false;
+        var serializedData=$('#myform').serialize();
         $.ajax({
              url:'?d=content&c=content&m=move',
              type:'post',
              data:serializedData,
              dataType:'text',
-             success:function(){
-                 location.href=location.href;
+             success:function(str){
+                 if(str=='no_privileges'){
+                    alert('您没有操作的权限，请联系管理员！');
+                    return false;               
+                 }else if(str=='no'){
+                    $(".inner .category #warning").removeClass();
+                    $(".inner .category #warning").addClass('onError');
+                    $(".inner .category #warning").html("模型不一致，不能移动！");
+                 }else{
+                    modal.close();
+                    location.href=location.href;
+                 }
              }
         });
+        
+    })
+    
+    $('.inner').on('change','select[name=category]',function(){
+       var id=$(this).val();
+
+       $.post('?d=content&c=content&m=hasChildren',{catid:id},function(str){
+           if(str=='yes'){
+               $(".inner .category #warning").removeClass();
+               $(".inner .category #warning").addClass('onError');
+               $(".inner .category #warning").html("栏目必须为终极栏目！");
+           }else{
+               $(".inner .category #warning").removeClass();
+               $(".inner .category #warning").html("");
+               $('input[name=tocategory]').val(id);
+           }
+       })
+    });
+    
+    //推送
+    $('#push').on('click',function(){
+        if(!checkSubmit()) return false;
+        var flag=compare_(ids);
+        if (flag==0) {
+            alert("只能选择同一种模型、同一栏目的文章推送，返回重选！");return false;
+        }
+        
+        var serializedData=$('#myform').serialize();
+         $.ajax({
+             url:'?d=content&c=push&m=index',
+             type:'post',
+             data:serializedData,
+             dataType:'text',
+             success:function(str){
+                 if(str.indexOf('no_privileges')>=0){
+                     var str_=str.replace(/no_privileges/,'');
+                     alert('您没有对栏目'+str_+'操作权限，请联系系统管理员！');
+                     return false;
+                 }else{
+                     var comid=$('input[type=checkbox]:checked').get(0).value;
+                     comid=comid.split(',');
+                     var modelid = comid[1];
+                     var catid = comid[2];
+                     
+                     var id='';
+                     var sperator='';
+                     $('input[type=checkbox]:checked').each(function(i,w){
+                         var x=$(w).val();
+                         x = x.split(',');
+                         id += sperator;
+                         id += x[0];
+                         sperator='|';
+                     });
+                    
+                     location.href='?d=content&c=push&m=index&action=positionList&id='+id+'&modelid='+modelid+'&catid='+catid;
+                 }
+                 
+             }
+         });
     });
     
     //删除（待审核=》归档）
     $('#delete').on('click',function(){
         if(!checkSubmit()) return false;
-        $('input[name=steps]').val(3);
-        $('input[name=type]').val('delete');
         var serializedData=$('#myform').serialize();
         $.ajax({
-             url:'?d=content&c=content&m=operate',
+             url:'?d=content&c=content&m=delete',
              type:'post',
              data:serializedData,
              dataType:'text',
-             success:function(){
-                 $('.table-list table tbody tr td').map(function(){
-                     if(($(this).children('input').attr('checked')=='checked')){
-                         $(this).parent().remove();
-                     }
-                 })
+             success:function(str){
+                 if(str=='no_privileges'){
+                     alert('您没有操作的权限，请联系管理员！');
+                     return false;
+                 }else{
+                    $('.table-list table tbody tr td').map(function(){
+                        if(($(this).children('input').attr('checked')=='checked')){
+                            $(this).parent().remove();
+                        }
+                    })
+                 }
              }
         });
     });
@@ -278,11 +415,9 @@
     //还原（删除=》待审核)
     $('#restore').on('click',function(){
         if(!checkSubmit()) return false;
-         $('input[name=steps]').val(1);
-        $('input[name=type]').val('restore');
         var serializedData=$('#myform').serialize();
         $.ajax({
-             url:'?d=content&c=content&m=operate',
+             url:'?d=content&c=content&m=restore',
              type:'post',
              data:serializedData,
              dataType:'text',
@@ -299,11 +434,9 @@
     //退稿(退稿=>待审核）
     $('#reject').on('click',function(){
         if(!checkSubmit()) return false;
-        $('input[name=steps]').val(2);
-        $('input[name=type]').val('reject');
         var serializedData=$('#myform').serialize();
         $.ajax({
-             url:'?d=content&c=content&m=operate',
+             url:'?d=content&c=content&m=reject',
              type:'post',
              data:serializedData,
              dataType:'text',

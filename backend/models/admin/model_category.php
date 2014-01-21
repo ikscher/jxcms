@@ -43,6 +43,19 @@ class Model_category extends CI_Model {
         return $result;
     }
     
+    
+     /*
+     * 获取指定栏目信息
+     */
+    public function getCategoryById($catid){
+        $result = array();
+        $sql = "select catid,module,type,modelid,parentid,arrparentid,child,arrchildid,catname,style,image,description,parentdir,catdir,url,items,hits,setting,listorder,ismenu,sethtml,letter,usable_type  from {$this->tbl_prefix}category where catid=?";
+        $query = $this->db->query($sql,$catid);
+        $result = $query->row_array();
+        
+        return $result;
+    }
+    
     /*
      * 更新栏目
      */
@@ -59,6 +72,18 @@ class Model_category extends CI_Model {
         return $this->db->query($sql,$id);
     }
     
+    /*
+     * 指定ID是否有子项
+     */
+    public function hasChildren($pid){
+        $sql ="select catid from  {$this->tbl_prefix}category where parentid=?";
+        $query=$this->db->query($sql,$pid);
+        if($query->num_rows()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
    
 }

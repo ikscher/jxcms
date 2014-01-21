@@ -117,6 +117,7 @@ if ( ! function_exists('array_iconv'))
 }
 
 
+
 /**
  * 提示信息页面跳转，跳转地址如果传入数组，页面会提示多个地址供用户选择，默认跳转地址为数组的第一个值，时间为5秒。
  * showmessage('登录成功', array('默认跳转地址'=>'http://www.phpcms.cn'));
@@ -124,17 +125,14 @@ if ( ! function_exists('array_iconv'))
  * @param mixed(string/array) $url_forward 跳转地址
  * @param int $ms 跳转等待时间
  */
-if ( ! function_exists('showMessage')){
-    function showMessage($msg, $url_forward = 'goback', $ms = 1250,  $returnjs = '') {
-        if(defined('_ADMIN_')) {
-            include('system/public/showmessage.php');
-        } else {
-            //include(template('content', 'message'));
-        }
-        exit;
-    }
+function showMessage($msg, $url_forward = 'goback', $ms = 1250, $dialog = '') {
+	if(defined('_ADMIN_')) {
+		include('system/public/showmessage.php');
+	} else {
+		//include(template('content', 'message'));
+	}
+	exit;
 }
-
 
 
 /**
@@ -161,6 +159,10 @@ if ( ! function_exists('safeReplace')){
         return $string;
     }
 }
+
+
+
+
 // ------------------------------------------------------------------------
 /* End of file language_helper.php */
 /* Location: ./system/helpers/language_helper.php */

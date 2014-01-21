@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50528
 File Encoding         : 65001
 
-Date: 2013-12-30 15:27:45
+Date: 2014-01-20 18:03:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,8 +40,8 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1388364993', 'ikscherw@163.com', '中国hefei', '', '', '1', null);
-INSERT INTO `admin` VALUES ('2', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1386226389', 'phpcms@163.com', 'phps', '', '', '1', null);
+INSERT INTO `admin` VALUES ('1', 'admin', 'b94e5c9c55db9c9a0c490d4867ee4288', '1', 'xhAxTE', '127.0.0.1', '1390282822', 'ikscherw@163.com', '中国hefei', '', '', '1', null);
+INSERT INTO `admin` VALUES ('2', 'php', '7e0d368e73672a27dcb2acda7ead6f39', '7', 'AiawRQ', '127.0.0.1', '1389768313', 'phpcms@163.com', 'phps', '', '', '1', null);
 INSERT INTO `admin` VALUES ('3', 'java', 'c02faae912f4ae794fc74b9532db4ba7', '3', 'AT1IfR', '127.0.0.1', '1382774641', 'java@163.com', 'javad', '', '', '1', null);
 INSERT INTO `admin` VALUES ('4', 'csharp', 'b94e5c9c55db9c9a0c490d4867ee4288', '2', 'xhAxTE', '127.0.0.1', '0', 'c#@163.com', '', '', '', '3', null);
 
@@ -106,6 +106,36 @@ CREATE TABLE `admin_role_priv` (
 -- ----------------------------
 -- Records of admin_role_priv
 -- ----------------------------
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'sort', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'edit', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_setting', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'memberinfo', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'edit', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'search', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'move', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'unlock', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'lock', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'modelinfo', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'reject', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'ignore', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'pass', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=5', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=4', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=3', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=1', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=2', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=0', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'upgrade', 'index', 'checkfile', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'upgrade', 'index', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'member', 'member_menu', 'delete', '', '0');
@@ -439,6 +469,24 @@ INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'workflow', 'add', '', '0'
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'workflow', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'linkage', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'linkage', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'clear_data', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html', 'public_index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html', 'category', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html', 'update_urls', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html', 'show', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'release', 'index', 'del', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'release', 'index', 'failed', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'release', 'index', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'release', 'html', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'comment', 'check', 'checks', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'comment', 'comment_admin', 'listinfo', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'import_content', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'import_program_del', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'import_program_add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'content_del', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'copy', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'import', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'col_content', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('3', 'content', 'create_html', 'public_index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('3', 'admin', 'manage', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('3', 'member', 'member_model', 'move', '', '0');
@@ -695,18 +743,18 @@ INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'badword', 'delete', '', '0'
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'badword', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'badword', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'badword', 'import', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'admin', 'manage', 'index', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=4', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'admin', 'manage', 'index', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'delete', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'move', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'common', 'main', 'public_main', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'del', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'move', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'attachment', 'address', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'content', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'badword', 'export', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'badword', 'index', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=3', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html', 'public_index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'push', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'export', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'menu', 'delete', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'search', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'listorder', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'menu', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'menu', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'menu', 'index', '', '0');
@@ -716,12 +764,12 @@ INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'create_html', 'public_ind
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'create_html_opt', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'manage', 'edit_info', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'manage', 'edit_pwd', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'ignore', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=1', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'edit', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'pass', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'manage', 'index', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'common', 'main', 'public_main', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_modelfield', 'edit', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'node_import', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'type_manage', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'type_manage', 'delete', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'type_manage', 'add', '', '0');
@@ -729,11 +777,11 @@ INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'type_manage', 'index', ''
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'sitemodel', 'export', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'sitemodel', 'delete', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'sitemodel', 'disabled', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'modelinfo', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'edit', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'sort', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'admin', 'manage', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'block', 'block_admin', 'del', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'content', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'sitemodel', 'edit', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'admin', 'manage', 'edit_info', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'publist', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'sitemodel_field', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'sitemodel', 'import', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'sitemodel', 'add', '', '0');
@@ -749,46 +797,46 @@ INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'category', 'batch_edit', ''
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'setting', 'index', '&tab=2', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member_setting', 'manage', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member_verify', 'modelinfo', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'manage', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=2', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'content', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'category', 'count_items', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'html', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'category', 'add', 's=2', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'edit', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=0', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'edit', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'reject', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'memberinfo', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'admin', 'manage', 'edit_pwd', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'export', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'content', 'edit', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'elite', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'block', 'block_admin', 'history_del', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'block', 'block_admin', 'history_restore', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'setting', 'index', '&tab=4', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'manage', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'setting', 'save', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'role', 'delete', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'category', 'add', 's=1', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_modelfield', 'delete', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'lock', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'attachment', 'manage', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'delete', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member_model', 'import', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'setting', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'release_point', 'add', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html_opt', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'category', 'public_cache', 'module=admin', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'sort', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'album', 'import', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'category', 'edit', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'category', 'add', 's=0', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'unlock', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'add', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'import', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'add', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'content', 'listorder', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'add_othors', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'content', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'attachment', 'manage', 'dir', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'category', 'index', 'module=admin', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'manage', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'import', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'col_url_list', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'role', 'role_priv', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'role', 'priv_setting', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'manage', 's=5', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'block', 'block_admin', 'block_update', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'position', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'position', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'role', 'add', '', '0');
@@ -834,19 +882,19 @@ INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member_modelfield', 'delet
 INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member_modelfield', 'manage', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'site', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member', 'lock', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'attachment', 'address', 'update', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'admin', 'position', 'index', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_verify', 'pass', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'block', 'block_admin', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'setting', 'index', '&tab=5', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'release_point', 'edit', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_modelfield', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'block', 'block_admin', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'content_settings', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'content', 'clear_data', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_group', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'content', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'create_html', 'public_index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'create_html', 'category', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_setting', 'manage', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'collection', 'node', 'add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html', 'batch_show', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'create_html', 'update_urls', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('5', 'content', 'create_html', 'show', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'admin_manage', 'creat_card', '', '0');
@@ -855,10 +903,10 @@ INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member_verify', 'ignore', 
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'manage', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'member', 'member_verify', 'pass', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'content', 'create_html', 'public_index', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member', 'manage', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html', 'public_index', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'move', '', '0');
-INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_modelfield', 'add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'listorder', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'attachment', 'manage', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'block', 'block_admin', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'special', 'special', 'create_special_list', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'admin_manage', 'card', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', 'role', 'edit', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('2', 'admin', '', '', '', '0');
@@ -1071,6 +1119,24 @@ INSERT INTO `admin_role_priv` VALUES ('3', 'admin', 'site', 'add', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('3', 'admin', 'site', 'index', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('3', 'admin', 'admin', 'admin', '', '0');
 INSERT INTO `admin_role_priv` VALUES ('3', 'admin', 'setting', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'import', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'edit', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_modelfield', 'add', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_modelfield', 'edit', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_modelfield', 'delete', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_modelfield', 'manage', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'export', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'sort', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'member', 'member_model', 'move', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'common', 'main', 'public_main', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'admin', 'manage', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'admin', 'manage', 'edit_pwd', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'admin', 'manage', 'edit_info', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html_opt', 'index', '', '0');
+INSERT INTO `admin_role_priv` VALUES ('7', 'content', 'create_html', 'public_index', '', '0');
 
 -- ----------------------------
 -- Table structure for announce
@@ -1290,20 +1356,20 @@ CREATE TABLE `category` (
   PRIMARY KEY (`catid`),
   KEY `module` (`module`,`parentid`,`listorder`,`catid`) USING BTREE,
   KEY `siteid` (`siteid`,`type`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
 -- ----------------------------
-INSERT INTO `category` VALUES ('1', '1', 'content', '1', '0', '0', '0', '1', '1,2,5,4,3', '网站介绍', '', '', '', '', 'about', '/html/about/', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'category_ruleid\' => \'1\',\n  \'show_ruleid\' => \'\',\n  \'repeatchargedays\' => \'1\',\n)', '1', '0', '0', 'wangzhanjieshao', '');
-INSERT INTO `category` VALUES ('2', '1', 'content', '1', '0', '1', '0,1', '0', '2', '关于我们', '', '', '', 'about/', 'aboutus', '/html/about/aboutus/', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'关于我们\',\n  \'meta_keywords\' => \'关于我们\',\n  \'meta_description\' => \'关于我们\',\n  \'category_ruleid\' => \'1\',\n  \'show_ruleid\' => \'\',\n  \'repeatchargedays\' => \'1\',\n)', '10', '1', '0', 'guanyuwomen', '');
-INSERT INTO `category` VALUES ('3', '1', 'content', '1', '0', '1', '0,1', '0', '3', '联系方式', '', '', '', 'about/', 'contactus', '/html/about/contactus/', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'联系方式\',\n  \'meta_keywords\' => \'联系方式\',\n  \'meta_description\' => \'联系方式\',\n  \'category_ruleid\' => \'1\',\n  \'show_ruleid\' => \'\',\n  \'repeatchargedays\' => \'1\',\n)', '12', '1', '0', 'lianxifangshi', '');
+INSERT INTO `category` VALUES ('1', '1', 'content', '1', '0', '0', '0', '1', '1,2,5,4,3', '网站介绍', '', '', '', '', 'about', '/html/about/', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'category_ruleid\' => \'0\',\n  \'show_ruleid\' => \'\',\n)', '1', '0', '0', '0', '');
+INSERT INTO `category` VALUES ('2', '1', 'content', '1', '0', '1', '0,1', '0', '2', '关于我们', '', '/jxcms/frontend/upload\\011.jpg', 'wesfdsdfsf', 'about/', 'aboutus', '/html/about/aboutus/', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'关于我们\',\n  \'meta_keywords\' => \'关于我们\',\n  \'meta_description\' => \'关于我们\',\n  \'category_ruleid\' => \'0\',\n  \'show_ruleid\' => \'\',\n)', '10', '1', '0', '0', '');
+INSERT INTO `category` VALUES ('3', '1', 'content', '1', '0', '1', '0,1', '0', '3', '联系方式', '', '', '', 'about/', 'contactus', '/html/about/contactus/', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'联系方式\',\n  \'meta_keywords\' => \'联系方式\',\n  \'meta_description\' => \'联系方式\',\n  \'category_ruleid\' => \'0\',\n  \'show_ruleid\' => \'\',\n)', '12', '1', '0', '0', '');
 INSERT INTO `category` VALUES ('4', '1', 'content', '1', '0', '1', '0,1', '0', '4', '版权声明', '', '', '', 'about/', 'copyright', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=4', '0', '0', 'array (\n  \'ishtml\' => \'0\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'版权声明\',\n  \'meta_keywords\' => \'版权声明\',\n  \'meta_description\' => \'版权声明\',\n  \'category_ruleid\' => \'6\',\n  \'show_ruleid\' => \'\',\n  \'repeatchargedays\' => \'1\',\n)', '11', '1', '0', 'banquanshengming', '');
-INSERT INTO `category` VALUES ('5', '1', 'content', '1', '0', '1', '0,1', '0', '5', '招聘信息', '', '', '', 'about/', 'hr', '/html/about/hr/', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'category_ruleid\' => \'1\',\n  \'show_ruleid\' => \'\',\n  \'repeatchargedays\' => \'1\',\n)', '12', '1', '0', 'zhaopinxinxi', '');
-INSERT INTO `category` VALUES ('6', '1', 'content', '0', '1', '0', '0', '0', '6', '国内', '', '', '', '', 'guonei', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=6', '1', '0', 'array (\n  \'workflowid\' => \'\',\n  \'ishtml\' => \'0\',\n  \'content_ishtml\' => \'0\',\n  \'create_to_html_root\' => \'0\',\n  \'template_list\' => \'default\',\n  \'category_template\' => \'category\',\n  \'list_template\' => \'list\',\n  \'show_template\' => \'show\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'presentpoint\' => \'1\',\n  \'defaultchargepoint\' => \'0\',\n  \'paytype\' => \'0\',\n  \'repeatchargedays\' => \'1\',\n  \'category_ruleid\' => \'6\',\n  \'show_ruleid\' => \'16\',\n)', '10', '1', '0', 'guonei', '2,52');
-INSERT INTO `category` VALUES ('7', '1', 'content', '0', '2', '0', '0', '0', '7', '下载', '', '', '', '', 'down', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=7', '0', '0', 'array (\n  \'workflowid\' => \'\',\n  \'ishtml\' => \'0\',\n  \'content_ishtml\' => \'0\',\n  \'create_to_html_root\' => \'0\',\n  \'template_list\' => \'default\',\n  \'category_template\' => \'category_download\',\n  \'list_template\' => \'list_download\',\n  \'show_template\' => \'show_download\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'presentpoint\' => \'1\',\n  \'defaultchargepoint\' => \'0\',\n  \'paytype\' => \'0\',\n  \'repeatchargedays\' => \'1\',\n  \'category_ruleid\' => \'6\',\n  \'show_ruleid\' => \'16\',\n)', '6', '1', '0', 'xiazai', '52,1');
-INSERT INTO `category` VALUES ('8', '1', 'content', '0', '3', '0', '0', '0', '8', '图片', '', '/jxcms/frontend/upload\\wj94a.jpg', 'eetert', '', 'pps', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=8', '0', '0', 'array (\n  \'ishtml\' => \'0\',\n  \'content_ishtml\' => \'0\',\n  \'create_to_html_root\' => \'0\',\n  \'template_list\' => \'default\',\n  \'category_template\' => \'category\',\n  \'list_template\' => \'list\',\n  \'show_template\' => \'show\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'category_ruleid\' => \'0\',\n  \'show_ruleid\' => \'2\',\n)', '3', '1', '0', '0', '1');
-INSERT INTO `category` VALUES ('9', '1', 'content', '0', '3', '0', '0', '0', '9', '体育f', '', '/jxcms/frontend/upload\\wj94b.jpg', 'erwerwerdfdsfsfsdfasdf我打的dfsdf', '', 'tiyu个', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=9', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'content_ishtml\' => \'1\',\n  \'create_to_html_root\' => \'0\',\n  \'template_list\' => \'default\',\n  \'category_template\' => \'category_download\',\n  \'list_template\' => \'list\',\n  \'show_template\' => \'show\',\n  \'meta_title\' => \'地方的的\',\n  \'meta_keywords\' => \'梵蒂冈的的\',\n  \'meta_description\' => \'电饭锅的的\',\n  \'category_ruleid\' => \'0\',\n  \'show_ruleid\' => \'2\',\n)', '9', '1', '0', '0', '2');
+INSERT INTO `category` VALUES ('5', '1', 'content', '1', '0', '1', '0,1', '0', '5', '招聘信息', '', '', '', 'about/', 'hr', '/html/about/hr/', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'template_list\' => \'default\',\n  \'page_template\' => \'page\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'category_ruleid\' => \'0\',\n  \'show_ruleid\' => \'\',\n)', '12', '1', '0', '0', '');
+INSERT INTO `category` VALUES ('6', '1', 'content', '0', '1', '0', '0', '0', '6', '新闻联播', '', '', '', '', 'guonei', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=6', '1', '0', 'array (\n  \'ishtml\' => \'0\',\n  \'content_ishtml\' => \'0\',\n  \'create_to_html_root\' => \'0\',\n  \'template_list\' => \'\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'category_ruleid\' => \'0\',\n  \'show_ruleid\' => \'2\',\n)', '10', '1', '0', '0', '79,3,52');
+INSERT INTO `category` VALUES ('7', '1', 'content', '0', '2', '0', '0', '0', '7', '焦点访谈', '', '', '', '', 'down', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=7', '0', '0', 'array (\n  \'ishtml\' => \'0\',\n  \'content_ishtml\' => \'0\',\n  \'create_to_html_root\' => \'0\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'category_ruleid\' => \'\',\n  \'show_ruleid\' => \'\',\n)', '6', '1', '0', '0', '79,1,52');
+INSERT INTO `category` VALUES ('8', '1', 'content', '0', '3', '0', '0', '0', '8', '中国好声音', '', '/jxcms/frontend/upload\\wj94a.jpg', 'eetert', '', 'pps', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=8', '0', '0', 'array (\n  \'ishtml\' => \'0\',\n  \'content_ishtml\' => \'0\',\n  \'create_to_html_root\' => \'0\',\n  \'template_list\' => \'\',\n  \'meta_title\' => \'\',\n  \'meta_keywords\' => \'\',\n  \'meta_description\' => \'\',\n  \'category_ruleid\' => \'0\',\n  \'show_ruleid\' => \'2\',\n)', '3', '1', '0', '0', '1,3');
+INSERT INTO `category` VALUES ('9', '1', 'content', '0', '1', '0', '0', '0', '9', '足球', '', '/jxcms/frontend/upload\\wj94b.jpg', 'erwerwerdfdsfsfsdfasdf我打的dfsdf的水电费', '', 'tiyu个', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=lists&catid=9', '0', '0', 'array (\n  \'ishtml\' => \'1\',\n  \'content_ishtml\' => \'1\',\n  \'create_to_html_root\' => \'0\',\n  \'meta_title\' => \'地方的的\',\n  \'meta_keywords\' => \'梵蒂冈的的\',\n  \'meta_description\' => \'电饭锅的的\',\n  \'category_ruleid\' => \'\',\n  \'show_ruleid\' => \'\',\n)', '9', '1', '0', '0', '79,2,3');
 
 -- ----------------------------
 -- Table structure for category_priv
@@ -1322,24 +1388,23 @@ CREATE TABLE `category_priv` (
 -- ----------------------------
 -- Records of category_priv
 -- ----------------------------
-INSERT INTO `category_priv` VALUES ('1', '1', '2', '1', 'init');
-INSERT INTO `category_priv` VALUES ('2', '1', '2', '1', 'init');
-INSERT INTO `category_priv` VALUES ('3', '1', '2', '1', 'init');
+INSERT INTO `category_priv` VALUES ('1', '0', '2', '1', 'init');
+INSERT INTO `category_priv` VALUES ('2', '0', '2', '1', 'init');
+INSERT INTO `category_priv` VALUES ('3', '0', '3', '1', 'init');
 INSERT INTO `category_priv` VALUES ('4', '1', '2', '1', 'init');
-INSERT INTO `category_priv` VALUES ('5', '1', '2', '1', 'init');
-INSERT INTO `category_priv` VALUES ('6', '1', '2', '1', 'init');
-INSERT INTO `category_priv` VALUES ('6', '1', '2', '1', 'add');
-INSERT INTO `category_priv` VALUES ('6', '1', '2', '1', 'edit');
-INSERT INTO `category_priv` VALUES ('6', '1', '2', '1', 'delete');
-INSERT INTO `category_priv` VALUES ('6', '1', '2', '1', 'listorder');
-INSERT INTO `category_priv` VALUES ('6', '1', '2', '1', 'push');
-INSERT INTO `category_priv` VALUES ('6', '1', '2', '1', 'remove');
-INSERT INTO `category_priv` VALUES ('7', '1', '2', '1', 'delete');
-INSERT INTO `category_priv` VALUES ('7', '1', '2', '1', 'listorder');
-INSERT INTO `category_priv` VALUES ('7', '1', '2', '1', 'push');
-INSERT INTO `category_priv` VALUES ('7', '1', '2', '1', 'edit');
-INSERT INTO `category_priv` VALUES ('7', '1', '2', '1', 'add');
-INSERT INTO `category_priv` VALUES ('7', '1', '2', '1', 'init');
+INSERT INTO `category_priv` VALUES ('5', '0', '2', '1', 'init');
+INSERT INTO `category_priv` VALUES ('6', '0', '2', '1', 'edit');
+INSERT INTO `category_priv` VALUES ('6', '0', '7', '1', 'push');
+INSERT INTO `category_priv` VALUES ('6', '0', '2', '1', 'listorder');
+INSERT INTO `category_priv` VALUES ('6', '0', '2', '1', 'delete');
+INSERT INTO `category_priv` VALUES ('6', '0', '2', '1', 'push');
+INSERT INTO `category_priv` VALUES ('6', '0', '2', '1', 'add');
+INSERT INTO `category_priv` VALUES ('6', '0', '2', '1', 'index');
+INSERT INTO `category_priv` VALUES ('7', '0', '2', '1', 'add');
+INSERT INTO `category_priv` VALUES ('7', '0', '2', '1', 'edit');
+INSERT INTO `category_priv` VALUES ('7', '0', '2', '1', 'push');
+INSERT INTO `category_priv` VALUES ('7', '0', '2', '1', 'listorder');
+INSERT INTO `category_priv` VALUES ('7', '0', '2', '1', 'delete');
 INSERT INTO `category_priv` VALUES ('8', '0', '2', '1', 'push');
 INSERT INTO `category_priv` VALUES ('9', '0', '6', '0', 'add');
 INSERT INTO `category_priv` VALUES ('9', '0', '6', '0', 'visit');
@@ -1348,6 +1413,11 @@ INSERT INTO `category_priv` VALUES ('8', '0', '2', '1', 'listorder');
 INSERT INTO `category_priv` VALUES ('8', '0', '2', '1', 'edit');
 INSERT INTO `category_priv` VALUES ('8', '0', '2', '1', 'add');
 INSERT INTO `category_priv` VALUES ('9', '0', '5', '0', 'visit');
+INSERT INTO `category_priv` VALUES ('2', '0', '7', '1', 'init');
+INSERT INTO `category_priv` VALUES ('2', '0', '5', '1', 'init');
+INSERT INTO `category_priv` VALUES ('2', '0', '4', '1', 'init');
+INSERT INTO `category_priv` VALUES ('2', '0', '3', '1', 'init');
+INSERT INTO `category_priv` VALUES ('3', '0', '2', '1', 'init');
 INSERT INTO `category_priv` VALUES ('16', '0', '2', '1', 'index');
 INSERT INTO `category_priv` VALUES ('15', '0', '2', '1', 'index');
 INSERT INTO `category_priv` VALUES ('15', '0', '2', '0', 'visit');
@@ -1358,6 +1428,7 @@ INSERT INTO `category_priv` VALUES ('9', '0', '4', '1', 'add');
 INSERT INTO `category_priv` VALUES ('9', '0', '3', '1', 'delete');
 INSERT INTO `category_priv` VALUES ('9', '0', '2', '1', 'add');
 INSERT INTO `category_priv` VALUES ('9', '0', '2', '0', 'add');
+INSERT INTO `category_priv` VALUES ('2', '0', '2', '0', 'visit');
 
 -- ----------------------------
 -- Table structure for collection_content
@@ -1682,14 +1753,15 @@ CREATE TABLE `download` (
   `filesize` varchar(10) NOT NULL DEFAULT 'Unkown',
   `stars` varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `status` (`status`,`listorder`,`id`),
-  KEY `listorder` (`catid`,`status`,`listorder`,`id`),
-  KEY `catid` (`catid`,`status`,`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  KEY `status` (`status`,`listorder`,`id`) USING BTREE,
+  KEY `listorder` (`catid`,`status`,`listorder`,`id`) USING BTREE,
+  KEY `catid` (`catid`,`status`,`id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of download
 -- ----------------------------
+INSERT INTO `download` VALUES ('1', '7', '0', '今日精选段子：家有熊孩子', '', '', '今日 精盐 子', 'sdfsdf', '1', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=show&catid=7&id=1', '0', '1', '1', '0', 'ikscher3', '1388728210', '1388728434', 'Win2000/WinXP/Win2003', '演示版', '英文', '', '', '未知', '');
 
 -- ----------------------------
 -- Table structure for download_data
@@ -1708,12 +1780,13 @@ CREATE TABLE `download_data` (
   `allow_comment` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `downfiles` mediumtext NOT NULL,
   `downfile` varchar(255) NOT NULL DEFAULT '',
-  KEY `id` (`id`)
+  KEY `id` (`id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of download_data
 -- ----------------------------
+INSERT INTO `download_data` VALUES ('1', 'dsfsdf', '0', '', '0', '0', '', '0', '', '1', 'array (\n  0 => \n  array (\n    \'fileurl\' => \'http://test.jx.com/phpcms/index.php\',\n    \'filename\' => \'附件说明\',\n  ),\n)', 'sdf|');
 
 -- ----------------------------
 -- Table structure for downservers
@@ -1786,6 +1859,7 @@ CREATE TABLE `hits` (
 -- Records of hits
 -- ----------------------------
 INSERT INTO `hits` VALUES ('c-1-1', '6', '3', '0', '3', '3', '3', '1382924554');
+INSERT INTO `hits` VALUES ('c-3-2', '2', '3', '10', '2', '15', '150', '1382924554');
 
 -- ----------------------------
 -- Table structure for ipbanned
@@ -5250,30 +5324,22 @@ CREATE TABLE `member` (
   `from` char(10) NOT NULL DEFAULT '',
   `mobile` char(11) NOT NULL DEFAULT '',
   PRIMARY KEY (`userid`),
-  UNIQUE KEY `username` (`username`),
-  KEY `email` (`email`(20)),
-  KEY `phpssouid` (`phpssouid`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `email` (`email`(20)) USING BTREE,
+  KEY `phpssouid` (`phpssouid`),
+  KEY `username` (`username`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of member
 -- ----------------------------
-INSERT INTO `member` VALUES ('1', '1', 'ikscher', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
-
--- ----------------------------
--- Table structure for member_detail
--- ----------------------------
-DROP TABLE IF EXISTS `member_detail`;
-CREATE TABLE `member_detail` (
-  `userid` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `birthday` date DEFAULT NULL,
-  UNIQUE KEY `userid` (`userid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of member_detail
--- ----------------------------
-INSERT INTO `member_detail` VALUES ('1', '2013-10-25');
+INSERT INTO `member` VALUES ('1', '1', 'ikscher1', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher1@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
+INSERT INTO `member` VALUES ('2', '1', 'ikscher2', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher2@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
+INSERT INTO `member` VALUES ('3', '1', 'ikscher3', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher3@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
+INSERT INTO `member` VALUES ('4', '1', 'ikscher4', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher4@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
+INSERT INTO `member` VALUES ('5', '1', 'ikscher5', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher5@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
+INSERT INTO `member` VALUES ('6', '1', 'ikscher6', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher6@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
+INSERT INTO `member` VALUES ('7', '1', 'ikscher7', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher7@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
+INSERT INTO `member` VALUES ('8', '1', 'ikscher8', '5046ff2c7e7f9a2784f499e3e64db56c', 'cWxaRw', 'ikscher', '1382682101', '1382682101', '127.0.0.1', '', '0', 'iksher8@163.com', '2', '0', '0.00', '0', '10', '0', '0', '0', '0', '1', '', '', '');
 
 -- ----------------------------
 -- Table structure for member_group
@@ -6220,8 +6286,7 @@ CREATE TABLE `model` (
 INSERT INTO `model` VALUES ('1', '1', '文章模型', '', 'news', '', '0', '0', '1', '0', 'default', 'category', 'list', 'show', '', '', '', '', '0', '0');
 INSERT INTO `model` VALUES ('2', '1', '下载模型', '', 'download', '', '0', '0', '1', '0', 'default', 'category_download', 'list_download', 'show_download', '', '', '', '', '0', '0');
 INSERT INTO `model` VALUES ('3', '1', '图片模型', '', 'picture', '', '0', '0', '1', '0', 'default', 'category_picture', 'list_picture', 'show_picture', '', '', '', '', '0', '0');
-INSERT INTO `model` VALUES ('10', '1', '普通会员', '普通会员', 'member_detail', '', '0', '0', '1', '0', '', '', '', '', '', '', '', '', '0', '2');
-INSERT INTO `model` VALUES ('11', '1', '视频模型', '我的', 'video', '', '0', '0', '1', '0', 'default', 'category_download', 'list', 'show', '', '', '', '', '0', '0');
+INSERT INTO `model` VALUES ('4', '1', '视频模型', '我的', 'video', '', '0', '0', '1', '0', 'default', 'category_download', 'list', 'show', '', '', '', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for model_field
@@ -6339,7 +6404,6 @@ INSERT INTO `model_field` VALUES ('72', '3', '1', 'copyfrom', '来源', '', '', 
 INSERT INTO `model_field` VALUES ('73', '1', '1', 'islink', '转向链接', '', '', '0', '0', '', '', 'islink', '', '', '', '', '0', '1', '0', '0', '0', '1', '0', '0', '30', '0', '0');
 INSERT INTO `model_field` VALUES ('74', '2', '1', 'islink', '转向链接', '', '', '0', '0', '', '', 'islink', '', '', '', '', '0', '1', '0', '0', '0', '1', '0', '0', '30', '0', '0');
 INSERT INTO `model_field` VALUES ('75', '3', '1', 'islink', '转向链接', '', '', '0', '0', '', '', 'islink', '', '', '', '', '0', '1', '0', '0', '0', '1', '0', '0', '30', '0', '0');
-INSERT INTO `model_field` VALUES ('83', '10', '1', 'birthday', '生日', '', '', '0', '0', '', '生日格式错误', 'datetime', 'array (\n  \'fieldtype\' => \'date\',\n  \'format\' => \'Y-m-d\',\n  \'defaulttype\' => \'0\',\n)', '', '', '', '0', '0', '0', '0', '0', '1', '1', '0', '0', '0', '0');
 INSERT INTO `model_field` VALUES ('84', '11', '1', 'catid', '栏目', '', '', '1', '6', '/^[0-9]{1,6}$/', '请选择栏目', 'catid', 'array (\n  \'defaultvalue\' => \'\',\n)', '', '-99', '-99', '0', '1', '0', '1', '1', '1', '0', '0', '1', '0', '0');
 INSERT INTO `model_field` VALUES ('85', '11', '1', 'typeid', '类别', '', '', '0', '0', '', '', 'typeid', 'array (\n  \'minnumber\' => \'\',\n  \'defaultvalue\' => \'\',\n)', '', '', '', '0', '1', '0', '1', '1', '1', '0', '0', '2', '0', '0');
 INSERT INTO `model_field` VALUES ('86', '11', '1', 'title', '标题', '', 'inputtitle', '1', '80', '', '请输入标题', 'title', 'array (\n)', '', '', '', '0', '1', '0', '1', '1', '1', '1', '1', '4', '0', '0');
@@ -6474,11 +6538,13 @@ CREATE TABLE `news` (
   KEY `status` (`status`,`listorder`,`id`) USING BTREE,
   KEY `listorder` (`catid`,`status`,`listorder`,`id`) USING BTREE,
   KEY `catid` (`catid`,`status`,`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of news
 -- ----------------------------
+INSERT INTO `news` VALUES ('1', '6', '53', '测试标题3', '', '', '测试 标题', '“青铜剑”“镶嵌”在晒布岩岩壁上。“青铜剑”疑似绿色植物攀附在岩壁上生长。记者陪同远道而来的朋友游览世界地质公园广东丹霞山，在阳元石景区内，突然发现一把青铜剑', '0', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=show&catid=9&id=2', '0', '1', '1', '0', 'ikscher1', '1388646251', '1388646280');
+INSERT INTO `news` VALUES ('2', '9', '0', '最高检依法对童名谦立案侦查', '', '', '最高检 依法 立案', '最高人民检察院刚刚发布：最高检经审查，湖南省政协原副主席童名谦在衡阳破坏选举案中失职渎职，涉嫌玩忽职守罪，依法决定对其立案侦查并采   ', '0', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=show&catid=6&id=3', '0', '1', '1', '0', 'ikscher2', '1388727967', '1388728048');
 
 -- ----------------------------
 -- Table structure for news_data
@@ -6503,6 +6569,8 @@ CREATE TABLE `news_data` (
 -- ----------------------------
 -- Records of news_data
 -- ----------------------------
+INSERT INTO `news_data` VALUES ('2', '&ldquo;青铜剑&rdquo;&ldquo;镶嵌&rdquo;在晒布岩岩壁上。&ldquo;青铜剑&rdquo;疑似绿色植物攀附在岩壁上生长。记者陪同远道而来的朋友游览世界地质公园广东丹霞山，在阳元石景区内，突然发现一把青铜剑', '0', '', '0', '10000', '', '0', '', '0', '1', 'dsf|0');
+INSERT INTO `news_data` VALUES ('3', '<span style=\"color: rgb(51, 51, 51); font-family: \'Microsoft YaHei\', \'Microsoft JhengHei\', STHeiti, MingLiu; font-size: 16px; line-height: 24px; background-color: rgb(248, 248, 248);\">最高人民检察院刚刚发布：最高检经审查，湖南省政协原副主席童名谦在衡阳破坏选举案中失职渎职，涉嫌玩忽职守罪，依法决定对其立案侦查并采取强制措施，案件侦查工作正在进行中。(记者孙莹)</span>', '0', '', '0', '10000', '', '0', '', '0', '1', 'http://toutiao.com/|0');
 
 -- ----------------------------
 -- Table structure for page
@@ -6638,11 +6706,14 @@ CREATE TABLE `picture` (
   KEY `status` (`status`,`listorder`,`id`) USING BTREE,
   KEY `listorder` (`catid`,`status`,`listorder`,`id`) USING BTREE,
   KEY `catid` (`catid`,`status`,`id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of picture
 -- ----------------------------
+INSERT INTO `picture` VALUES ('1', '8', '0', '测试标题', '', '', '测试 标题', '', '1', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=show&catid=12&id=1', '0', '1', '1', '0', 'ikscher4', '1386818205', '1386818220');
+INSERT INTO `picture` VALUES ('2', '8', '0', '合肥一写字楼顶楼着火 冒出滚滚浓烟', '', '', '合肥 写字楼 顶楼', '新华房产1月2日合肥讯 1月2日下午五点半左右，位于合肥政务区南二环路上的新城国际C座顶楼突然大火，火势凶猛，并伴随着浓浓的黑烟。截至', '1', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=show&catid=8&id=2', '0', '1', '1', '0', 'ikscher5', '1388728081', '1388728192');
+INSERT INTO `picture` VALUES ('3', '8', '0', '合肥金相', '', '', '合肥金相', '', '1', 'http://127.0.0.1/phpcms/index.php?m=content&c=index&a=show&catid=8&id=3', '0', '1', '1', '0', 'ikscher5', '1388728081', '1388728199');
 
 -- ----------------------------
 -- Table structure for picture_data
@@ -6667,6 +6738,9 @@ CREATE TABLE `picture_data` (
 -- ----------------------------
 -- Records of picture_data
 -- ----------------------------
+INSERT INTO `picture_data` VALUES ('1', '', '0', '', '0', '10000', '', '0', '', 'array (\n)', '测试来源|0', '1');
+INSERT INTO `picture_data` VALUES ('2', '<span style=\"color: rgb(78, 78, 78); font-family: 微软雅黑, 华文细黑, 宋体, sans-serif; font-size: 14px; line-height: 21px;\">新华房产1月2日合肥讯 1月2日下午五点半左右，位于合肥政务区南二环路上的新城国际C座顶楼突然大火，火势凶猛，并伴随着浓浓的黑烟。截至新华网记者截稿时，消防车已经赶到扑灭大火，目前起火原因尚不清楚。</span>', '0', '', '0', '10000', '', '0', '', 'array (\n  0 => \n  array (\n    \'url\' => \'http://127.0.0.1/phpcms/uploadfile/2013/1026/20131026042912949.jpg\',\n    \'alt\' => \'01\',\n  ),\n  1 => \n  array (\n    \'url\' => \'http://127.0.0.1/phpcms/uploadfile/poster/4.gif\',\n    \'alt\' => \'4\',\n  ),\n)', 'http://toutiao.com/|0', '1');
+INSERT INTO `picture_data` VALUES ('3', '', '0', '', '0', '10000', '', '0', '', 'array()', '', '1');
 
 -- ----------------------------
 -- Table structure for position
@@ -6692,7 +6766,7 @@ INSERT INTO `position` VALUES ('1', '0', '0', '首页焦点图推荐', '20', nul
 INSERT INTO `position` VALUES ('2', '0', '0', '首页头条推荐', '20', null, '4', '1', '');
 INSERT INTO `position` VALUES ('13', '82', '0', '栏目页焦点图', '20', null, '0', '1', '');
 INSERT INTO `position` VALUES ('5', '69', '0', '推荐下载', '20', null, '0', '1', '');
-INSERT INTO `position` VALUES ('8', '30', '54', '图片频道首页焦点图', '20', null, '0', '1', '');
+INSERT INTO `position` VALUES ('8', '30', '6', '图片频道首页焦点图', '20', null, '0', '1', '');
 INSERT INTO `position` VALUES ('9', '0', '0', '网站顶部推荐', '20', null, '0', '1', '');
 INSERT INTO `position` VALUES ('10', '0', '0', '栏目首页推荐', '20', null, '0', '1', '');
 INSERT INTO `position` VALUES ('12', '0', '0', '首页图片推荐', '20', null, '0', '1', '');
@@ -6718,13 +6792,27 @@ CREATE TABLE `position_data` (
   `expiration` int(10) NOT NULL,
   `extention` char(30) DEFAULT NULL,
   `synedit` tinyint(1) DEFAULT '0',
-  KEY `posid` (`posid`),
-  KEY `listorder` (`listorder`)
+  KEY `posid` (`posid`) USING BTREE,
+  KEY `listorder` (`listorder`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of position_data
 -- ----------------------------
+INSERT INTO `position_data` VALUES ('3', '8', '2', 'content', '3', '0', 'array (\n  \'title\' => \'合肥一写字楼顶楼着火 冒出滚滚浓烟\',\n  \'description\' => \'新华房产1月2日合肥讯 1月2日下午五点半左右，位于合肥政务区南二环路上的新城国际C座顶楼突然大火，火势凶猛，并伴随着浓浓的黑烟。截至\',\n  \'inputtime\' => \'1388728081\',\n  \'style\' => \'\',\n)', '1', '3', '0', null, '0');
+INSERT INTO `position_data` VALUES ('3', '8', '1', 'content', '3', '0', 'array (\n  \'title\' => \'合肥金相\',\n  \'inputtime\' => \'1388728081\',\n  \'style\' => \'\',\n)', '1', '3', '0', null, '0');
+INSERT INTO `position_data` VALUES ('3', '8', '16', 'content', '3', '0', 'array (\n  \'title\' => \'合肥金相\',\n  \'inputtime\' => \'1388728081\',\n  \'style\' => \'\',\n)', '1', '3', '0', null, '0');
+INSERT INTO `position_data` VALUES ('2', '8', '16', 'content', '3', '0', 'array (\n  \'title\' => \'合肥一写字楼顶楼着火 冒出滚滚浓烟\',\n  \'description\' => \'新华房产1月2日合肥讯 1月2日下午五点半左右，位于合肥政务区南二环路上的新城国际C座顶楼突然大火，火势凶猛，并伴随着浓浓的黑烟。截至\',\n  \'inputtime\' => \'1388728081\',\n  \'style\' => \'\',\n)', '1', '2', '0', null, '0');
+INSERT INTO `position_data` VALUES ('3', '8', '12', 'content', '3', '0', 'array (\n  \'title\' => \'合肥一写字楼顶楼着火 冒出滚滚浓烟\',\n  \'description\' => \'新华房产1月2日合肥讯 1月2日下午五点半左右，位于合肥政务区南二环路上的新城国际C座顶楼突然大火，火势凶猛，并伴随着浓浓的黑烟。截至\',\n  \'inputtime\' => \'1388728081\',\n  \'style\' => \'\',\n)', '1', '3', '0', null, '0');
+INSERT INTO `position_data` VALUES ('3', '8', '10', 'content', '3', '0', 'array (\n  \'title\' => \'合肥一写字楼顶楼着火 冒出滚滚浓烟\',\n  \'description\' => \'新华房产1月2日合肥讯 1月2日下午五点半左右，位于合肥政务区南二环路上的新城国际C座顶楼突然大火，火势凶猛，并伴随着浓浓的黑烟。截至\',\n  \'inputtime\' => \'1388728081\',\n  \'style\' => \'\',\n)', '1', '3', '0', null, '0');
+INSERT INTO `position_data` VALUES ('1', '7', '9', 'content', '2', '0', 'array (\n  \'title\' => \'今日精选段子：家有熊孩子\',\n  \'description\' => \'sdfsdf\',\n  \'inputtime\' => \'1388728210\',\n  \'style\' => \'\',\n)', '1', '1', '0', null, '0');
+INSERT INTO `position_data` VALUES ('1', '7', '2', 'content', '2', '0', 'array (\n  \'title\' => \'今日精选段子：家有熊孩子\',\n  \'description\' => \'sdfsdf\',\n  \'inputtime\' => \'1388728210\',\n  \'style\' => \'\',\n)', '1', '1', '0', null, '0');
+INSERT INTO `position_data` VALUES ('1', '7', '12', 'content', '2', '0', 'array (\n  \'title\' => \'今日精选段子：家有熊孩子\',\n  \'description\' => \'sdfsdf\',\n  \'inputtime\' => \'1388728210\',\n  \'style\' => \'\',\n)', '1', '1', '0', null, '0');
+INSERT INTO `position_data` VALUES ('1', '7', '16', 'content', '2', '0', 'array (\n  \'title\' => \'今日精选段子：家有熊孩子\',\n  \'description\' => \'sdfsdf\',\n  \'inputtime\' => \'1388728210\',\n  \'style\' => \'\',\n)', '1', '1', '0', null, '0');
+INSERT INTO `position_data` VALUES ('2', '8', '1', 'content', '3', '0', 'array (\n  \'title\' => \'合肥一写字楼顶楼着火 冒出滚滚浓烟\',\n  \'description\' => \'新华房产1月2日合肥讯 1月2日下午五点半左右，位于合肥政务区南二环路上的新城国际C座顶楼突然大火，火势凶猛，并伴随着浓浓的黑烟。截至\',\n  \'inputtime\' => \'1388728081\',\n  \'style\' => \'\',\n)', '1', '2', '0', null, '0');
+INSERT INTO `position_data` VALUES ('1', '8', '1', 'content', '3', '0', 'array (\n  \'title\' => \'测试标题\',\n  \'inputtime\' => \'1386818205\',\n  \'style\' => \'\',\n)', '1', '1', '0', null, '0');
+INSERT INTO `position_data` VALUES ('1', '7', '1', 'content', '2', '0', 'array (\n  \'title\' => \'今日精选段子：家有熊孩子\',\n  \'description\' => \'sdfsdf\',\n  \'inputtime\' => \'1388728210\',\n  \'style\' => \'\',\n)', '1', '1', '0', null, '0');
+INSERT INTO `position_data` VALUES ('1', '8', '16', 'content', '3', '0', 'array (\n  \'title\' => \'测试标题\',\n  \'inputtime\' => \'1386818205\',\n  \'style\' => \'\',\n)', '1', '1', '0', null, '0');
 
 -- ----------------------------
 -- Table structure for poster
@@ -7297,7 +7385,7 @@ CREATE TABLE `type` (
   `description` varchar(255) NOT NULL,
   PRIMARY KEY (`typeid`),
   KEY `module` (`module`,`parentid`,`siteid`,`listorder`)
-) ENGINE=MyISAM AUTO_INCREMENT=79 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of type
@@ -7358,9 +7446,9 @@ CREATE TABLE `video` (
   `vision` varchar(255) NOT NULL DEFAULT '',
   `video_category` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `status` (`status`,`listorder`,`id`),
-  KEY `listorder` (`catid`,`status`,`listorder`,`id`),
-  KEY `catid` (`catid`,`status`,`id`)
+  KEY `status` (`status`,`listorder`,`id`) USING BTREE,
+  KEY `listorder` (`catid`,`status`,`listorder`,`id`) USING BTREE,
+  KEY `catid` (`catid`,`status`,`id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -7399,7 +7487,7 @@ CREATE TABLE `video_data` (
   `allow_comment` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `relation` varchar(255) NOT NULL DEFAULT '',
   `video` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  KEY `id` (`id`)
+  KEY `id` (`id`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
