@@ -50,16 +50,17 @@ class Model_type extends CI_Model {
     }
     
     /*
-     * 返回单条记录
+     * module  : 模块
+     * parentid: 父ID
      */
     public function getType($data){
-        $result = array();
+        $results = array();
         $sql="select `typeid`,`siteid`, `module`, `modelid` , `name` ,`parentid`, `typedir`,`url` , `template` , `listorder`,`description` from {$this->tbl_prefix}{$this->table} where module=? and parentid=?";
         $query=$this->db->query($sql,$data);
         
-        $result = $query->row_array();
+        $results = $query->result_array();
         
-        return $result;
+        return $results;
         
     }
     

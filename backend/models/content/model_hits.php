@@ -33,7 +33,7 @@ class Model_hits extends CI_Model {
      */
     public function insert($data){
         if(!is_array($data)) return;
-        $sql = $this->db->insert("{$this->tbl_prefix}hits",$data);
+        $sql = $this->db->insert_string("{$this->tbl_prefix}hits",$data);
         return $this->db->query($sql);
     }
 

@@ -61,14 +61,16 @@ class Push extends CI_Controller {
         $action = isset($action)?$action:'positionList';
         
         if ($this->input->post('dosubmit')) {
-			
+
             $this->load->model('content/model_content');
             $modelid = $this->input->post('modelid');
+
 			$this->model_content->set($modelid);
 			$info = array();
 			$ids = explode('|', $this->input->post('id'));
             
             $posid=$this->input->post('posid');
+ 
             if($posid){
                 $catid = $this->input->post('catid');
                 if(is_array($ids)) {
@@ -77,16 +79,16 @@ class Push extends CI_Controller {
                     }
                 }
     //            var_dump($info);exit;
-
-                $this->pushapi->{$action}($info, $this->input->post());
             }
+
+            $this->pushapi->{$action}($info, $this->input->post());
             echo "<script type='text/javascript'>location.href='?d=content&c=content&m=index';</script>";
 		} else {
 
             $html = $this->pushapi->{$action}(array('modelid'=>$this->input->get('modelid'), 'catid'=>$this->input->get('catid')));
             $tpl = $this->input->get('tpl');
             $tpl = !empty($tpl) ? 'push_to_category' : 'push_list';
-     
+  
             $this->data['html'] = $html;
             $this->data['module'] = $module;
             $this->data['modelid'] = $this->input->get('modelid');

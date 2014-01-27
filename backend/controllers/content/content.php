@@ -462,6 +462,51 @@ class Content extends CI_Controller {
         $this->load->view('content/category_tree',$this->data);
 	}
     
+     /**
+	 * 同时发布到其他栏目 异步加载栏目
+	 */
+	public function public_getsite_categorys() {
+		$this->load->library('tree');
+		$this->categoryies = unserialize($this->cache->get('category_content'));
+		$models = unserialize($this->cache->get('model'));
+	
+		$this->tree->icon = array('&nbsp;&nbsp;&nbsp;│ ','&nbsp;&nbsp;&nbsp;├─ ','&nbsp;&nbsp;&nbsp;└─ ');
+		$this->tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+		$categorys = array();
+		if($this->session->userdata('roleid') != 1) {
+			$this->priv_db = pc_base::load_model('category_priv_model');
+            $this->load->model('admin/model_category_priv');
+			$priv_result = $this->model_category_priv->getCategoryPrivs_(array('action'=>'add','roleid'=>$this->session->userdata('roleid')));
+			$priv_catids = array();
+			foreach($priv_result as $_v) {
+				$priv_catids[] = $_v['catid'];
+			}
+			if(empty($priv_catids)) return '';
+		}
+	
+		foreach($this->categories as $r) {
+			if($r['type']!=0) continue;
+			if($this->session->userdata('roleid') != 1 && !in_array($r['catid'],$priv_catids)) {
+				$arrchildid = explode(',',$r['arrchildid']);
+				$array_intersect = array_intersect($priv_catids,$arrchildid);
+				if(empty($array_intersect)) continue;
+			}
+			$r['modelname'] = $models[$r['modelid']]['name'];
+			$r['style'] = $r['child'] ? 'color:#8A8A8A;' : '';
+			$r['click'] = $r['child'] ? '' : "onclick=\"select_list(this,'".safeReplace($r['catname'])."',".$r['catid'].")\" class='cu' title='".$this->lang->line('click_to_select')."'";
+			$categorys[$r['catid']] = $r;
+		}
+		$str  = "<tr \$click >
+					<td align='center'>\$id</td>
+					<td >\$spacer\$catname</td>
+					<td align='center'>\$modelname</td>
+				</tr>";
+		$this->tree->init($categorys);
+		$categorys = $this->tree->getTree(0, $str);
+		echo $categorys;
+	}
+    
+   
     
   
 }

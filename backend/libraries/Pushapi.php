@@ -254,7 +254,7 @@ class Pushapi {
 			if(empty($ids)) return true;
 			$ids = explode('|', $ids);
 	
-			$this->categories = unserialize($this->cache->get('category_content'));
+			$this->categories = unserialize($CI->cache->get('category_content'));
 
 			$modelid = $this->categories[$old_catid]['modelid'];
 			$CI->model_content->set($modelid);
@@ -266,7 +266,7 @@ class Pushapi {
 				$linkurl = preg_match('/^http:\/\//',$r['url']) ? $r['url'] : self::siteurl($siteid).$r['url'];
 				foreach($ids as $catid) {
 					
-					$this->categories = unserialize($this->cache->get('category_content'));
+					$this->categories = unserialize($CI->cache->get('category_content'));
 					$modelid = $this->categories[$catid]['modelid'];
 					$CI->model_content->set($modelid);
                     $tablename = $CI->model_content->getTable();
@@ -286,28 +286,28 @@ class Pushapi {
                                                         ));
                     $CI->db->query($sql);
                     $newid = $CI->db->insert_id();
-                    $table_name .='_data';
+                    $tablename .='_data';
                     $sql = $CI->db->insert_string($tablename,array('id'=>$newid));
                     $CI->db->query($sql);
                     $hitsid = 'c-'.$modelid.'-'.$newid;
-                    $this->model_hits->insert(array('hitsid'=>$hitsid,'catid'=>$catid,'updatetime'=>SYS_TIME));
+                    $CI->model_hits->insert(array('hitsid'=>$hitsid,'catid'=>$catid,'updatetime'=>SYS_TIME));
 				}
 			}
 			return true;
 		} else {
 			
-			$this->categories = unserialize($this->cache->get('category_content'));
+			$this->categories = unserialize($CI->cache->get('category_content'));
             $CI->load->library('tree');
 			
-			$this->tree->icon = array('&nbsp;&nbsp;&nbsp;│ ','&nbsp;&nbsp;&nbsp;├─ ','&nbsp;&nbsp;&nbsp;└─ ');
-			$this->tree->nbsp = '&nbsp;&nbsp;&nbsp;';
+			$CI->tree->icon = array('&nbsp;&nbsp;&nbsp;│ ','&nbsp;&nbsp;&nbsp;├─ ','&nbsp;&nbsp;&nbsp;└─ ');
+			$CI->tree->nbsp = '&nbsp;&nbsp;&nbsp;';
 			$categorys = array();
 			$this->catids_string = array();
-			if($this->session->userdata('roleid') != 1) {
+			if($CI->session->userdata('roleid') != 1) {
                 //write here
-                $this->load->model('admin/model_category_priv');
+                $CI->load->model('admin/model_category_priv');
 				
-				$priv_result = $this->model_category_priv->getCategoryPrivs_(array('action'=>'add','roleid'=>$this->session->userdata('roleid')));
+				$priv_result = $CI->model_category_priv->getCategoryPrivs_(array('action'=>'add','roleid'=>$CI->session->userdata('roleid')));
 				$priv_catids = array();
 				foreach($priv_result as $_v) {
 					$priv_catids[] = $_v['catid'];
@@ -317,7 +317,7 @@ class Pushapi {
 
 			foreach($this->categories as $r) {
 				if( $r['type']!=0) continue;
-				if($this->session->userdata('roleid') != 1 && !in_array($r['catid'],$priv_catids)) {
+				if($CI->session->userdata('roleid') != 1 && !in_array($r['catid'],$priv_catids)) {
 					$arrchildid = explode(',',$r['arrchildid']);
 					$array_intersect = array_intersect($priv_catids,$arrchildid);
 					if(empty($array_intersect)) continue;
@@ -327,14 +327,14 @@ class Pushapi {
 					$r['style'] = 'color:#8A8A8A;';
 				} else {
 					$checked = '';
-					if($typeid && $r['usable_type']) {
+					if(isset($typeid) && $r['usable_type']) {
 						$usable_type = explode(',', $r['usable_type']);
 						if(in_array($typeid, $usable_type)) {
 							$checked = 'checked';
 							$this->catids_string[] = $r['catid'];
 						}
 					}
-					$r['checkbox'] = "<input type='checkbox' name='ids[]' value='{$r[catid]}' {$checked}>";
+					$r['checkbox'] = "<input type='checkbox' name='ids[]' value=\"{$r['catid']}\" {$checked}>";
 					$r['style'] = '';
 				}
 				$categorys[$r['catid']] = $r;
@@ -343,8 +343,8 @@ class Pushapi {
 						<td align='center'>\$checkbox</td>
 						<td style='\$style'>\$spacer\$catname</td>
 					</tr>";
-			$this->tree->init($categorys);
-			$categorys = $this->tree->get_tree(0, $str);
+			$CI->tree->init($categorys);
+			$categorys = $CI->tree->getTree(0, $str);
 			return $categorys;
 		}
      }

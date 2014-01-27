@@ -20,7 +20,7 @@
         <ul class="nav nav-tabs">
             <li<?php if ((isset($_GET['order']) && $_GET['order'] == 1) || !isset($_GET['order'])) { ?> class="active"<?php } ?>><a href="?d=content&c=push&m=index&classname=position_api&action=positionList&order=1&modelid=<?php echo $modelid ?>&catid=<?php echo $catid ?>&id=<?php echo $id ?>"><?php echo $this->lang->line('push_to_position'); ?></a></li>
             <li<?php if (isset($_GET['order']) && $_GET['order'] == 2) { ?> class="active"<?php } ?>><a href="?d=content&c=push&m=index&module=special&action=_get_special&order=2&modelid=<?php echo $modelid ?>&catid=<?php echo $catid ?>&id=<?php echo $id ?>"><?php echo $this->lang->line('push_to_special'); ?></a></li>
-            <li<?php if (isset($_GET['order']) && $_GET['order'] == 3) { ?> class="active"<?php } ?>><a href="?d=content&c=push&m=index&module=content&classname=push_api&action=category_list&order=3&tpl=push_to_category&modelid=<?php echo $modelid ?>&catid=<?php echo $catid ?>&id=<?php echo $id ?>"><?php echo $this->lang->line('push_to_category'); ?></a></li>
+            <li<?php if (isset($_GET['order']) && $_GET['order'] == 3) { ?> class="active"<?php } ?>><a href="?d=content&c=push&m=index&module=content&classname=push_api&action=categoryList&order=3&tpl=push_to_category&modelid=<?php echo $modelid ?>&catid=<?php echo $catid ?>&id=<?php echo $id ?>"><?php echo $this->lang->line('push_to_category'); ?></a></li>
         </ul>
         <div class='content' style="height:auto;">
             <form action="?d=content&c=push&m=index&module=<?php echo $module; ?>&action=<?php echo $action; ?>" method="post" name="myform" id="myform">
